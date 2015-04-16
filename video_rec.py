@@ -132,6 +132,8 @@ def face_rec():
             params = model.predict(roi)
             print "Label: %s, Confidence: %.2f" % (params[0], params[1])
             cv2.putText(img, names[params[0]], (x, y - 20), cv2.FONT_HERSHEY_SIMPLEX, 1, 255, 2)
+            if (params[0] == 0):
+                cv2.imwrite('face_rec.jpg', img)
         except:
             continue
       cv2.imshow("camera", img)
