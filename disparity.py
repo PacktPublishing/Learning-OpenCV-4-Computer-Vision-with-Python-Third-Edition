@@ -29,25 +29,18 @@ def write_ply(fn, verts, colors):
         f.write(ply_header % dict(vert_num=len(verts)))
         np.savetxt(f, verts, '%f %f %f %d %d %d')
 
-
-if __name__ == '__main__':
-    print 'loading images...'
-    imgL = cv2.pyrDown( cv2.imread('images/color1.jpg') )  # downscale images for faster processing
-    imgR = cv2.pyrDown( cv2.imread('images/color2.jpg') )
-
+def update(val = 0):
     # disparity range is tuned for 'aloe' image pair
-    window_size = 3
-    min_disp = 16
-    num_disp = 112-min_disp
-    stereo = cv2.StereoSGBM_create(minDisparity = min_disp,
+    stereo = cv2.StereoSGBM_create(
+        minDisparity = min_disp,
         numDisparities = num_disp,
-        blockSize = window_size,
-        uniquenessRatio = 10,
-        speckleWindowSize = 100,
-        speckleRange = 32,
-        disp12MaxDiff = 1,
-        P1 = 8*3*window_size**2,
-        P2 = 32*3*window_size**2
+        blockSize = cv2.getTrackbarPos('window_size', 'disparity'),
+        uniquenessRatio = cv2.getTrackbarPos('uniquenessRatio', 'disparity'),
+        speckleWindowSize = cv2.getTrackbarPos('speckleWindowSize', 'disparity'),
+        speckleRange = cv2.getTrackbarPos('speckleRange', 'disparity'),
+        disp12MaxDiff = 10,
+        P1 = 600,
+        P2 = 2400
     )
 
     print 'computing disparity...'
@@ -71,5 +64,25 @@ if __name__ == '__main__':
 
     cv2.imshow('left', imgL)
     cv2.imshow('disparity', (disp-min_disp)/num_disp)
+    
+
+if __name__ == "__main__":
+    window_size = 9
+    min_disp = -64
+    num_disp = 192-min_disp
+    blockSize = window_size
+    uniquenessRatio = 7
+    speckleRange = 8
+    speckleWindowSize = 10
+    disp12MaxDiff = 10
+    P1 = 600
+    P2 = 2400
+    imgL = cv2.imread('images/stacked1.png')
+    imgR = cv2.imread('images/stacked2.png')    
+    cv2.namedWindow('disparity')
+    cv2.createTrackbar('speckleRange', 'disparity', speckleRange, 50, update)    
+    cv2.createTrackbar('window_size', 'disparity', window_size, 51, update)
+    cv2.createTrackbar('speckleWindowSize', 'disparity', speckleWindowSize, 200, update)
+    cv2.createTrackbar('uniquenessRatio', 'disparity', uniquenessRatio, 50, update)
+    update()
     cv2.waitKey()
-    cv2.destroyAllWindows()
