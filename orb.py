@@ -2,8 +2,8 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-img1 = cv2.imread('images/coat_of_arms_single.jpg',0)          # queryImage
-img2 = cv2.imread('images/coat_of_arms.jpg',0) # trainImage
+img1 = cv2.imread('images/manowar_logo.png',0) # queryImage
+img2 = cv2.imread('images/manowar_single.jpg',0) # trainImage
 
 # Initiate SIFT detector
 orb = cv2.ORB_create()
@@ -22,6 +22,6 @@ matches = bf.match(des1,des2)
 matches = sorted(matches, key = lambda x:x.distance)
 
 # Draw first 10 matches.
-img3 = cv2.drawMatches(img1,kp1,img2,kp2, matches[:12], img2,flags=2)
+img3 = cv2.drawMatches(img1,kp1,img2,kp2, matches[:40], img2,flags=2)
 
 plt.imshow(img3),plt.show()

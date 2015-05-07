@@ -1,0 +1,2178 @@
+Help on module cv2:
+
+NAME
+    cv2
+
+FILE
+    /home/d3athmast3r/dev/opencv_3_build/lib/cv2.so
+
+SUBMODULES
+    Error
+    bgsegm
+    datasets
+    detail
+    face
+    fisheye
+    flann
+    line_descriptor
+    ml
+    motempl
+    ocl
+    ogl
+    optflow
+    ppf_match_3d
+    rgbd
+    text
+    videostab
+    xfeatures2d
+    ximgproc
+    xphoto
+
+CLASSES
+    exceptions.Exception(exceptions.BaseException)
+        error
+    
+    class error(exceptions.Exception)
+     |  Method resolution order:
+     |      error
+     |      exceptions.Exception
+     |      exceptions.BaseException
+     |      __builtin__.object
+     |  
+     |  Data descriptors defined here:
+     |  
+     |  __weakref__
+     |      list of weak references to the object (if defined)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.Exception:
+     |  
+     |  __init__(...)
+     |      x.__init__(...) initializes x; see help(type(x)) for signature
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data and other attributes inherited from exceptions.Exception:
+     |  
+     |  __new__ = <built-in method __new__ of type object>
+     |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+     |  
+     |  ----------------------------------------------------------------------
+     |  Methods inherited from exceptions.BaseException:
+     |  
+     |  __delattr__(...)
+     |      x.__delattr__('name') <==> del x.name
+     |  
+     |  __getattribute__(...)
+     |      x.__getattribute__('name') <==> x.name
+     |  
+     |  __getitem__(...)
+     |      x.__getitem__(y) <==> x[y]
+     |  
+     |  __getslice__(...)
+     |      x.__getslice__(i, j) <==> x[i:j]
+     |      
+     |      Use of negative indices is not supported.
+     |  
+     |  __reduce__(...)
+     |  
+     |  __repr__(...)
+     |      x.__repr__() <==> repr(x)
+     |  
+     |  __setattr__(...)
+     |      x.__setattr__('name', value) <==> x.name = value
+     |  
+     |  __setstate__(...)
+     |  
+     |  __str__(...)
+     |      x.__str__() <==> str(x)
+     |  
+     |  __unicode__(...)
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors inherited from exceptions.BaseException:
+     |  
+     |  __dict__
+     |  
+     |  args
+     |  
+     |  message
+
+FUNCTIONS
+    AKAZE_create(...)
+        AKAZE_create([, descriptor_type[, descriptor_size[, descriptor_channels[, threshold[, nOctaves[, nOctaveLayers[, diffusivity]]]]]]]) -> retval
+    
+    Algorithm__create(...)
+        Algorithm__create(name) -> retval
+    
+    Algorithm_getList(...)
+        Algorithm_getList() -> algorithms
+    
+    BFMatcher(...)
+        BFMatcher([, normType[, crossCheck]]) -> <BFMatcher object>
+    
+    BOWImgDescriptorExtractor(...)
+        BOWImgDescriptorExtractor(dextractor, dmatcher) -> <BOWImgDescriptorExtractor object>
+    
+    BOWKMeansTrainer(...)
+        BOWKMeansTrainer(clusterCount[, termcrit[, attempts[, flags]]]) -> <BOWKMeansTrainer object>
+    
+    BRISK_create(...)
+        BRISK_create([, thresh[, octaves[, patternScale]]]) -> retval  or  BRISK_create(radiusList, numberList[, dMax[, dMin[, indexChange]]]) -> retval
+    
+    CamShift(...)
+        CamShift(probImage, window, criteria) -> retval, window
+    
+    Canny(...)
+        Canny(image, threshold1, threshold2[, edges[, apertureSize[, L2gradient]]]) -> edges
+    
+    CascadeClassifier(...)
+        CascadeClassifier([filename]) -> <CascadeClassifier object>
+    
+    CascadeClassifier_convert(...)
+        CascadeClassifier_convert(oldcascade, newcascade) -> retval
+    
+    DMatch(...)
+        DMatch() -> <DMatch object>  or  DMatch(_queryIdx, _trainIdx, _distance) -> <DMatch object>  or  DMatch(_queryIdx, _trainIdx, _imgIdx, _distance) -> <DMatch object>
+    
+    DescriptorMatcher_create(...)
+        DescriptorMatcher_create(descriptorMatcherType) -> retval
+    
+    FastFeatureDetector_create(...)
+        FastFeatureDetector_create([, threshold[, nonmaxSuppression[, type]]]) -> retval
+    
+    FileNode(...)
+        FileNode() -> <FileNode object>
+    
+    FileStorage(...)
+        FileStorage([source, flags[, encoding]]) -> <FileStorage object>
+    
+    FlannBasedMatcher(...)
+        FlannBasedMatcher([, indexParams[, searchParams]]) -> <FlannBasedMatcher object>
+    
+    GFTTDetector_create(...)
+        GFTTDetector_create([, maxCorners[, qualityLevel[, minDistance[, blockSize[, useHarrisDetector[, k]]]]]]) -> retval
+    
+    GaussianBlur(...)
+        GaussianBlur(src, ksize, sigmaX[, dst[, sigmaY[, borderType]]]) -> dst
+    
+    HOGDescriptor(...)
+        HOGDescriptor() -> <HOGDescriptor object>  or  HOGDescriptor(_winSize, _blockSize, _blockStride, _cellSize, _nbins[, _derivAperture[, _winSigma[, _histogramNormType[, _L2HysThreshold[, _gammaCorrection[, _nlevels]]]]]]) -> <HOGDescriptor object>  or  HOGDescriptor(filename) -> <HOGDescriptor object>
+    
+    HOGDescriptor_getDaimlerPeopleDetector(...)
+        HOGDescriptor_getDaimlerPeopleDetector() -> retval
+    
+    HOGDescriptor_getDefaultPeopleDetector(...)
+        HOGDescriptor_getDefaultPeopleDetector() -> retval
+    
+    HoughCircles(...)
+        HoughCircles(image, method, dp, minDist[, circles[, param1[, param2[, minRadius[, maxRadius]]]]]) -> circles
+    
+    HoughLines(...)
+        HoughLines(image, rho, theta, threshold[, lines[, srn[, stn[, min_theta[, max_theta]]]]]) -> lines
+    
+    HoughLinesP(...)
+        HoughLinesP(image, rho, theta, threshold[, lines[, minLineLength[, maxLineGap]]]) -> lines
+    
+    HuMoments(...)
+        HuMoments(m[, hu]) -> hu
+    
+    KAZE_create(...)
+        KAZE_create([, extended[, upright[, threshold[, nOctaves[, nOctaveLayers[, diffusivity]]]]]]) -> retval
+    
+    KalmanFilter(...)
+        KalmanFilter([dynamParams, measureParams[, controlParams[, type]]]) -> <KalmanFilter object>
+    
+    KeyPoint(...)
+        KeyPoint([x, y, _size[, _angle[, _response[, _octave[, _class_id]]]]]) -> <KeyPoint object>
+    
+    KeyPoint_convert(...)
+        KeyPoint_convert(keypoints[, keypointIndexes]) -> points2f  or  KeyPoint_convert(points2f[, size[, response[, octave[, class_id]]]]) -> keypoints
+    
+    KeyPoint_overlap(...)
+        KeyPoint_overlap(kp1, kp2) -> retval
+    
+    LUT(...)
+        LUT(src, lut[, dst]) -> dst
+    
+    Laplacian(...)
+        Laplacian(src, ddepth[, dst[, ksize[, scale[, delta[, borderType]]]]]) -> dst
+    
+    MSER_create(...)
+        MSER_create([, _delta[, _min_area[, _max_area[, _max_variation[, _min_diversity[, _max_evolution[, _area_threshold[, _min_margin[, _edge_blur_size]]]]]]]]]) -> retval
+    
+    Mahalanobis(...)
+        Mahalanobis(v1, v2, icovar) -> retval
+    
+    ORB_create(...)
+        ORB_create([, nfeatures[, scaleFactor[, nlevels[, edgeThreshold[, firstLevel[, WTA_K[, scoreType[, patchSize[, fastThreshold]]]]]]]]]) -> retval
+    
+    PCABackProject(...)
+        PCABackProject(data, mean, eigenvectors[, result]) -> result
+    
+    PCACompute(...)
+        PCACompute(data, mean[, eigenvectors[, maxComponents]]) -> mean, eigenvectors  or  PCACompute(data, mean, retainedVariance[, eigenvectors]) -> mean, eigenvectors
+    
+    PCAProject(...)
+        PCAProject(data, mean, eigenvectors[, result]) -> result
+    
+    PSNR(...)
+        PSNR(src1, src2) -> retval
+    
+    RQDecomp3x3(...)
+        RQDecomp3x3(src[, mtxR[, mtxQ[, Qx[, Qy[, Qz]]]]]) -> retval, mtxR, mtxQ, Qx, Qy, Qz
+    
+    Rodrigues(...)
+        Rodrigues(src[, dst[, jacobian]]) -> dst, jacobian
+    
+    SVBackSubst(...)
+        SVBackSubst(w, u, vt, rhs[, dst]) -> dst
+    
+    SVDecomp(...)
+        SVDecomp(src[, w[, u[, vt[, flags]]]]) -> w, u, vt
+    
+    Scharr(...)
+        Scharr(src, ddepth, dx, dy[, dst[, scale[, delta[, borderType]]]]) -> dst
+    
+    SimpleBlobDetector_Params(...)
+        SimpleBlobDetector_Params() -> <SimpleBlobDetector_Params object>
+    
+    SimpleBlobDetector_create(...)
+        SimpleBlobDetector_create([, parameters]) -> retval
+    
+    Sobel(...)
+        Sobel(src, ddepth, dx, dy[, dst[, ksize[, scale[, delta[, borderType]]]]]) -> dst
+    
+    StereoBM_create(...)
+        StereoBM_create([, numDisparities[, blockSize]]) -> retval
+    
+    StereoSGBM_create(...)
+        StereoSGBM_create(minDisparity, numDisparities, blockSize[, P1[, P2[, disp12MaxDiff[, preFilterCap[, uniquenessRatio[, speckleWindowSize[, speckleRange[, mode]]]]]]]]) -> retval
+    
+    Subdiv2D(...)
+        Subdiv2D([rect]) -> <Subdiv2D object>
+    
+    VideoCapture(...)
+        VideoCapture() -> <VideoCapture object>  or  VideoCapture(filename) -> <VideoCapture object>  or  VideoCapture(device) -> <VideoCapture object>
+    
+    VideoWriter(...)
+        VideoWriter([filename, fourcc, fps, frameSize[, isColor]]) -> <VideoWriter object>
+    
+    VideoWriter_fourcc(...)
+        VideoWriter_fourcc(c1, c2, c3, c4) -> retval
+    
+    absdiff(...)
+        absdiff(src1, src2[, dst]) -> dst
+    
+    accumulate(...)
+        accumulate(src, dst[, mask]) -> dst
+    
+    accumulateProduct(...)
+        accumulateProduct(src1, src2, dst[, mask]) -> dst
+    
+    accumulateSquare(...)
+        accumulateSquare(src, dst[, mask]) -> dst
+    
+    accumulateWeighted(...)
+        accumulateWeighted(src, dst, alpha[, mask]) -> dst
+    
+    adaptiveThreshold(...)
+        adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C[, dst]) -> dst
+    
+    add(...)
+        add(src1, src2[, dst[, mask[, dtype]]]) -> dst
+    
+    addWeighted(...)
+        addWeighted(src1, alpha, src2, beta, gamma[, dst[, dtype]]) -> dst
+    
+    applyColorMap(...)
+        applyColorMap(src, colormap[, dst]) -> dst
+    
+    approxPolyDP(...)
+        approxPolyDP(curve, epsilon, closed[, approxCurve]) -> approxCurve
+    
+    arcLength(...)
+        arcLength(curve, closed) -> retval
+    
+    arrowedLine(...)
+        arrowedLine(img, pt1, pt2, color[, thickness[, line_type[, shift[, tipLength]]]]) -> img
+    
+    batchDistance(...)
+        batchDistance(src1, src2, dtype[, dist[, nidx[, normType[, K[, mask[, update[, crosscheck]]]]]]]) -> dist, nidx
+    
+    bilateralFilter(...)
+        bilateralFilter(src, d, sigmaColor, sigmaSpace[, dst[, borderType]]) -> dst
+    
+    bitwise_and(...)
+        bitwise_and(src1, src2[, dst[, mask]]) -> dst
+    
+    bitwise_not(...)
+        bitwise_not(src[, dst[, mask]]) -> dst
+    
+    bitwise_or(...)
+        bitwise_or(src1, src2[, dst[, mask]]) -> dst
+    
+    bitwise_xor(...)
+        bitwise_xor(src1, src2[, dst[, mask]]) -> dst
+    
+    blur(...)
+        blur(src, ksize[, dst[, anchor[, borderType]]]) -> dst
+    
+    borderInterpolate(...)
+        borderInterpolate(p, len, borderType) -> retval
+    
+    boundingRect(...)
+        boundingRect(points) -> retval
+    
+    boxFilter(...)
+        boxFilter(src, ddepth, ksize[, dst[, anchor[, normalize[, borderType]]]]) -> dst
+    
+    boxPoints(...)
+        boxPoints(box[, points]) -> points
+    
+    buildOpticalFlowPyramid(...)
+        buildOpticalFlowPyramid(img, winSize, maxLevel[, pyramid[, withDerivatives[, pyrBorder[, derivBorder[, tryReuseInputImage]]]]]) -> retval, pyramid
+    
+    calcBackProject(...)
+        calcBackProject(images, channels, hist, ranges, scale[, dst]) -> dst
+    
+    calcCovarMatrix(...)
+        calcCovarMatrix(samples, mean, flags[, covar[, ctype]]) -> covar, mean
+    
+    calcHist(...)
+        calcHist(images, channels, mask, histSize, ranges[, hist[, accumulate]]) -> hist
+    
+    calcOpticalFlowFarneback(...)
+        calcOpticalFlowFarneback(prev, next, flow, pyr_scale, levels, winsize, iterations, poly_n, poly_sigma, flags) -> flow
+    
+    calcOpticalFlowPyrLK(...)
+        calcOpticalFlowPyrLK(prevImg, nextImg, prevPts, nextPts[, status[, err[, winSize[, maxLevel[, criteria[, flags[, minEigThreshold]]]]]]]) -> nextPts, status, err
+    
+    calibrateCamera(...)
+        calibrateCamera(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs[, rvecs[, tvecs[, flags[, criteria]]]]) -> retval, cameraMatrix, distCoeffs, rvecs, tvecs
+    
+    calibrationMatrixValues(...)
+        calibrationMatrixValues(cameraMatrix, imageSize, apertureWidth, apertureHeight) -> fovx, fovy, focalLength, principalPoint, aspectRatio
+    
+    cartToPolar(...)
+        cartToPolar(x, y[, magnitude[, angle[, angleInDegrees]]]) -> magnitude, angle
+    
+    checkHardwareSupport(...)
+        checkHardwareSupport(feature) -> retval
+    
+    checkRange(...)
+        checkRange(a[, quiet[, minVal[, maxVal]]]) -> retval, pos
+    
+    circle(...)
+        circle(img, center, radius, color[, thickness[, lineType[, shift]]]) -> img
+    
+    clipLine(...)
+        clipLine(imgRect, pt1, pt2) -> retval, pt1, pt2
+    
+    colorChange(...)
+        colorChange(src, mask[, dst[, red_mul[, green_mul[, blue_mul]]]]) -> dst
+    
+    compare(...)
+        compare(src1, src2, cmpop[, dst]) -> dst
+    
+    compareHist(...)
+        compareHist(H1, H2, method) -> retval
+    
+    completeSymm(...)
+        completeSymm(mtx[, lowerToUpper]) -> mtx
+    
+    composeRT(...)
+        composeRT(rvec1, tvec1, rvec2, tvec2[, rvec3[, tvec3[, dr3dr1[, dr3dt1[, dr3dr2[, dr3dt2[, dt3dr1[, dt3dt1[, dt3dr2[, dt3dt2]]]]]]]]]]) -> rvec3, tvec3, dr3dr1, dr3dt1, dr3dr2, dr3dt2, dt3dr1, dt3dt1, dt3dr2, dt3dt2
+    
+    computeCorrespondEpilines(...)
+        computeCorrespondEpilines(points, whichImage, F[, lines]) -> lines
+    
+    connectedComponents(...)
+        connectedComponents(image[, labels[, connectivity[, ltype]]]) -> retval, labels
+    
+    connectedComponentsWithStats(...)
+        connectedComponentsWithStats(image[, labels[, stats[, centroids[, connectivity[, ltype]]]]]) -> retval, labels, stats, centroids
+    
+    contourArea(...)
+        contourArea(contour[, oriented]) -> retval
+    
+    convertMaps(...)
+        convertMaps(map1, map2, dstmap1type[, dstmap1[, dstmap2[, nninterpolation]]]) -> dstmap1, dstmap2
+    
+    convertPointsFromHomogeneous(...)
+        convertPointsFromHomogeneous(src[, dst]) -> dst
+    
+    convertPointsToHomogeneous(...)
+        convertPointsToHomogeneous(src[, dst]) -> dst
+    
+    convertScaleAbs(...)
+        convertScaleAbs(src[, dst[, alpha[, beta]]]) -> dst
+    
+    convexHull(...)
+        convexHull(points[, hull[, clockwise[, returnPoints]]]) -> hull
+    
+    convexityDefects(...)
+        convexityDefects(contour, convexhull[, convexityDefects]) -> convexityDefects
+    
+    copyMakeBorder(...)
+        copyMakeBorder(src, top, bottom, left, right, borderType[, dst[, value]]) -> dst
+    
+    cornerEigenValsAndVecs(...)
+        cornerEigenValsAndVecs(src, blockSize, ksize[, dst[, borderType]]) -> dst
+    
+    cornerHarris(...)
+        cornerHarris(src, blockSize, ksize, k[, dst[, borderType]]) -> dst
+    
+    cornerMinEigenVal(...)
+        cornerMinEigenVal(src, blockSize[, dst[, ksize[, borderType]]]) -> dst
+    
+    cornerSubPix(...)
+        cornerSubPix(image, corners, winSize, zeroZone, criteria) -> corners
+    
+    correctMatches(...)
+        correctMatches(F, points1, points2[, newPoints1[, newPoints2]]) -> newPoints1, newPoints2
+    
+    countNonZero(...)
+        countNonZero(src) -> retval
+    
+    createAffineTransformer(...)
+        createAffineTransformer(fullAffine) -> retval
+    
+    createAlignMTB(...)
+        createAlignMTB([, max_bits[, exclude_range[, cut]]]) -> retval
+    
+    createBackgroundSubtractorKNN(...)
+        createBackgroundSubtractorKNN([, history[, dist2Threshold[, detectShadows]]]) -> retval
+    
+    createBackgroundSubtractorMOG2(...)
+        createBackgroundSubtractorMOG2([, history[, varThreshold[, detectShadows]]]) -> retval
+    
+    createCLAHE(...)
+        createCLAHE([, clipLimit[, tileGridSize]]) -> retval
+    
+    createCalibrateDebevec(...)
+        createCalibrateDebevec([, samples[, lambda[, random]]]) -> retval
+    
+    createCalibrateRobertson(...)
+        createCalibrateRobertson([, max_iter[, threshold]]) -> retval
+    
+    createChiHistogramCostExtractor(...)
+        createChiHistogramCostExtractor([, nDummies[, defaultCost]]) -> retval
+    
+    createEMDHistogramCostExtractor(...)
+        createEMDHistogramCostExtractor([, flag[, nDummies[, defaultCost]]]) -> retval
+    
+    createEMDL1HistogramCostExtractor(...)
+        createEMDL1HistogramCostExtractor([, nDummies[, defaultCost]]) -> retval
+    
+    createHanningWindow(...)
+        createHanningWindow(winSize, type[, dst]) -> dst
+    
+    createHausdorffDistanceExtractor(...)
+        createHausdorffDistanceExtractor([, distanceFlag[, rankProp]]) -> retval
+    
+    createLineSegmentDetector(...)
+        createLineSegmentDetector([, _refine[, _scale[, _sigma_scale[, _quant[, _ang_th[, _log_eps[, _density_th[, _n_bins]]]]]]]]) -> retval
+    
+    createMergeDebevec(...)
+        createMergeDebevec() -> retval
+    
+    createMergeMertens(...)
+        createMergeMertens([, contrast_weight[, saturation_weight[, exposure_weight]]]) -> retval
+    
+    createMergeRobertson(...)
+        createMergeRobertson() -> retval
+    
+    createNormHistogramCostExtractor(...)
+        createNormHistogramCostExtractor([, flag[, nDummies[, defaultCost]]]) -> retval
+    
+    createOptFlow_DualTVL1(...)
+        createOptFlow_DualTVL1() -> retval
+    
+    createShapeContextDistanceExtractor(...)
+        createShapeContextDistanceExtractor([, nAngularBins[, nRadialBins[, innerRadius[, outerRadius[, iterations[, comparer[, transformer]]]]]]]) -> retval
+    
+    createStitcher(...)
+        createStitcher([, try_use_gpu]) -> retval
+    
+    createThinPlateSplineShapeTransformer(...)
+        createThinPlateSplineShapeTransformer([, regularizationParameter]) -> retval
+    
+    createTonemap(...)
+        createTonemap([, gamma]) -> retval
+    
+    createTonemapDrago(...)
+        createTonemapDrago([, gamma[, saturation[, bias]]]) -> retval
+    
+    createTonemapDurand(...)
+        createTonemapDurand([, gamma[, contrast[, saturation[, sigma_space[, sigma_color]]]]]) -> retval
+    
+    createTonemapMantiuk(...)
+        createTonemapMantiuk([, gamma[, scale[, saturation]]]) -> retval
+    
+    createTonemapReinhard(...)
+        createTonemapReinhard([, gamma[, intensity[, light_adapt[, color_adapt]]]]) -> retval
+    
+    createTrackbar(...)
+        createTrackbar(trackbarName, windowName, value, count, onChange) -> None
+    
+    cubeRoot(...)
+        cubeRoot(val) -> retval
+    
+    cvtColor(...)
+        cvtColor(src, code[, dst[, dstCn]]) -> dst
+    
+    dct(...)
+        dct(src[, dst[, flags]]) -> dst
+    
+    decolor(...)
+        decolor(src[, grayscale[, color_boost]]) -> grayscale, color_boost
+    
+    decomposeEssentialMat(...)
+        decomposeEssentialMat(E[, R1[, R2[, t]]]) -> R1, R2, t
+    
+    decomposeHomographyMat(...)
+        decomposeHomographyMat(H, K[, rotations[, translations[, normals]]]) -> retval, rotations, translations, normals
+    
+    decomposeProjectionMatrix(...)
+        decomposeProjectionMatrix(projMatrix[, cameraMatrix[, rotMatrix[, transVect[, rotMatrixX[, rotMatrixY[, rotMatrixZ[, eulerAngles]]]]]]]) -> cameraMatrix, rotMatrix, transVect, rotMatrixX, rotMatrixY, rotMatrixZ, eulerAngles
+    
+    demosaicing(...)
+        demosaicing(_src, code[, _dst[, dcn]]) -> _dst
+    
+    denoise_TVL1(...)
+        denoise_TVL1(observations, result[, lambda[, niters]]) -> None
+    
+    destroyAllWindows(...)
+        destroyAllWindows() -> None
+    
+    destroyWindow(...)
+        destroyWindow(winname) -> None
+    
+    detailEnhance(...)
+        detailEnhance(src[, dst[, sigma_s[, sigma_r]]]) -> dst
+    
+    determinant(...)
+        determinant(mtx) -> retval
+    
+    dft(...)
+        dft(src[, dst[, flags[, nonzeroRows]]]) -> dst
+    
+    dilate(...)
+        dilate(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) -> dst
+    
+    distanceTransform(...)
+        distanceTransform(src, distanceType, maskSize[, dst[, dstType]]) -> dst
+    
+    distanceTransformWithLabels(...)
+        distanceTransformWithLabels(src, distanceType, maskSize[, dst[, labels[, labelType]]]) -> dst, labels
+    
+    divide(...)
+        divide(src1, src2[, dst[, scale[, dtype]]]) -> dst  or  divide(scale, src2[, dst[, dtype]]) -> dst
+    
+    drawChessboardCorners(...)
+        drawChessboardCorners(image, patternSize, corners, patternWasFound) -> image
+    
+    drawContours(...)
+        drawContours(image, contours, contourIdx, color[, thickness[, lineType[, hierarchy[, maxLevel[, offset]]]]]) -> image
+    
+    drawKeypoints(...)
+        drawKeypoints(image, keypoints, outImage[, color[, flags]]) -> outImage
+    
+    drawMatches(...)
+        drawMatches(img1, keypoints1, img2, keypoints2, matches1to2, outImg[, matchColor[, singlePointColor[, matchesMask[, flags]]]]) -> outImg
+    
+    drawMatchesKnn(...)
+        drawMatchesKnn(img1, keypoints1, img2, keypoints2, matches1to2, outImg[, matchColor[, singlePointColor[, matchesMask[, flags]]]]) -> outImg
+    
+    edgePreservingFilter(...)
+        edgePreservingFilter(src[, dst[, flags[, sigma_s[, sigma_r]]]]) -> dst
+    
+    eigen(...)
+        eigen(src[, eigenvalues[, eigenvectors]]) -> retval, eigenvalues, eigenvectors
+    
+    ellipse(...)
+        ellipse(img, center, axes, angle, startAngle, endAngle, color[, thickness[, lineType[, shift]]]) -> img  or  ellipse(img, box, color[, thickness[, lineType]]) -> img
+    
+    ellipse2Poly(...)
+        ellipse2Poly(center, axes, angle, arcStart, arcEnd, delta) -> pts
+    
+    equalizeHist(...)
+        equalizeHist(src[, dst]) -> dst
+    
+    erode(...)
+        erode(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) -> dst
+    
+    estimateAffine3D(...)
+        estimateAffine3D(src, dst[, out[, inliers[, ransacThreshold[, confidence]]]]) -> retval, out, inliers
+    
+    estimateRigidTransform(...)
+        estimateRigidTransform(src, dst, fullAffine) -> retval
+    
+    exp(...)
+        exp(src[, dst]) -> dst
+    
+    extractChannel(...)
+        extractChannel(src, coi[, dst]) -> dst
+    
+    fastAtan2(...)
+        fastAtan2(y, x) -> retval
+    
+    fastNlMeansDenoising(...)
+        fastNlMeansDenoising(src[, dst[, h[, templateWindowSize[, searchWindowSize]]]]) -> dst
+    
+    fastNlMeansDenoisingColored(...)
+        fastNlMeansDenoisingColored(src[, dst[, h[, hColor[, templateWindowSize[, searchWindowSize]]]]]) -> dst
+    
+    fastNlMeansDenoisingColoredMulti(...)
+        fastNlMeansDenoisingColoredMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize[, dst[, h[, hColor[, templateWindowSize[, searchWindowSize]]]]]) -> dst
+    
+    fastNlMeansDenoisingMulti(...)
+        fastNlMeansDenoisingMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize[, dst[, h[, templateWindowSize[, searchWindowSize]]]]) -> dst
+    
+    fillConvexPoly(...)
+        fillConvexPoly(img, points, color[, lineType[, shift]]) -> img
+    
+    fillPoly(...)
+        fillPoly(img, pts, color[, lineType[, shift[, offset]]]) -> img
+    
+    filter2D(...)
+        filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]]) -> dst
+    
+    filterSpeckles(...)
+        filterSpeckles(img, newVal, maxSpeckleSize, maxDiff[, buf]) -> img, buf
+    
+    findChessboardCorners(...)
+        findChessboardCorners(image, patternSize[, corners[, flags]]) -> retval, corners
+    
+    findCirclesGrid(...)
+        findCirclesGrid(image, patternSize[, centers[, flags[, blobDetector]]]) -> retval, centers
+    
+    findContours(...)
+        findContours(image, mode, method[, contours[, hierarchy[, offset]]]) -> image, contours, hierarchy
+    
+    findEssentialMat(...)
+        findEssentialMat(points1, points2[, focal[, pp[, method[, prob[, threshold[, mask]]]]]]) -> retval, mask
+    
+    findFundamentalMat(...)
+        findFundamentalMat(points1, points2[, method[, param1[, param2[, mask]]]]) -> retval, mask
+    
+    findHomography(...)
+        findHomography(srcPoints, dstPoints[, method[, ransacReprojThreshold[, mask[, maxIters[, confidence]]]]]) -> retval, mask
+    
+    findNonZero(...)
+        findNonZero(src[, idx]) -> idx
+    
+    findTransformECC(...)
+        findTransformECC(templateImage, inputImage, warpMatrix[, motionType[, criteria]]) -> retval, warpMatrix
+    
+    fitEllipse(...)
+        fitEllipse(points) -> retval
+    
+    fitLine(...)
+        fitLine(points, distType, param, reps, aeps[, line]) -> line
+    
+    flip(...)
+        flip(src, flipCode[, dst]) -> dst
+    
+    floodFill(...)
+        floodFill(image, mask, seedPoint, newVal[, loDiff[, upDiff[, flags]]]) -> retval, image, mask, rect
+    
+    gemm(...)
+        gemm(src1, src2, alpha, src3, beta[, dst[, flags]]) -> dst
+    
+    getAffineTransform(...)
+        getAffineTransform(src, dst) -> retval
+    
+    getBuildInformation(...)
+        getBuildInformation() -> retval
+    
+    getCPUTickCount(...)
+        getCPUTickCount() -> retval
+    
+    getDefaultNewCameraMatrix(...)
+        getDefaultNewCameraMatrix(cameraMatrix[, imgsize[, centerPrincipalPoint]]) -> retval
+    
+    getDerivKernels(...)
+        getDerivKernels(dx, dy, ksize[, kx[, ky[, normalize[, ktype]]]]) -> kx, ky
+    
+    getGaborKernel(...)
+        getGaborKernel(ksize, sigma, theta, lambd, gamma[, psi[, ktype]]) -> retval
+    
+    getGaussianKernel(...)
+        getGaussianKernel(ksize, sigma[, ktype]) -> retval
+    
+    getNumberOfCPUs(...)
+        getNumberOfCPUs() -> retval
+    
+    getOptimalDFTSize(...)
+        getOptimalDFTSize(vecsize) -> retval
+    
+    getOptimalNewCameraMatrix(...)
+        getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, alpha[, newImgSize[, centerPrincipalPoint]]) -> retval, validPixROI
+    
+    getPerspectiveTransform(...)
+        getPerspectiveTransform(src, dst) -> retval
+    
+    getRectSubPix(...)
+        getRectSubPix(image, patchSize, center[, patch[, patchType]]) -> patch
+    
+    getRotationMatrix2D(...)
+        getRotationMatrix2D(center, angle, scale) -> retval
+    
+    getStructuringElement(...)
+        getStructuringElement(shape, ksize[, anchor]) -> retval
+    
+    getTextSize(...)
+        getTextSize(text, fontFace, fontScale, thickness) -> retval, baseLine
+    
+    getTickCount(...)
+        getTickCount() -> retval
+    
+    getTickFrequency(...)
+        getTickFrequency() -> retval
+    
+    getTrackbarPos(...)
+        getTrackbarPos(trackbarname, winname) -> retval
+    
+    getValidDisparityROI(...)
+        getValidDisparityROI(roi1, roi2, minDisparity, numberOfDisparities, SADWindowSize) -> retval
+    
+    getWindowProperty(...)
+        getWindowProperty(winname, prop_id) -> retval
+    
+    goodFeaturesToTrack(...)
+        goodFeaturesToTrack(image, maxCorners, qualityLevel, minDistance[, corners[, mask[, blockSize[, useHarrisDetector[, k]]]]]) -> corners
+    
+    grabCut(...)
+        grabCut(img, mask, rect, bgdModel, fgdModel, iterCount[, mode]) -> mask, bgdModel, fgdModel
+    
+    groupRectangles(...)
+        groupRectangles(rectList, groupThreshold[, eps]) -> rectList, weights
+    
+    hconcat(...)
+        hconcat(src[, dst]) -> dst
+    
+    idct(...)
+        idct(src[, dst[, flags]]) -> dst
+    
+    idft(...)
+        idft(src[, dst[, flags[, nonzeroRows]]]) -> dst
+    
+    illuminationChange(...)
+        illuminationChange(src, mask[, dst[, alpha[, beta]]]) -> dst
+    
+    imdecode(...)
+        imdecode(buf, flags) -> retval
+    
+    imencode(...)
+        imencode(ext, img[, params]) -> retval, buf
+    
+    imread(...)
+        imread(filename[, flags]) -> retval
+    
+    imreadmulti(...)
+        imreadmulti(filename, mats[, flags]) -> retval
+    
+    imshow(...)
+        imshow(winname, mat) -> None
+    
+    imwrite(...)
+        imwrite(filename, img[, params]) -> retval
+    
+    inRange(...)
+        inRange(src, lowerb, upperb[, dst]) -> dst
+    
+    initCameraMatrix2D(...)
+        initCameraMatrix2D(objectPoints, imagePoints, imageSize[, aspectRatio]) -> retval
+    
+    initUndistortRectifyMap(...)
+        initUndistortRectifyMap(cameraMatrix, distCoeffs, R, newCameraMatrix, size, m1type[, map1[, map2]]) -> map1, map2
+    
+    initWideAngleProjMap(...)
+        initWideAngleProjMap(cameraMatrix, distCoeffs, imageSize, destImageWidth, m1type[, map1[, map2[, projType[, alpha]]]]) -> retval, map1, map2
+    
+    inpaint(...)
+        inpaint(src, inpaintMask, inpaintRadius, flags[, dst]) -> dst
+    
+    insertChannel(...)
+        insertChannel(src, dst, coi) -> dst
+    
+    integral(...)
+        integral(src[, sum[, sdepth]]) -> sum
+    
+    integral2(...)
+        integral2(src[, sum[, sqsum[, sdepth[, sqdepth]]]]) -> sum, sqsum
+    
+    integral3(...)
+        integral3(src[, sum[, sqsum[, tilted[, sdepth[, sqdepth]]]]]) -> sum, sqsum, tilted
+    
+    intersectConvexConvex(...)
+        intersectConvexConvex(_p1, _p2[, _p12[, handleNested]]) -> retval, _p12
+    
+    invert(...)
+        invert(src[, dst[, flags]]) -> retval, dst
+    
+    invertAffineTransform(...)
+        invertAffineTransform(M[, iM]) -> iM
+    
+    isContourConvex(...)
+        isContourConvex(contour) -> retval
+    
+    kmeans(...)
+        kmeans(data, K, bestLabels, criteria, attempts, flags[, centers]) -> retval, bestLabels, centers
+    
+    line(...)
+        line(img, pt1, pt2, color[, thickness[, lineType[, shift]]]) -> img
+    
+    linearPolar(...)
+        linearPolar(src, center, maxRadius, flags[, dst]) -> dst
+    
+    log(...)
+        log(src[, dst]) -> dst
+    
+    logPolar(...)
+        logPolar(src, center, M, flags[, dst]) -> dst
+    
+    magnitude(...)
+        magnitude(x, y[, magnitude]) -> magnitude
+    
+    matMulDeriv(...)
+        matMulDeriv(A, B[, dABdA[, dABdB]]) -> dABdA, dABdB
+    
+    matchShapes(...)
+        matchShapes(contour1, contour2, method, parameter) -> retval
+    
+    matchTemplate(...)
+        matchTemplate(image, templ, method[, result[, mask]]) -> result
+    
+    max(...)
+        max(src1, src2[, dst]) -> dst
+    
+    mean(...)
+        mean(src[, mask]) -> retval
+    
+    meanShift(...)
+        meanShift(probImage, window, criteria) -> retval, window
+    
+    meanStdDev(...)
+        meanStdDev(src[, mean[, stddev[, mask]]]) -> mean, stddev
+    
+    medianBlur(...)
+        medianBlur(src, ksize[, dst]) -> dst
+    
+    merge(...)
+        merge(mv[, dst]) -> dst
+    
+    min(...)
+        min(src1, src2[, dst]) -> dst
+    
+    minAreaRect(...)
+        minAreaRect(points) -> retval
+    
+    minEnclosingCircle(...)
+        minEnclosingCircle(points) -> center, radius
+    
+    minEnclosingTriangle(...)
+        minEnclosingTriangle(points[, triangle]) -> retval, triangle
+    
+    minMaxLoc(...)
+        minMaxLoc(src[, mask]) -> minVal, maxVal, minLoc, maxLoc
+    
+    mixChannels(...)
+        mixChannels(src, dst, fromTo) -> dst
+    
+    moments(...)
+        moments(array[, binaryImage]) -> retval
+    
+    morphologyEx(...)
+        morphologyEx(src, op, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) -> dst
+    
+    moveWindow(...)
+        moveWindow(winname, x, y) -> None
+    
+    mulSpectrums(...)
+        mulSpectrums(a, b, flags[, c[, conjB]]) -> c
+    
+    mulTransposed(...)
+        mulTransposed(src, aTa[, dst[, delta[, scale[, dtype]]]]) -> dst
+    
+    multiply(...)
+        multiply(src1, src2[, dst[, scale[, dtype]]]) -> dst
+    
+    namedWindow(...)
+        namedWindow(winname[, flags]) -> None
+    
+    norm(...)
+        norm(src1[, normType[, mask]]) -> retval  or  norm(src1, src2[, normType[, mask]]) -> retval
+    
+    normalize(...)
+        normalize(src, dst[, alpha[, beta[, norm_type[, dtype[, mask]]]]]) -> dst
+    
+    patchNaNs(...)
+        patchNaNs(a[, val]) -> a
+    
+    pencilSketch(...)
+        pencilSketch(src[, dst1[, dst2[, sigma_s[, sigma_r[, shade_factor]]]]]) -> dst1, dst2
+    
+    perspectiveTransform(...)
+        perspectiveTransform(src, m[, dst]) -> dst
+    
+    phase(...)
+        phase(x, y[, angle[, angleInDegrees]]) -> angle
+    
+    phaseCorrelate(...)
+        phaseCorrelate(src1, src2[, window]) -> retval, response
+    
+    pointPolygonTest(...)
+        pointPolygonTest(contour, pt, measureDist) -> retval
+    
+    polarToCart(...)
+        polarToCart(magnitude, angle[, x[, y[, angleInDegrees]]]) -> x, y
+    
+    polylines(...)
+        polylines(img, pts, isClosed, color[, thickness[, lineType[, shift]]]) -> img
+    
+    pow(...)
+        pow(src, power[, dst]) -> dst
+    
+    preCornerDetect(...)
+        preCornerDetect(src, ksize[, dst[, borderType]]) -> dst
+    
+    projectPoints(...)
+        projectPoints(objectPoints, rvec, tvec, cameraMatrix, distCoeffs[, imagePoints[, jacobian[, aspectRatio]]]) -> imagePoints, jacobian
+    
+    putText(...)
+        putText(img, text, org, fontFace, fontScale, color[, thickness[, lineType[, bottomLeftOrigin]]]) -> img
+    
+    pyrDown(...)
+        pyrDown(src[, dst[, dstsize[, borderType]]]) -> dst
+    
+    pyrMeanShiftFiltering(...)
+        pyrMeanShiftFiltering(src, sp, sr[, dst[, maxLevel[, termcrit]]]) -> dst
+    
+    pyrUp(...)
+        pyrUp(src[, dst[, dstsize[, borderType]]]) -> dst
+    
+    randShuffle(...)
+        randShuffle(dst[, iterFactor]) -> dst
+    
+    randn(...)
+        randn(dst, mean, stddev) -> dst
+    
+    randu(...)
+        randu(dst, low, high) -> dst
+    
+    recoverPose(...)
+        recoverPose(E, points1, points2[, R[, t[, focal[, pp[, mask]]]]]) -> retval, R, t, mask
+    
+    rectangle(...)
+        rectangle(img, pt1, pt2, color[, thickness[, lineType[, shift]]]) -> img
+    
+    rectify3Collinear(...)
+        rectify3Collinear(cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, cameraMatrix3, distCoeffs3, imgpt1, imgpt3, imageSize, R12, T12, R13, T13, alpha, newImgSize, flags[, R1[, R2[, R3[, P1[, P2[, P3[, Q]]]]]]]) -> retval, R1, R2, R3, P1, P2, P3, Q, roi1, roi2
+    
+    reduce(...)
+        reduce(src, dim, rtype[, dst[, dtype]]) -> dst
+    
+    remap(...)
+        remap(src, map1, map2, interpolation[, dst[, borderMode[, borderValue]]]) -> dst
+    
+    repeat(...)
+        repeat(src, ny, nx[, dst]) -> dst
+    
+    reprojectImageTo3D(...)
+        reprojectImageTo3D(disparity, Q[, _3dImage[, handleMissingValues[, ddepth]]]) -> _3dImage
+    
+    resize(...)
+        resize(src, dsize[, dst[, fx[, fy[, interpolation]]]]) -> dst
+    
+    resizeWindow(...)
+        resizeWindow(winname, width, height) -> None
+    
+    rotatedRectangleIntersection(...)
+        rotatedRectangleIntersection(rect1, rect2[, intersectingRegion]) -> retval, intersectingRegion
+    
+    scaleAdd(...)
+        scaleAdd(src1, alpha, src2[, dst]) -> dst
+    
+    seamlessClone(...)
+        seamlessClone(src, dst, mask, p, flags[, blend]) -> blend
+    
+    sepFilter2D(...)
+        sepFilter2D(src, ddepth, kernelX, kernelY[, dst[, anchor[, delta[, borderType]]]]) -> dst
+    
+    setIdentity(...)
+        setIdentity(mtx[, s]) -> mtx
+    
+    setMouseCallback(...)
+        setMouseCallback(windowName, onMouse [, param]) -> None
+    
+    setTrackbarMax(...)
+        setTrackbarMax(trackbarname, winname, maxval) -> None
+    
+    setTrackbarPos(...)
+        setTrackbarPos(trackbarname, winname, pos) -> None
+    
+    setUseOptimized(...)
+        setUseOptimized(onoff) -> None
+    
+    setWindowProperty(...)
+        setWindowProperty(winname, prop_id, prop_value) -> None
+    
+    setWindowTitle(...)
+        setWindowTitle(winname, title) -> None
+    
+    solve(...)
+        solve(src1, src2[, dst[, flags]]) -> retval, dst
+    
+    solveCubic(...)
+        solveCubic(coeffs[, roots]) -> retval, roots
+    
+    solveLP(...)
+        solveLP(Func, Constr, z) -> retval
+    
+    solvePnP(...)
+        solvePnP(objectPoints, imagePoints, cameraMatrix, distCoeffs[, rvec[, tvec[, useExtrinsicGuess[, flags]]]]) -> retval, rvec, tvec
+    
+    solvePnPRansac(...)
+        solvePnPRansac(objectPoints, imagePoints, cameraMatrix, distCoeffs[, rvec[, tvec[, useExtrinsicGuess[, iterationsCount[, reprojectionError[, confidence[, inliers[, flags]]]]]]]]) -> retval, rvec, tvec, inliers
+    
+    solvePoly(...)
+        solvePoly(coeffs[, roots[, maxIters]]) -> retval, roots
+    
+    sort(...)
+        sort(src, flags[, dst]) -> dst
+    
+    sortIdx(...)
+        sortIdx(src, flags[, dst]) -> dst
+    
+    split(...)
+        split(m[, mv]) -> mv
+    
+    sqrBoxFilter(...)
+        sqrBoxFilter(_src, ddepth, ksize[, _dst[, anchor[, normalize[, borderType]]]]) -> _dst
+    
+    sqrt(...)
+        sqrt(src[, dst]) -> dst
+    
+    startWindowThread(...)
+        startWindowThread() -> retval
+    
+    stereoCalibrate(...)
+        stereoCalibrate(objectPoints, imagePoints1, imagePoints2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, imageSize[, R[, T[, E[, F[, flags[, criteria]]]]]]) -> retval, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, R, T, E, F
+    
+    stereoRectify(...)
+        stereoRectify(cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, imageSize, R, T[, R1[, R2[, P1[, P2[, Q[, flags[, alpha[, newImageSize]]]]]]]]) -> R1, R2, P1, P2, Q, validPixROI1, validPixROI2
+    
+    stereoRectifyUncalibrated(...)
+        stereoRectifyUncalibrated(points1, points2, F, imgSize[, H1[, H2[, threshold]]]) -> retval, H1, H2
+    
+    stylization(...)
+        stylization(src[, dst[, sigma_s[, sigma_r]]]) -> dst
+    
+    subtract(...)
+        subtract(src1, src2[, dst[, mask[, dtype]]]) -> dst
+    
+    sumElems(...)
+        sumElems(src) -> retval
+    
+    textureFlattening(...)
+        textureFlattening(src, mask[, dst[, low_threshold[, high_threshold[, kernel_size]]]]) -> dst
+    
+    threshold(...)
+        threshold(src, thresh, maxval, type[, dst]) -> retval, dst
+    
+    trace(...)
+        trace(mtx) -> retval
+    
+    transform(...)
+        transform(src, m[, dst]) -> dst
+    
+    transpose(...)
+        transpose(src[, dst]) -> dst
+    
+    triangulatePoints(...)
+        triangulatePoints(projMatr1, projMatr2, projPoints1, projPoints2[, points4D]) -> points4D
+    
+    undistort(...)
+        undistort(src, cameraMatrix, distCoeffs[, dst[, newCameraMatrix]]) -> dst
+    
+    undistortPoints(...)
+        undistortPoints(src, cameraMatrix, distCoeffs[, dst[, R[, P]]]) -> dst
+    
+    useOptimized(...)
+        useOptimized() -> retval
+    
+    validateDisparity(...)
+        validateDisparity(disparity, cost, minDisparity, numberOfDisparities[, disp12MaxDisp]) -> disparity
+    
+    vconcat(...)
+        vconcat(src[, dst]) -> dst
+    
+    waitKey(...)
+        waitKey([, delay]) -> retval
+    
+    warpAffine(...)
+        warpAffine(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]]) -> dst
+    
+    warpPerspective(...)
+        warpPerspective(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]]) -> dst
+    
+    watershed(...)
+        watershed(image, markers) -> markers
+
+DATA
+    ACCESS_FAST = 67108864
+    ACCESS_MASK = 50331648
+    ACCESS_READ = 16777216
+    ACCESS_RW = 50331648
+    ACCESS_WRITE = 33554432
+    ADAPTIVE_THRESH_GAUSSIAN_C = 1
+    ADAPTIVE_THRESH_MEAN_C = 0
+    AKAZE_DESCRIPTOR_KAZE = 3
+    AKAZE_DESCRIPTOR_KAZE_UPRIGHT = 2
+    AKAZE_DESCRIPTOR_MLDB = 5
+    AKAZE_DESCRIPTOR_MLDB_UPRIGHT = 4
+    BORDER_CONSTANT = 0
+    BORDER_DEFAULT = 4
+    BORDER_ISOLATED = 16
+    BORDER_REFLECT = 2
+    BORDER_REFLECT101 = 4
+    BORDER_REFLECT_101 = 4
+    BORDER_REPLICATE = 1
+    BORDER_TRANSPARENT = 5
+    BORDER_WRAP = 3
+    CALIB_CB_ADAPTIVE_THRESH = 1
+    CALIB_CB_ASYMMETRIC_GRID = 2
+    CALIB_CB_CLUSTERING = 4
+    CALIB_CB_FAST_CHECK = 8
+    CALIB_CB_FILTER_QUADS = 4
+    CALIB_CB_NORMALIZE_IMAGE = 2
+    CALIB_CB_SYMMETRIC_GRID = 1
+    CALIB_FIX_ASPECT_RATIO = 2
+    CALIB_FIX_FOCAL_LENGTH = 16
+    CALIB_FIX_INTRINSIC = 256
+    CALIB_FIX_K1 = 32
+    CALIB_FIX_K2 = 64
+    CALIB_FIX_K3 = 128
+    CALIB_FIX_K4 = 2048
+    CALIB_FIX_K5 = 4096
+    CALIB_FIX_K6 = 8192
+    CALIB_FIX_PRINCIPAL_POINT = 4
+    CALIB_FIX_S1_S2_S3_S4 = 65536
+    CALIB_RATIONAL_MODEL = 16384
+    CALIB_SAME_FOCAL_LENGTH = 512
+    CALIB_THIN_PRISM_MODEL = 32768
+    CALIB_USE_INTRINSIC_GUESS = 1
+    CALIB_ZERO_DISPARITY = 1024
+    CALIB_ZERO_TANGENT_DIST = 8
+    CAP_ANDROID = 1000
+    CAP_ANDROID_ANTIBANDING_50HZ = 0
+    CAP_ANDROID_ANTIBANDING_60HZ = 1
+    CAP_ANDROID_ANTIBANDING_AUTO = 2
+    CAP_ANDROID_ANTIBANDING_OFF = 3
+    CAP_ANDROID_COLOR_FRAME = 0
+    CAP_ANDROID_COLOR_FRAME_BGR = 0
+    CAP_ANDROID_COLOR_FRAME_BGRA = 3
+    CAP_ANDROID_COLOR_FRAME_RGB = 2
+    CAP_ANDROID_COLOR_FRAME_RGBA = 4
+    CAP_ANDROID_FLASH_MODE_AUTO = 0
+    CAP_ANDROID_FLASH_MODE_OFF = 1
+    CAP_ANDROID_FLASH_MODE_ON = 2
+    CAP_ANDROID_FLASH_MODE_RED_EYE = 3
+    CAP_ANDROID_FLASH_MODE_TORCH = 4
+    CAP_ANDROID_FOCUS_MODE_AUTO = 0
+    CAP_ANDROID_FOCUS_MODE_CONTINUOUS_VIDEO = 1
+    CAP_ANDROID_FOCUS_MODE_EDOF = 2
+    CAP_ANDROID_FOCUS_MODE_FIXED = 3
+    CAP_ANDROID_FOCUS_MODE_INFINITY = 4
+    CAP_ANDROID_FOCUS_MODE_MACRO = 5
+    CAP_ANDROID_GRAY_FRAME = 1
+    CAP_ANDROID_GREY_FRAME = 1
+    CAP_ANDROID_WHITE_BALANCE_AUTO = 0
+    CAP_ANDROID_WHITE_BALANCE_CLOUDY_DAYLIGHT = 1
+    CAP_ANDROID_WHITE_BALANCE_DAYLIGHT = 2
+    CAP_ANDROID_WHITE_BALANCE_FLUORESCENT = 3
+    CAP_ANDROID_WHITE_BALANCE_INCANDESCENT = 4
+    CAP_ANDROID_WHITE_BALANCE_SHADE = 5
+    CAP_ANDROID_WHITE_BALANCE_TWILIGHT = 6
+    CAP_ANDROID_WHITE_BALANCE_WARM_FLUORESCENT = 7
+    CAP_ANY = 0
+    CAP_AVFOUNDATION = 1200
+    CAP_CMU1394 = 300
+    CAP_DC1394 = 300
+    CAP_DSHOW = 700
+    CAP_FIREWARE = 300
+    CAP_FIREWIRE = 300
+    CAP_GIGANETIX = 1300
+    CAP_IEEE1394 = 300
+    CAP_INTELPERC = 1500
+    CAP_INTELPERC_DEPTH_GENERATOR = 536870912
+    CAP_INTELPERC_DEPTH_MAP = 0
+    CAP_INTELPERC_GENERATORS_MASK = 805306368
+    CAP_INTELPERC_IMAGE = 3
+    CAP_INTELPERC_IMAGE_GENERATOR = 268435456
+    CAP_INTELPERC_IR_MAP = 2
+    CAP_INTELPERC_UVDEPTH_MAP = 1
+    CAP_MODE_BGR = 0
+    CAP_MODE_GRAY = 2
+    CAP_MODE_RGB = 1
+    CAP_MSMF = 1400
+    CAP_OPENNI = 900
+    CAP_OPENNI2 = 1600
+    CAP_OPENNI2_ASUS = 1610
+    CAP_OPENNI_ASUS = 910
+    CAP_OPENNI_BGR_IMAGE = 5
+    CAP_OPENNI_DEPTH_GENERATOR = -2147483648
+    CAP_OPENNI_DEPTH_GENERATOR_BASELINE = -2147483546
+    CAP_OPENNI_DEPTH_GENERATOR_FOCAL_LENGTH = -2147483545
+    CAP_OPENNI_DEPTH_GENERATOR_REGISTRATION = -2147483544
+    CAP_OPENNI_DEPTH_GENERATOR_REGISTRATION_ON = -2147483544
+    CAP_OPENNI_DEPTH_MAP = 0
+    CAP_OPENNI_DISPARITY_MAP = 2
+    CAP_OPENNI_DISPARITY_MAP_32F = 3
+    CAP_OPENNI_GENERATORS_MASK = -1073741824
+    CAP_OPENNI_GRAY_IMAGE = 6
+    CAP_OPENNI_IMAGE_GENERATOR = 1073741824
+    CAP_OPENNI_IMAGE_GENERATOR_OUTPUT_MODE = 1073741924
+    CAP_OPENNI_IMAGE_GENERATOR_PRESENT = 1073741933
+    CAP_OPENNI_POINT_CLOUD_MAP = 1
+    CAP_OPENNI_QVGA_30HZ = 3
+    CAP_OPENNI_QVGA_60HZ = 4
+    CAP_OPENNI_SXGA_15HZ = 1
+    CAP_OPENNI_SXGA_30HZ = 2
+    CAP_OPENNI_VALID_DEPTH_MASK = 4
+    CAP_OPENNI_VGA_30HZ = 0
+    CAP_PROP_ANDROID_ANTIBANDING = 8004
+    CAP_PROP_ANDROID_AUTOGRAB = 1024
+    CAP_PROP_ANDROID_FLASH_MODE = 8001
+    CAP_PROP_ANDROID_FOCAL_LENGTH = 8005
+    CAP_PROP_ANDROID_FOCUS_DISTANCE_FAR = 8008
+    CAP_PROP_ANDROID_FOCUS_DISTANCE_NEAR = 8006
+    CAP_PROP_ANDROID_FOCUS_DISTANCE_OPTIMAL = 8007
+    CAP_PROP_ANDROID_FOCUS_MODE = 8002
+    CAP_PROP_ANDROID_PREVIEW_FORMAT = 1026
+    CAP_PROP_ANDROID_PREVIEW_SIZES_STRING = 1025
+    CAP_PROP_ANDROID_WHITE_BALANCE = 8003
+    CAP_PROP_AUTO_EXPOSURE = 21
+    CAP_PROP_BACKLIGHT = 32
+    CAP_PROP_BRIGHTNESS = 10
+    CAP_PROP_CONTRAST = 11
+    CAP_PROP_CONVERT_RGB = 16
+    CAP_PROP_DC1394_MAX = 31
+    CAP_PROP_DC1394_MODE_AUTO = -2
+    CAP_PROP_DC1394_MODE_MANUAL = -3
+    CAP_PROP_DC1394_MODE_ONE_PUSH_AUTO = -1
+    CAP_PROP_DC1394_OFF = -4
+    CAP_PROP_EXPOSURE = 15
+    CAP_PROP_FOCUS = 28
+    CAP_PROP_FORMAT = 8
+    CAP_PROP_FOURCC = 6
+    CAP_PROP_FPS = 5
+    CAP_PROP_FRAME_COUNT = 7
+    CAP_PROP_FRAME_HEIGHT = 4
+    CAP_PROP_FRAME_WIDTH = 3
+    CAP_PROP_GAIN = 14
+    CAP_PROP_GAMMA = 22
+    CAP_PROP_GIGA_FRAME_HEIGH_MAX = 10004
+    CAP_PROP_GIGA_FRAME_OFFSET_X = 10001
+    CAP_PROP_GIGA_FRAME_OFFSET_Y = 10002
+    CAP_PROP_GIGA_FRAME_SENS_HEIGH = 10006
+    CAP_PROP_GIGA_FRAME_SENS_WIDTH = 10005
+    CAP_PROP_GIGA_FRAME_WIDTH_MAX = 10003
+    CAP_PROP_GSTREAMER_QUEUE_LENGTH = 200
+    CAP_PROP_GUID = 29
+    CAP_PROP_HUE = 13
+    CAP_PROP_INTELPERC_DEPTH_CONFIDENCE_THRESHOLD = 11005
+    CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_HORZ = 11006
+    CAP_PROP_INTELPERC_DEPTH_FOCAL_LENGTH_VERT = 11007
+    CAP_PROP_INTELPERC_DEPTH_LOW_CONFIDENCE_VALUE = 11003
+    CAP_PROP_INTELPERC_DEPTH_SATURATION_VALUE = 11004
+    CAP_PROP_INTELPERC_PROFILE_COUNT = 11001
+    CAP_PROP_INTELPERC_PROFILE_IDX = 11002
+    CAP_PROP_IOS_DEVICE_EXPOSURE = 9002
+    CAP_PROP_IOS_DEVICE_FLASH = 9003
+    CAP_PROP_IOS_DEVICE_FOCUS = 9001
+    CAP_PROP_IOS_DEVICE_TORCH = 9005
+    CAP_PROP_IOS_DEVICE_WHITEBALANCE = 9004
+    CAP_PROP_IRIS = 36
+    CAP_PROP_ISO_SPEED = 30
+    CAP_PROP_MODE = 9
+    CAP_PROP_MONOCHROME = 19
+    CAP_PROP_MONOCROME = 19
+    CAP_PROP_OPENNI2_MIRROR = 111
+    CAP_PROP_OPENNI2_SYNC = 110
+    CAP_PROP_OPENNI_APPROX_FRAME_SYNC = 105
+    CAP_PROP_OPENNI_BASELINE = 102
+    CAP_PROP_OPENNI_CIRCLE_BUFFER = 107
+    CAP_PROP_OPENNI_FOCAL_LENGTH = 103
+    CAP_PROP_OPENNI_FRAME_MAX_DEPTH = 101
+    CAP_PROP_OPENNI_GENERATOR_PRESENT = 109
+    CAP_PROP_OPENNI_MAX_BUFFER_SIZE = 106
+    CAP_PROP_OPENNI_MAX_TIME_DURATION = 108
+    CAP_PROP_OPENNI_OUTPUT_MODE = 100
+    CAP_PROP_OPENNI_REGISTRATION = 104
+    CAP_PROP_OPENNI_REGISTRATION_ON = 104
+    CAP_PROP_PAN = 33
+    CAP_PROP_POS_AVI_RATIO = 2
+    CAP_PROP_POS_FRAMES = 1
+    CAP_PROP_POS_MSEC = 0
+    CAP_PROP_PVAPI_BINNINGX = 304
+    CAP_PROP_PVAPI_BINNINGY = 305
+    CAP_PROP_PVAPI_DECIMATIONHORIZONTAL = 302
+    CAP_PROP_PVAPI_DECIMATIONVERTICAL = 303
+    CAP_PROP_PVAPI_FRAMESTARTTRIGGERMODE = 301
+    CAP_PROP_PVAPI_MULTICASTIP = 300
+    CAP_PROP_RECTIFICATION = 18
+    CAP_PROP_ROLL = 35
+    CAP_PROP_SATURATION = 12
+    CAP_PROP_SETTINGS = 37
+    CAP_PROP_SHARPNESS = 20
+    CAP_PROP_TEMPERATURE = 23
+    CAP_PROP_TILT = 34
+    CAP_PROP_TRIGGER = 24
+    CAP_PROP_TRIGGER_DELAY = 25
+    CAP_PROP_WHITE_BALANCE_BLUE_U = 17
+    CAP_PROP_WHITE_BALANCE_RED_V = 26
+    CAP_PROP_XI_AEAG = 415
+    CAP_PROP_XI_AEAG_LEVEL = 419
+    CAP_PROP_XI_AE_MAX_LIMIT = 417
+    CAP_PROP_XI_AG_MAX_LIMIT = 418
+    CAP_PROP_XI_AUTO_WB = 414
+    CAP_PROP_XI_DATA_FORMAT = 401
+    CAP_PROP_XI_DOWNSAMPLING = 400
+    CAP_PROP_XI_EXP_PRIORITY = 416
+    CAP_PROP_XI_GPI_LEVEL = 408
+    CAP_PROP_XI_GPI_MODE = 407
+    CAP_PROP_XI_GPI_SELECTOR = 406
+    CAP_PROP_XI_GPO_MODE = 410
+    CAP_PROP_XI_GPO_SELECTOR = 409
+    CAP_PROP_XI_LED_MODE = 412
+    CAP_PROP_XI_LED_SELECTOR = 411
+    CAP_PROP_XI_MANUAL_WB = 413
+    CAP_PROP_XI_OFFSET_X = 402
+    CAP_PROP_XI_OFFSET_Y = 403
+    CAP_PROP_XI_TIMEOUT = 420
+    CAP_PROP_XI_TRG_SOFTWARE = 405
+    CAP_PROP_XI_TRG_SOURCE = 404
+    CAP_PROP_ZOOM = 27
+    CAP_PVAPI = 800
+    CAP_PVAPI_DECIMATION_2OUTOF16 = 8
+    CAP_PVAPI_DECIMATION_2OUTOF4 = 2
+    CAP_PVAPI_DECIMATION_2OUTOF8 = 4
+    CAP_PVAPI_DECIMATION_OFF = 1
+    CAP_PVAPI_FSTRIGMODE_FIXEDRATE = 3
+    CAP_PVAPI_FSTRIGMODE_FREERUN = 0
+    CAP_PVAPI_FSTRIGMODE_SOFTWARE = 4
+    CAP_PVAPI_FSTRIGMODE_SYNCIN1 = 1
+    CAP_PVAPI_FSTRIGMODE_SYNCIN2 = 2
+    CAP_QT = 500
+    CAP_UNICAP = 600
+    CAP_V4L = 200
+    CAP_V4L2 = 200
+    CAP_VFW = 200
+    CAP_XIAPI = 1100
+    CASCADE_DO_CANNY_PRUNING = 1
+    CASCADE_DO_ROUGH_SEARCH = 8
+    CASCADE_FIND_BIGGEST_OBJECT = 4
+    CASCADE_SCALE_IMAGE = 2
+    CC_STAT_AREA = 4
+    CC_STAT_HEIGHT = 3
+    CC_STAT_LEFT = 0
+    CC_STAT_MAX = 5
+    CC_STAT_TOP = 1
+    CC_STAT_WIDTH = 2
+    CHAIN_APPROX_NONE = 1
+    CHAIN_APPROX_SIMPLE = 2
+    CHAIN_APPROX_TC89_KCOS = 4
+    CHAIN_APPROX_TC89_L1 = 3
+    CMP_EQ = 0
+    CMP_GE = 2
+    CMP_GT = 1
+    CMP_LE = 4
+    CMP_LT = 3
+    CMP_NE = 5
+    COLORMAP_AUTUMN = 0
+    COLORMAP_BONE = 1
+    COLORMAP_COOL = 8
+    COLORMAP_HOT = 11
+    COLORMAP_HSV = 9
+    COLORMAP_JET = 2
+    COLORMAP_OCEAN = 5
+    COLORMAP_PINK = 10
+    COLORMAP_RAINBOW = 4
+    COLORMAP_SPRING = 7
+    COLORMAP_SUMMER = 6
+    COLORMAP_WINTER = 3
+    COLOR_BAYER_BG2BGR = 46
+    COLOR_BAYER_BG2BGR_EA = 135
+    COLOR_BAYER_BG2BGR_VNG = 62
+    COLOR_BAYER_BG2GRAY = 86
+    COLOR_BAYER_BG2RGB = 48
+    COLOR_BAYER_BG2RGB_EA = 137
+    COLOR_BAYER_BG2RGB_VNG = 64
+    COLOR_BAYER_GB2BGR = 47
+    COLOR_BAYER_GB2BGR_EA = 136
+    COLOR_BAYER_GB2BGR_VNG = 63
+    COLOR_BAYER_GB2GRAY = 87
+    COLOR_BAYER_GB2RGB = 49
+    COLOR_BAYER_GB2RGB_EA = 138
+    COLOR_BAYER_GB2RGB_VNG = 65
+    COLOR_BAYER_GR2BGR = 49
+    COLOR_BAYER_GR2BGR_EA = 138
+    COLOR_BAYER_GR2BGR_VNG = 65
+    COLOR_BAYER_GR2GRAY = 89
+    COLOR_BAYER_GR2RGB = 47
+    COLOR_BAYER_GR2RGB_EA = 136
+    COLOR_BAYER_GR2RGB_VNG = 63
+    COLOR_BAYER_RG2BGR = 48
+    COLOR_BAYER_RG2BGR_EA = 137
+    COLOR_BAYER_RG2BGR_VNG = 64
+    COLOR_BAYER_RG2GRAY = 88
+    COLOR_BAYER_RG2RGB = 46
+    COLOR_BAYER_RG2RGB_EA = 135
+    COLOR_BAYER_RG2RGB_VNG = 62
+    COLOR_BGR2BGR555 = 22
+    COLOR_BGR2BGR565 = 12
+    COLOR_BGR2BGRA = 0
+    COLOR_BGR2GRAY = 6
+    COLOR_BGR2HLS = 52
+    COLOR_BGR2HLS_FULL = 68
+    COLOR_BGR2HSV = 40
+    COLOR_BGR2HSV_FULL = 66
+    COLOR_BGR2LAB = 44
+    COLOR_BGR2LUV = 50
+    COLOR_BGR2Lab = 44
+    COLOR_BGR2Luv = 50
+    COLOR_BGR2RGB = 4
+    COLOR_BGR2RGBA = 2
+    COLOR_BGR2XYZ = 32
+    COLOR_BGR2YCR_CB = 36
+    COLOR_BGR2YCrCb = 36
+    COLOR_BGR2YUV = 82
+    COLOR_BGR2YUV_I420 = 128
+    COLOR_BGR2YUV_IYUV = 128
+    COLOR_BGR2YUV_YV12 = 132
+    COLOR_BGR5552BGR = 24
+    COLOR_BGR5552BGRA = 28
+    COLOR_BGR5552GRAY = 31
+    COLOR_BGR5552RGB = 25
+    COLOR_BGR5552RGBA = 29
+    COLOR_BGR5652BGR = 14
+    COLOR_BGR5652BGRA = 18
+    COLOR_BGR5652GRAY = 21
+    COLOR_BGR5652RGB = 15
+    COLOR_BGR5652RGBA = 19
+    COLOR_BGRA2BGR = 1
+    COLOR_BGRA2BGR555 = 26
+    COLOR_BGRA2BGR565 = 16
+    COLOR_BGRA2GRAY = 10
+    COLOR_BGRA2RGB = 3
+    COLOR_BGRA2RGBA = 5
+    COLOR_BGRA2YUV_I420 = 130
+    COLOR_BGRA2YUV_IYUV = 130
+    COLOR_BGRA2YUV_YV12 = 134
+    COLOR_BayerBG2BGR = 46
+    COLOR_BayerBG2BGR_EA = 135
+    COLOR_BayerBG2BGR_VNG = 62
+    COLOR_BayerBG2GRAY = 86
+    COLOR_BayerBG2RGB = 48
+    COLOR_BayerBG2RGB_EA = 137
+    COLOR_BayerBG2RGB_VNG = 64
+    COLOR_BayerGB2BGR = 47
+    COLOR_BayerGB2BGR_EA = 136
+    COLOR_BayerGB2BGR_VNG = 63
+    COLOR_BayerGB2GRAY = 87
+    COLOR_BayerGB2RGB = 49
+    COLOR_BayerGB2RGB_EA = 138
+    COLOR_BayerGB2RGB_VNG = 65
+    COLOR_BayerGR2BGR = 49
+    COLOR_BayerGR2BGR_EA = 138
+    COLOR_BayerGR2BGR_VNG = 65
+    COLOR_BayerGR2GRAY = 89
+    COLOR_BayerGR2RGB = 47
+    COLOR_BayerGR2RGB_EA = 136
+    COLOR_BayerGR2RGB_VNG = 63
+    COLOR_BayerRG2BGR = 48
+    COLOR_BayerRG2BGR_EA = 137
+    COLOR_BayerRG2BGR_VNG = 64
+    COLOR_BayerRG2GRAY = 88
+    COLOR_BayerRG2RGB = 46
+    COLOR_BayerRG2RGB_EA = 135
+    COLOR_BayerRG2RGB_VNG = 62
+    COLOR_COLORCVT_MAX = 139
+    COLOR_GRAY2BGR = 8
+    COLOR_GRAY2BGR555 = 30
+    COLOR_GRAY2BGR565 = 20
+    COLOR_GRAY2BGRA = 9
+    COLOR_GRAY2RGB = 8
+    COLOR_GRAY2RGBA = 9
+    COLOR_HLS2BGR = 60
+    COLOR_HLS2BGR_FULL = 72
+    COLOR_HLS2RGB = 61
+    COLOR_HLS2RGB_FULL = 73
+    COLOR_HSV2BGR = 54
+    COLOR_HSV2BGR_FULL = 70
+    COLOR_HSV2RGB = 55
+    COLOR_HSV2RGB_FULL = 71
+    COLOR_LAB2BGR = 56
+    COLOR_LAB2LBGR = 78
+    COLOR_LAB2LRGB = 79
+    COLOR_LAB2RGB = 57
+    COLOR_LBGR2LAB = 74
+    COLOR_LBGR2LUV = 76
+    COLOR_LBGR2Lab = 74
+    COLOR_LBGR2Luv = 76
+    COLOR_LRGB2LAB = 75
+    COLOR_LRGB2LUV = 77
+    COLOR_LRGB2Lab = 75
+    COLOR_LRGB2Luv = 77
+    COLOR_LUV2BGR = 58
+    COLOR_LUV2LBGR = 80
+    COLOR_LUV2LRGB = 81
+    COLOR_LUV2RGB = 59
+    COLOR_Lab2BGR = 56
+    COLOR_Lab2LBGR = 78
+    COLOR_Lab2LRGB = 79
+    COLOR_Lab2RGB = 57
+    COLOR_Luv2BGR = 58
+    COLOR_Luv2LBGR = 80
+    COLOR_Luv2LRGB = 81
+    COLOR_Luv2RGB = 59
+    COLOR_M_RGBA2RGBA = 126
+    COLOR_RGB2BGR = 4
+    COLOR_RGB2BGR555 = 23
+    COLOR_RGB2BGR565 = 13
+    COLOR_RGB2BGRA = 2
+    COLOR_RGB2GRAY = 7
+    COLOR_RGB2HLS = 53
+    COLOR_RGB2HLS_FULL = 69
+    COLOR_RGB2HSV = 41
+    COLOR_RGB2HSV_FULL = 67
+    COLOR_RGB2LAB = 45
+    COLOR_RGB2LUV = 51
+    COLOR_RGB2Lab = 45
+    COLOR_RGB2Luv = 51
+    COLOR_RGB2RGBA = 0
+    COLOR_RGB2XYZ = 33
+    COLOR_RGB2YCR_CB = 37
+    COLOR_RGB2YCrCb = 37
+    COLOR_RGB2YUV = 83
+    COLOR_RGB2YUV_I420 = 127
+    COLOR_RGB2YUV_IYUV = 127
+    COLOR_RGB2YUV_YV12 = 131
+    COLOR_RGBA2BGR = 3
+    COLOR_RGBA2BGR555 = 27
+    COLOR_RGBA2BGR565 = 17
+    COLOR_RGBA2BGRA = 5
+    COLOR_RGBA2GRAY = 11
+    COLOR_RGBA2M_RGBA = 125
+    COLOR_RGBA2RGB = 1
+    COLOR_RGBA2YUV_I420 = 129
+    COLOR_RGBA2YUV_IYUV = 129
+    COLOR_RGBA2YUV_YV12 = 133
+    COLOR_RGBA2mRGBA = 125
+    COLOR_XYZ2BGR = 34
+    COLOR_XYZ2RGB = 35
+    COLOR_YCR_CB2BGR = 38
+    COLOR_YCR_CB2RGB = 39
+    COLOR_YCrCb2BGR = 38
+    COLOR_YCrCb2RGB = 39
+    COLOR_YUV2BGR = 84
+    COLOR_YUV2BGRA_I420 = 105
+    COLOR_YUV2BGRA_IYUV = 105
+    COLOR_YUV2BGRA_NV12 = 95
+    COLOR_YUV2BGRA_NV21 = 97
+    COLOR_YUV2BGRA_UYNV = 112
+    COLOR_YUV2BGRA_UYVY = 112
+    COLOR_YUV2BGRA_Y422 = 112
+    COLOR_YUV2BGRA_YUNV = 120
+    COLOR_YUV2BGRA_YUY2 = 120
+    COLOR_YUV2BGRA_YUYV = 120
+    COLOR_YUV2BGRA_YV12 = 103
+    COLOR_YUV2BGRA_YVYU = 122
+    COLOR_YUV2BGR_I420 = 101
+    COLOR_YUV2BGR_IYUV = 101
+    COLOR_YUV2BGR_NV12 = 91
+    COLOR_YUV2BGR_NV21 = 93
+    COLOR_YUV2BGR_UYNV = 108
+    COLOR_YUV2BGR_UYVY = 108
+    COLOR_YUV2BGR_Y422 = 108
+    COLOR_YUV2BGR_YUNV = 116
+    COLOR_YUV2BGR_YUY2 = 116
+    COLOR_YUV2BGR_YUYV = 116
+    COLOR_YUV2BGR_YV12 = 99
+    COLOR_YUV2BGR_YVYU = 118
+    COLOR_YUV2GRAY_420 = 106
+    COLOR_YUV2GRAY_I420 = 106
+    COLOR_YUV2GRAY_IYUV = 106
+    COLOR_YUV2GRAY_NV12 = 106
+    COLOR_YUV2GRAY_NV21 = 106
+    COLOR_YUV2GRAY_UYNV = 123
+    COLOR_YUV2GRAY_UYVY = 123
+    COLOR_YUV2GRAY_Y422 = 123
+    COLOR_YUV2GRAY_YUNV = 124
+    COLOR_YUV2GRAY_YUY2 = 124
+    COLOR_YUV2GRAY_YUYV = 124
+    COLOR_YUV2GRAY_YV12 = 106
+    COLOR_YUV2GRAY_YVYU = 124
+    COLOR_YUV2RGB = 85
+    COLOR_YUV2RGBA_I420 = 104
+    COLOR_YUV2RGBA_IYUV = 104
+    COLOR_YUV2RGBA_NV12 = 94
+    COLOR_YUV2RGBA_NV21 = 96
+    COLOR_YUV2RGBA_UYNV = 111
+    COLOR_YUV2RGBA_UYVY = 111
+    COLOR_YUV2RGBA_Y422 = 111
+    COLOR_YUV2RGBA_YUNV = 119
+    COLOR_YUV2RGBA_YUY2 = 119
+    COLOR_YUV2RGBA_YUYV = 119
+    COLOR_YUV2RGBA_YV12 = 102
+    COLOR_YUV2RGBA_YVYU = 121
+    COLOR_YUV2RGB_I420 = 100
+    COLOR_YUV2RGB_IYUV = 100
+    COLOR_YUV2RGB_NV12 = 90
+    COLOR_YUV2RGB_NV21 = 92
+    COLOR_YUV2RGB_UYNV = 107
+    COLOR_YUV2RGB_UYVY = 107
+    COLOR_YUV2RGB_Y422 = 107
+    COLOR_YUV2RGB_YUNV = 115
+    COLOR_YUV2RGB_YUY2 = 115
+    COLOR_YUV2RGB_YUYV = 115
+    COLOR_YUV2RGB_YV12 = 98
+    COLOR_YUV2RGB_YVYU = 117
+    COLOR_YUV420P2BGR = 99
+    COLOR_YUV420P2BGRA = 103
+    COLOR_YUV420P2GRAY = 106
+    COLOR_YUV420P2RGB = 98
+    COLOR_YUV420P2RGBA = 102
+    COLOR_YUV420SP2BGR = 93
+    COLOR_YUV420SP2BGRA = 97
+    COLOR_YUV420SP2GRAY = 106
+    COLOR_YUV420SP2RGB = 92
+    COLOR_YUV420SP2RGBA = 96
+    COLOR_YUV420p2BGR = 99
+    COLOR_YUV420p2BGRA = 103
+    COLOR_YUV420p2GRAY = 106
+    COLOR_YUV420p2RGB = 98
+    COLOR_YUV420p2RGBA = 102
+    COLOR_YUV420sp2BGR = 93
+    COLOR_YUV420sp2BGRA = 97
+    COLOR_YUV420sp2GRAY = 106
+    COLOR_YUV420sp2RGB = 92
+    COLOR_YUV420sp2RGBA = 96
+    COLOR_mRGBA2RGBA = 126
+    COVAR_COLS = 16
+    COVAR_NORMAL = 1
+    COVAR_ROWS = 8
+    COVAR_SCALE = 4
+    COVAR_SCRAMBLED = 0
+    COVAR_USE_AVG = 2
+    CPU_AVX = 10
+    CPU_MMX = 1
+    CPU_NEON = 11
+    CPU_POPCNT = 8
+    CPU_SSE = 2
+    CPU_SSE2 = 3
+    CPU_SSE3 = 4
+    CPU_SSE4_1 = 6
+    CPU_SSE4_2 = 7
+    CPU_SSSE3 = 5
+    CV_16S = 3
+    CV_16SC1 = 3
+    CV_16SC2 = 11
+    CV_16SC3 = 19
+    CV_16SC4 = 27
+    CV_16U = 2
+    CV_16UC1 = 2
+    CV_16UC2 = 10
+    CV_16UC3 = 18
+    CV_16UC4 = 26
+    CV_32F = 5
+    CV_32FC1 = 5
+    CV_32FC2 = 13
+    CV_32FC3 = 21
+    CV_32FC4 = 29
+    CV_32S = 4
+    CV_32SC1 = 4
+    CV_32SC2 = 12
+    CV_32SC3 = 20
+    CV_32SC4 = 28
+    CV_64F = 6
+    CV_64FC1 = 6
+    CV_64FC2 = 14
+    CV_64FC3 = 22
+    CV_64FC4 = 30
+    CV_8S = 1
+    CV_8SC1 = 1
+    CV_8SC2 = 9
+    CV_8SC3 = 17
+    CV_8SC4 = 25
+    CV_8U = 0
+    CV_8UC1 = 0
+    CV_8UC2 = 8
+    CV_8UC3 = 16
+    CV_8UC4 = 24
+    DCT_INVERSE = 1
+    DCT_ROWS = 4
+    DECOMP_CHOLESKY = 3
+    DECOMP_EIG = 2
+    DECOMP_LU = 0
+    DECOMP_NORMAL = 16
+    DECOMP_QR = 4
+    DECOMP_SVD = 1
+    DFT_COMPLEX_OUTPUT = 16
+    DFT_INVERSE = 1
+    DFT_REAL_OUTPUT = 32
+    DFT_ROWS = 4
+    DFT_SCALE = 2
+    DIST_C = 3
+    DIST_FAIR = 5
+    DIST_HUBER = 7
+    DIST_L1 = 1
+    DIST_L12 = 4
+    DIST_L2 = 2
+    DIST_LABEL_CCOMP = 0
+    DIST_LABEL_PIXEL = 1
+    DIST_MASK_3 = 3
+    DIST_MASK_5 = 5
+    DIST_MASK_PRECISE = 0
+    DIST_USER = -1
+    DIST_WELSCH = 6
+    DRAW_MATCHES_FLAGS_DEFAULT = 0
+    DRAW_MATCHES_FLAGS_DRAW_OVER_OUTIMG = 1
+    DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS = 4
+    DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS = 2
+    DrawMatchesFlags_DEFAULT = 0
+    DrawMatchesFlags_DRAW_OVER_OUTIMG = 1
+    DrawMatchesFlags_DRAW_RICH_KEYPOINTS = 4
+    DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS = 2
+    EVENT_FLAG_ALTKEY = 32
+    EVENT_FLAG_CTRLKEY = 8
+    EVENT_FLAG_LBUTTON = 1
+    EVENT_FLAG_MBUTTON = 4
+    EVENT_FLAG_RBUTTON = 2
+    EVENT_FLAG_SHIFTKEY = 16
+    EVENT_LBUTTONDBLCLK = 7
+    EVENT_LBUTTONDOWN = 1
+    EVENT_LBUTTONUP = 4
+    EVENT_MBUTTONDBLCLK = 9
+    EVENT_MBUTTONDOWN = 3
+    EVENT_MBUTTONUP = 6
+    EVENT_MOUSEHWHEEL = 11
+    EVENT_MOUSEMOVE = 0
+    EVENT_MOUSEWHEEL = 10
+    EVENT_RBUTTONDBLCLK = 8
+    EVENT_RBUTTONDOWN = 2
+    EVENT_RBUTTONUP = 5
+    FAST_FEATURE_DETECTOR_FAST_N = 10002
+    FAST_FEATURE_DETECTOR_NONMAX_SUPPRESSION = 10001
+    FAST_FEATURE_DETECTOR_THRESHOLD = 10000
+    FAST_FEATURE_DETECTOR_TYPE_5_8 = 0
+    FAST_FEATURE_DETECTOR_TYPE_7_12 = 1
+    FAST_FEATURE_DETECTOR_TYPE_9_16 = 2
+    FILE_NODE_EMPTY = 32
+    FILE_NODE_FLOAT = 2
+    FILE_NODE_FLOW = 8
+    FILE_NODE_INT = 1
+    FILE_NODE_MAP = 6
+    FILE_NODE_NAMED = 64
+    FILE_NODE_NONE = 0
+    FILE_NODE_REAL = 2
+    FILE_NODE_REF = 4
+    FILE_NODE_SEQ = 5
+    FILE_NODE_STR = 3
+    FILE_NODE_STRING = 3
+    FILE_NODE_TYPE_MASK = 7
+    FILE_NODE_USER = 16
+    FILE_STORAGE_APPEND = 2
+    FILE_STORAGE_FORMAT_AUTO = 0
+    FILE_STORAGE_FORMAT_MASK = 56
+    FILE_STORAGE_FORMAT_XML = 8
+    FILE_STORAGE_FORMAT_YAML = 16
+    FILE_STORAGE_INSIDE_MAP = 4
+    FILE_STORAGE_MEMORY = 4
+    FILE_STORAGE_NAME_EXPECTED = 2
+    FILE_STORAGE_READ = 0
+    FILE_STORAGE_UNDEFINED = 0
+    FILE_STORAGE_VALUE_EXPECTED = 1
+    FILE_STORAGE_WRITE = 1
+    FILLED = -1
+    FLOODFILL_FIXED_RANGE = 65536
+    FLOODFILL_MASK_ONLY = 131072
+    FM_7POINT = 1
+    FM_8POINT = 2
+    FM_LMEDS = 4
+    FM_RANSAC = 8
+    FONT_HERSHEY_COMPLEX = 3
+    FONT_HERSHEY_COMPLEX_SMALL = 5
+    FONT_HERSHEY_DUPLEX = 2
+    FONT_HERSHEY_PLAIN = 1
+    FONT_HERSHEY_SCRIPT_COMPLEX = 7
+    FONT_HERSHEY_SCRIPT_SIMPLEX = 6
+    FONT_HERSHEY_SIMPLEX = 0
+    FONT_HERSHEY_TRIPLEX = 4
+    FONT_ITALIC = 16
+    FORMATTER_FMT_C = 5
+    FORMATTER_FMT_CSV = 2
+    FORMATTER_FMT_DEFAULT = 0
+    FORMATTER_FMT_MATLAB = 1
+    FORMATTER_FMT_NUMPY = 4
+    FORMATTER_FMT_PYTHON = 3
+    FastFeatureDetector_FAST_N = 10002
+    FastFeatureDetector_NONMAX_SUPPRESSION = 10001
+    FastFeatureDetector_THRESHOLD = 10000
+    FastFeatureDetector_TYPE_5_8 = 0
+    FastFeatureDetector_TYPE_7_12 = 1
+    FastFeatureDetector_TYPE_9_16 = 2
+    FileNode_EMPTY = 32
+    FileNode_FLOAT = 2
+    FileNode_FLOW = 8
+    FileNode_INT = 1
+    FileNode_MAP = 6
+    FileNode_NAMED = 64
+    FileNode_NONE = 0
+    FileNode_REAL = 2
+    FileNode_REF = 4
+    FileNode_SEQ = 5
+    FileNode_STR = 3
+    FileNode_STRING = 3
+    FileNode_TYPE_MASK = 7
+    FileNode_USER = 16
+    FileStorage_APPEND = 2
+    FileStorage_FORMAT_AUTO = 0
+    FileStorage_FORMAT_MASK = 56
+    FileStorage_FORMAT_XML = 8
+    FileStorage_FORMAT_YAML = 16
+    FileStorage_INSIDE_MAP = 4
+    FileStorage_MEMORY = 4
+    FileStorage_NAME_EXPECTED = 2
+    FileStorage_READ = 0
+    FileStorage_UNDEFINED = 0
+    FileStorage_VALUE_EXPECTED = 1
+    FileStorage_WRITE = 1
+    Formatter_FMT_C = 5
+    Formatter_FMT_CSV = 2
+    Formatter_FMT_DEFAULT = 0
+    Formatter_FMT_MATLAB = 1
+    Formatter_FMT_NUMPY = 4
+    Formatter_FMT_PYTHON = 3
+    GC_BGD = 0
+    GC_EVAL = 2
+    GC_FGD = 1
+    GC_INIT_WITH_MASK = 1
+    GC_INIT_WITH_RECT = 0
+    GC_PR_BGD = 2
+    GC_PR_FGD = 3
+    GEMM_1_T = 1
+    GEMM_2_T = 2
+    GEMM_3_T = 4
+    HAMMING_NORM_TYPE = 6
+    HISTCMP_BHATTACHARYYA = 3
+    HISTCMP_CHISQR = 1
+    HISTCMP_CHISQR_ALT = 4
+    HISTCMP_CORREL = 0
+    HISTCMP_HELLINGER = 3
+    HISTCMP_INTERSECT = 2
+    HISTCMP_KL_DIV = 5
+    HOGDESCRIPTOR_DEFAULT_NLEVELS = 64
+    HOGDESCRIPTOR_L2HYS = 0
+    HOGDescriptor_DEFAULT_NLEVELS = 64
+    HOGDescriptor_L2Hys = 0
+    HOUGH_GRADIENT = 3
+    HOUGH_MULTI_SCALE = 2
+    HOUGH_PROBABILISTIC = 1
+    HOUGH_STANDARD = 0
+    Hamming_normType = 6
+    IMREAD_ANYCOLOR = 4
+    IMREAD_ANYDEPTH = 2
+    IMREAD_COLOR = 1
+    IMREAD_GRAYSCALE = 0
+    IMREAD_LOAD_GDAL = 8
+    IMREAD_UNCHANGED = -1
+    IMWRITE_JPEG_CHROMA_QUALITY = 6
+    IMWRITE_JPEG_LUMA_QUALITY = 5
+    IMWRITE_JPEG_OPTIMIZE = 3
+    IMWRITE_JPEG_PROGRESSIVE = 2
+    IMWRITE_JPEG_QUALITY = 1
+    IMWRITE_JPEG_RST_INTERVAL = 4
+    IMWRITE_PNG_BILEVEL = 18
+    IMWRITE_PNG_COMPRESSION = 16
+    IMWRITE_PNG_STRATEGY = 17
+    IMWRITE_PNG_STRATEGY_DEFAULT = 0
+    IMWRITE_PNG_STRATEGY_FILTERED = 1
+    IMWRITE_PNG_STRATEGY_FIXED = 4
+    IMWRITE_PNG_STRATEGY_HUFFMAN_ONLY = 2
+    IMWRITE_PNG_STRATEGY_RLE = 3
+    IMWRITE_PXM_BINARY = 32
+    IMWRITE_WEBP_QUALITY = 64
+    INPAINT_NS = 0
+    INPAINT_TELEA = 1
+    INTERSECT_FULL = 2
+    INTERSECT_NONE = 0
+    INTERSECT_PARTIAL = 1
+    INTER_AREA = 3
+    INTER_BITS = 5
+    INTER_BITS2 = 10
+    INTER_CUBIC = 2
+    INTER_LANCZOS4 = 4
+    INTER_LINEAR = 1
+    INTER_MAX = 7
+    INTER_NEAREST = 0
+    INTER_TAB_SIZE = 32
+    INTER_TAB_SIZE2 = 1024
+    KAZE_DIFF_CHARBONNIER = 3
+    KAZE_DIFF_PM_G1 = 0
+    KAZE_DIFF_PM_G2 = 1
+    KAZE_DIFF_WEICKERT = 2
+    KMEANS_PP_CENTERS = 2
+    KMEANS_RANDOM_CENTERS = 0
+    KMEANS_USE_INITIAL_LABELS = 1
+    LDR_SIZE = 256
+    LINE_4 = 4
+    LINE_8 = 8
+    LINE_AA = 16
+    LMEDS = 4
+    LSD_REFINE_ADV = 2
+    LSD_REFINE_NONE = 0
+    LSD_REFINE_STD = 1
+    MAT_AUTO_STEP = 0
+    MAT_CONTINUOUS_FLAG = 16384
+    MAT_DEPTH_MASK = 7
+    MAT_MAGIC_MASK = 4294901760
+    MAT_MAGIC_VAL = 1124007936
+    MAT_SUBMATRIX_FLAG = 32768
+    MAT_TYPE_MASK = 4095
+    MIXED_CLONE = 2
+    MONOCHROME_TRANSFER = 3
+    MORPH_BLACKHAT = 6
+    MORPH_CLOSE = 3
+    MORPH_CROSS = 1
+    MORPH_DILATE = 1
+    MORPH_ELLIPSE = 2
+    MORPH_ERODE = 0
+    MORPH_GRADIENT = 4
+    MORPH_OPEN = 2
+    MORPH_RECT = 0
+    MORPH_TOPHAT = 5
+    MOTION_AFFINE = 2
+    MOTION_EUCLIDEAN = 1
+    MOTION_HOMOGRAPHY = 3
+    MOTION_TRANSLATION = 0
+    Mat_AUTO_STEP = 0
+    Mat_CONTINUOUS_FLAG = 16384
+    Mat_DEPTH_MASK = 7
+    Mat_MAGIC_MASK = 4294901760
+    Mat_MAGIC_VAL = 1124007936
+    Mat_SUBMATRIX_FLAG = 32768
+    Mat_TYPE_MASK = 4095
+    NORMAL_CLONE = 1
+    NORMCONV_FILTER = 2
+    NORM_HAMMING = 6
+    NORM_HAMMING2 = 7
+    NORM_INF = 1
+    NORM_L1 = 2
+    NORM_L2 = 4
+    NORM_L2SQR = 5
+    NORM_MINMAX = 32
+    NORM_RELATIVE = 8
+    NORM_TYPE_MASK = 7
+    OPTFLOW_FARNEBACK_GAUSSIAN = 256
+    OPTFLOW_LK_GET_MIN_EIGENVALS = 8
+    OPTFLOW_USE_INITIAL_FLOW = 4
+    ORB_FAST_SCORE = 1
+    ORB_HARRIS_SCORE = 0
+    ORB_K_BYTES = 32
+    ORB_kBytes = 32
+    PARAM_ALGORITHM = 6
+    PARAM_BOOLEAN = 1
+    PARAM_FLOAT = 7
+    PARAM_INT = 0
+    PARAM_MAT = 4
+    PARAM_MAT_VECTOR = 5
+    PARAM_REAL = 2
+    PARAM_STRING = 3
+    PARAM_UCHAR = 11
+    PARAM_UINT64 = 9
+    PARAM_UNSIGNED_INT = 8
+    PCA_DATA_AS_COL = 1
+    PCA_DATA_AS_ROW = 0
+    PCA_USE_AVG = 2
+    PROJ_SPHERICAL_EQRECT = 1
+    PROJ_SPHERICAL_ORTHO = 0
+    Param_ALGORITHM = 6
+    Param_BOOLEAN = 1
+    Param_FLOAT = 7
+    Param_INT = 0
+    Param_MAT = 4
+    Param_MAT_VECTOR = 5
+    Param_REAL = 2
+    Param_STRING = 3
+    Param_UCHAR = 11
+    Param_UINT64 = 9
+    Param_UNSIGNED_INT = 8
+    QT_CHECKBOX = 1
+    QT_FONT_BLACK = 87
+    QT_FONT_BOLD = 75
+    QT_FONT_DEMIBOLD = 63
+    QT_FONT_LIGHT = 25
+    QT_FONT_NORMAL = 50
+    QT_PUSH_BUTTON = 0
+    QT_RADIOBOX = 2
+    QT_STYLE_ITALIC = 1
+    QT_STYLE_NORMAL = 0
+    QT_STYLE_OBLIQUE = 2
+    RANSAC = 8
+    RECURS_FILTER = 1
+    REDUCE_AVG = 1
+    REDUCE_MAX = 2
+    REDUCE_MIN = 3
+    REDUCE_SUM = 0
+    RETR_CCOMP = 2
+    RETR_EXTERNAL = 0
+    RETR_FLOODFILL = 4
+    RETR_LIST = 1
+    RETR_TREE = 3
+    RNG_NORMAL = 1
+    RNG_UNIFORM = 0
+    SOLVELP_MULTI = 1
+    SOLVELP_SINGLE = 0
+    SOLVELP_UNBOUNDED = -2
+    SOLVELP_UNFEASIBLE = -1
+    SOLVEPNP_DLS = 3
+    SOLVEPNP_EPNP = 1
+    SOLVEPNP_ITERATIVE = 0
+    SOLVEPNP_P3P = 2
+    SOLVEPNP_UPNP = 4
+    SORT_ASCENDING = 0
+    SORT_DESCENDING = 16
+    SORT_EVERY_COLUMN = 1
+    SORT_EVERY_ROW = 0
+    SPARSE_MAT_HASH_BIT = 2147483648
+    SPARSE_MAT_HASH_SCALE = 1540483477
+    SPARSE_MAT_MAGIC_VAL = 1123876864
+    SPARSE_MAT_MAX_DIM = 32
+    STEREO_BM_PREFILTER_NORMALIZED_RESPONSE = 0
+    STEREO_BM_PREFILTER_XSOBEL = 1
+    STEREO_MATCHER_DISP_SCALE = 16
+    STEREO_MATCHER_DISP_SHIFT = 4
+    STEREO_SGBM_MODE_HH = 1
+    STEREO_SGBM_MODE_SGBM = 0
+    STITCHER_ERR_CAMERA_PARAMS_ADJUST_FAIL = 3
+    STITCHER_ERR_HOMOGRAPHY_EST_FAIL = 2
+    STITCHER_ERR_NEED_MORE_IMGS = 1
+    STITCHER_OK = 0
+    STITCHER_ORIG_RESOL = -1
+    SUBDIV2D_NEXT_AROUND_DST = 34
+    SUBDIV2D_NEXT_AROUND_LEFT = 19
+    SUBDIV2D_NEXT_AROUND_ORG = 0
+    SUBDIV2D_NEXT_AROUND_RIGHT = 49
+    SUBDIV2D_PREV_AROUND_DST = 51
+    SUBDIV2D_PREV_AROUND_LEFT = 32
+    SUBDIV2D_PREV_AROUND_ORG = 17
+    SUBDIV2D_PREV_AROUND_RIGHT = 2
+    SUBDIV2D_PTLOC_ERROR = -2
+    SUBDIV2D_PTLOC_INSIDE = 0
+    SUBDIV2D_PTLOC_ON_EDGE = 2
+    SUBDIV2D_PTLOC_OUTSIDE_RECT = -1
+    SUBDIV2D_PTLOC_VERTEX = 1
+    SVD_FULL_UV = 4
+    SVD_MODIFY_A = 1
+    SVD_NO_UV = 2
+    SparseMat_HASH_BIT = 2147483648
+    SparseMat_HASH_SCALE = 1540483477
+    SparseMat_MAGIC_VAL = 1123876864
+    SparseMat_MAX_DIM = 32
+    StereoBM_PREFILTER_NORMALIZED_RESPONSE = 0
+    StereoBM_PREFILTER_XSOBEL = 1
+    StereoMatcher_DISP_SCALE = 16
+    StereoMatcher_DISP_SHIFT = 4
+    StereoSGBM_MODE_HH = 1
+    StereoSGBM_MODE_SGBM = 0
+    Stitcher_ERR_CAMERA_PARAMS_ADJUST_FAIL = 3
+    Stitcher_ERR_HOMOGRAPHY_EST_FAIL = 2
+    Stitcher_ERR_NEED_MORE_IMGS = 1
+    Stitcher_OK = 0
+    Stitcher_ORIG_RESOL = -1
+    Subdiv2D_NEXT_AROUND_DST = 34
+    Subdiv2D_NEXT_AROUND_LEFT = 19
+    Subdiv2D_NEXT_AROUND_ORG = 0
+    Subdiv2D_NEXT_AROUND_RIGHT = 49
+    Subdiv2D_PREV_AROUND_DST = 51
+    Subdiv2D_PREV_AROUND_LEFT = 32
+    Subdiv2D_PREV_AROUND_ORG = 17
+    Subdiv2D_PREV_AROUND_RIGHT = 2
+    Subdiv2D_PTLOC_ERROR = -2
+    Subdiv2D_PTLOC_INSIDE = 0
+    Subdiv2D_PTLOC_ON_EDGE = 2
+    Subdiv2D_PTLOC_OUTSIDE_RECT = -1
+    Subdiv2D_PTLOC_VERTEX = 1
+    TERM_CRITERIA_COUNT = 1
+    TERM_CRITERIA_EPS = 2
+    TERM_CRITERIA_MAX_ITER = 1
+    THRESH_BINARY = 0
+    THRESH_BINARY_INV = 1
+    THRESH_MASK = 7
+    THRESH_OTSU = 8
+    THRESH_TOZERO = 3
+    THRESH_TOZERO_INV = 4
+    THRESH_TRIANGLE = 16
+    THRESH_TRUNC = 2
+    TM_CCOEFF = 4
+    TM_CCOEFF_NORMED = 5
+    TM_CCORR = 2
+    TM_CCORR_NORMED = 3
+    TM_SQDIFF = 0
+    TM_SQDIFF_NORMED = 1
+    TermCriteria_COUNT = 1
+    TermCriteria_EPS = 2
+    TermCriteria_MAX_ITER = 1
+    UMAT_AUTO_STEP = 0
+    UMAT_CONTINUOUS_FLAG = 16384
+    UMAT_DATA_COPY_ON_MAP = 1
+    UMAT_DATA_DEVICE_COPY_OBSOLETE = 4
+    UMAT_DATA_DEVICE_MEM_MAPPED = 64
+    UMAT_DATA_HOST_COPY_OBSOLETE = 2
+    UMAT_DATA_TEMP_COPIED_UMAT = 24
+    UMAT_DATA_TEMP_UMAT = 8
+    UMAT_DATA_USER_ALLOCATED = 32
+    UMAT_DEPTH_MASK = 7
+    UMAT_MAGIC_MASK = 4294901760
+    UMAT_MAGIC_VAL = 1124007936
+    UMAT_SUBMATRIX_FLAG = 32768
+    UMAT_TYPE_MASK = 4095
+    UMatData_COPY_ON_MAP = 1
+    UMatData_DEVICE_COPY_OBSOLETE = 4
+    UMatData_DEVICE_MEM_MAPPED = 64
+    UMatData_HOST_COPY_OBSOLETE = 2
+    UMatData_TEMP_COPIED_UMAT = 24
+    UMatData_TEMP_UMAT = 8
+    UMatData_USER_ALLOCATED = 32
+    UMat_AUTO_STEP = 0
+    UMat_CONTINUOUS_FLAG = 16384
+    UMat_DEPTH_MASK = 7
+    UMat_MAGIC_MASK = 4294901760
+    UMat_MAGIC_VAL = 1124007936
+    UMat_SUBMATRIX_FLAG = 32768
+    UMat_TYPE_MASK = 4095
+    USAGE_ALLOCATE_DEVICE_MEMORY = 2
+    USAGE_ALLOCATE_HOST_MEMORY = 1
+    USAGE_DEFAULT = 0
+    WARP_FILL_OUTLIERS = 8
+    WARP_INVERSE_MAP = 16
+    WINDOW_AUTOSIZE = 1
+    WINDOW_FREERATIO = 256
+    WINDOW_FULLSCREEN = 1
+    WINDOW_KEEPRATIO = 0
+    WINDOW_NORMAL = 0
+    WINDOW_OPENGL = 4096
+    WND_PROP_ASPECT_RATIO = 2
+    WND_PROP_AUTOSIZE = 1
+    WND_PROP_FULLSCREEN = 0
+    WND_PROP_OPENGL = 3
+    __version__ = '3.0.0-dev'
+
+VERSION
+    3.0.0-dev
+
+
