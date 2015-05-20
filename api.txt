@@ -4,7 +4,7 @@ NAME
     cv2
 
 FILE
-    /home/d3athmast3r/dev/opencv_3_build/lib/cv2.so
+    /usr/local/lib/python2.7/dist-packages/cv2.so
 
 SUBMODULES
     Error
@@ -101,11 +101,8 @@ FUNCTIONS
     AKAZE_create(...)
         AKAZE_create([, descriptor_type[, descriptor_size[, descriptor_channels[, threshold[, nOctaves[, nOctaveLayers[, diffusivity]]]]]]]) -> retval
     
-    Algorithm__create(...)
-        Algorithm__create(name) -> retval
-    
-    Algorithm_getList(...)
-        Algorithm_getList() -> algorithms
+    AgastFeatureDetector_create(...)
+        AgastFeatureDetector_create([, threshold[, nonmaxSuppression[, type]]]) -> retval
     
     BFMatcher(...)
         BFMatcher([, normType[, crossCheck]]) -> <BFMatcher object>
@@ -156,7 +153,7 @@ FUNCTIONS
         GaussianBlur(src, ksize, sigmaX[, dst[, sigmaY[, borderType]]]) -> dst
     
     HOGDescriptor(...)
-        HOGDescriptor() -> <HOGDescriptor object>  or  HOGDescriptor(_winSize, _blockSize, _blockStride, _cellSize, _nbins[, _derivAperture[, _winSigma[, _histogramNormType[, _L2HysThreshold[, _gammaCorrection[, _nlevels]]]]]]) -> <HOGDescriptor object>  or  HOGDescriptor(filename) -> <HOGDescriptor object>
+        HOGDescriptor() -> <HOGDescriptor object>  or  HOGDescriptor(_winSize, _blockSize, _blockStride, _cellSize, _nbins[, _derivAperture[, _winSigma[, _histogramNormType[, _L2HysThreshold[, _gammaCorrection[, _nlevels[, _signedGradient]]]]]]]) -> <HOGDescriptor object>  or  HOGDescriptor(filename) -> <HOGDescriptor object>
     
     HOGDescriptor_getDaimlerPeopleDetector(...)
         HOGDescriptor_getDaimlerPeopleDetector() -> retval
@@ -618,7 +615,7 @@ FUNCTIONS
         fastAtan2(y, x) -> retval
     
     fastNlMeansDenoising(...)
-        fastNlMeansDenoising(src[, dst[, h[, templateWindowSize[, searchWindowSize]]]]) -> dst
+        fastNlMeansDenoising(src[, dst[, h[, templateWindowSize[, searchWindowSize]]]]) -> dst  or  fastNlMeansDenoising(src, h[, dst[, templateWindowSize[, searchWindowSize[, normType]]]]) -> dst
     
     fastNlMeansDenoisingColored(...)
         fastNlMeansDenoisingColored(src[, dst[, h[, hColor[, templateWindowSize[, searchWindowSize]]]]]) -> dst
@@ -627,7 +624,7 @@ FUNCTIONS
         fastNlMeansDenoisingColoredMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize[, dst[, h[, hColor[, templateWindowSize[, searchWindowSize]]]]]) -> dst
     
     fastNlMeansDenoisingMulti(...)
-        fastNlMeansDenoisingMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize[, dst[, h[, templateWindowSize[, searchWindowSize]]]]) -> dst
+        fastNlMeansDenoisingMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize[, dst[, h[, templateWindowSize[, searchWindowSize]]]]) -> dst  or  fastNlMeansDenoisingMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize, h[, dst[, templateWindowSize[, searchWindowSize[, normType]]]]) -> dst
     
     fillConvexPoly(...)
         fillConvexPoly(img, points, color[, lineType[, shift]]) -> img
@@ -1129,10 +1126,22 @@ DATA
     ACCESS_WRITE = 33554432
     ADAPTIVE_THRESH_GAUSSIAN_C = 1
     ADAPTIVE_THRESH_MEAN_C = 0
+    AGAST_FEATURE_DETECTOR_AGAST_5_8 = 0
+    AGAST_FEATURE_DETECTOR_AGAST_7_12D = 1
+    AGAST_FEATURE_DETECTOR_AGAST_7_12S = 2
+    AGAST_FEATURE_DETECTOR_NONMAX_SUPPRESSION = 10001
+    AGAST_FEATURE_DETECTOR_OAST_9_16 = 3
+    AGAST_FEATURE_DETECTOR_THRESHOLD = 10000
     AKAZE_DESCRIPTOR_KAZE = 3
     AKAZE_DESCRIPTOR_KAZE_UPRIGHT = 2
     AKAZE_DESCRIPTOR_MLDB = 5
     AKAZE_DESCRIPTOR_MLDB_UPRIGHT = 4
+    AgastFeatureDetector_AGAST_5_8 = 0
+    AgastFeatureDetector_AGAST_7_12d = 1
+    AgastFeatureDetector_AGAST_7_12s = 2
+    AgastFeatureDetector_NONMAX_SUPPRESSION = 10001
+    AgastFeatureDetector_OAST_9_16 = 3
+    AgastFeatureDetector_THRESHOLD = 10000
     BORDER_CONSTANT = 0
     BORDER_DEFAULT = 4
     BORDER_ISOLATED = 16
@@ -1217,6 +1226,7 @@ DATA
     CAP_MODE_BGR = 0
     CAP_MODE_GRAY = 2
     CAP_MODE_RGB = 1
+    CAP_MODE_YUYV = 3
     CAP_MSMF = 1400
     CAP_OPENNI = 900
     CAP_OPENNI2 = 1600
@@ -1299,7 +1309,6 @@ DATA
     CAP_PROP_ISO_SPEED = 30
     CAP_PROP_MODE = 9
     CAP_PROP_MONOCHROME = 19
-    CAP_PROP_MONOCROME = 19
     CAP_PROP_OPENNI2_MIRROR = 111
     CAP_PROP_OPENNI2_SYNC = 110
     CAP_PROP_OPENNI_APPROX_FRAME_SYNC = 105
@@ -1323,6 +1332,7 @@ DATA
     CAP_PROP_PVAPI_DECIMATIONVERTICAL = 303
     CAP_PROP_PVAPI_FRAMESTARTTRIGGERMODE = 301
     CAP_PROP_PVAPI_MULTICASTIP = 300
+    CAP_PROP_PVAPI_PIXELFORMAT = 306
     CAP_PROP_RECTIFICATION = 18
     CAP_PROP_ROLL = 35
     CAP_PROP_SATURATION = 12
@@ -1366,11 +1376,20 @@ DATA
     CAP_PVAPI_FSTRIGMODE_SOFTWARE = 4
     CAP_PVAPI_FSTRIGMODE_SYNCIN1 = 1
     CAP_PVAPI_FSTRIGMODE_SYNCIN2 = 2
+    CAP_PVAPI_PIXELFORMAT_BAYER16 = 4
+    CAP_PVAPI_PIXELFORMAT_BAYER8 = 3
+    CAP_PVAPI_PIXELFORMAT_BGR24 = 6
+    CAP_PVAPI_PIXELFORMAT_BGRA32 = 8
+    CAP_PVAPI_PIXELFORMAT_MONO16 = 2
+    CAP_PVAPI_PIXELFORMAT_MONO8 = 1
+    CAP_PVAPI_PIXELFORMAT_RGB24 = 5
+    CAP_PVAPI_PIXELFORMAT_RGBA32 = 7
     CAP_QT = 500
     CAP_UNICAP = 600
     CAP_V4L = 200
     CAP_V4L2 = 200
     CAP_VFW = 200
+    CAP_WINRT = 1410
     CAP_XIAPI = 1100
     CASCADE_DO_CANNY_PRUNING = 1
     CASCADE_DO_ROUGH_SEARCH = 8
@@ -1399,6 +1418,7 @@ DATA
     COLORMAP_HSV = 9
     COLORMAP_JET = 2
     COLORMAP_OCEAN = 5
+    COLORMAP_PARULA = 12
     COLORMAP_PINK = 10
     COLORMAP_RAINBOW = 4
     COLORMAP_SPRING = 7
@@ -1669,8 +1689,19 @@ DATA
     COVAR_SCRAMBLED = 0
     COVAR_USE_AVG = 2
     CPU_AVX = 10
+    CPU_AVX2 = 11
+    CPU_AVX_512BW = 14
+    CPU_AVX_512CD = 15
+    CPU_AVX_512DQ = 16
+    CPU_AVX_512ER = 17
+    CPU_AVX_512F = 13
+    CPU_AVX_512IFMA512 = 18
+    CPU_AVX_512PF = 19
+    CPU_AVX_512VBMI = 20
+    CPU_AVX_512VL = 21
+    CPU_FMA3 = 12
     CPU_MMX = 1
-    CPU_NEON = 11
+    CPU_NEON = 100
     CPU_POPCNT = 8
     CPU_SSE = 2
     CPU_SSE2 = 3
@@ -1721,6 +1752,10 @@ DATA
     DECOMP_NORMAL = 16
     DECOMP_QR = 4
     DECOMP_SVD = 1
+    DETECTION_BASED_TRACKER_DETECTED = 1
+    DETECTION_BASED_TRACKER_DETECTED_NOT_SHOWN_YET = 0
+    DETECTION_BASED_TRACKER_DETECTED_TEMPORARY_LOST = 2
+    DETECTION_BASED_TRACKER_WRONG_OBJECT = 3
     DFT_COMPLEX_OUTPUT = 16
     DFT_INVERSE = 1
     DFT_REAL_OUTPUT = 32
@@ -1743,6 +1778,10 @@ DATA
     DRAW_MATCHES_FLAGS_DRAW_OVER_OUTIMG = 1
     DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS = 4
     DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS = 2
+    DetectionBasedTracker_DETECTED = 1
+    DetectionBasedTracker_DETECTED_NOT_SHOWN_YET = 0
+    DetectionBasedTracker_DETECTED_TEMPORARY_LOST = 2
+    DetectionBasedTracker_WRONG_OBJECT = 3
     DrawMatchesFlags_DEFAULT = 0
     DrawMatchesFlags_DRAW_OVER_OUTIMG = 1
     DrawMatchesFlags_DRAW_RICH_KEYPOINTS = 4
@@ -2033,6 +2072,7 @@ DATA
     RETR_FLOODFILL = 4
     RETR_LIST = 1
     RETR_TREE = 3
+    RHO = 16
     RNG_NORMAL = 1
     RNG_UNIFORM = 0
     SOLVELP_MULTI = 1
@@ -2157,7 +2197,10 @@ DATA
     UMat_TYPE_MASK = 4095
     USAGE_ALLOCATE_DEVICE_MEMORY = 2
     USAGE_ALLOCATE_HOST_MEMORY = 1
+    USAGE_ALLOCATE_SHARED_MEMORY = 4
     USAGE_DEFAULT = 0
+    VIDEOWRITER_PROP_FRAMEBYTES = 2
+    VIDEOWRITER_PROP_QUALITY = 1
     WARP_FILL_OUTLIERS = 8
     WARP_INVERSE_MAP = 16
     WINDOW_AUTOSIZE = 1
@@ -2174,5 +2217,131 @@ DATA
 
 VERSION
     3.0.0-dev
+
+
+ML-----------------
+Help on module cv2.ml in cv2:
+
+NAME
+    cv2.ml
+
+FILE
+    (built-in)
+
+FUNCTIONS
+    ANN_MLP_create(...)
+        ANN_MLP_create() -> retval
+    
+    Boost_create(...)
+        Boost_create() -> retval
+    
+    DTrees_create(...)
+        DTrees_create() -> retval
+    
+    EM_create(...)
+        EM_create() -> retval
+    
+    KNearest_create(...)
+        KNearest_create() -> retval
+    
+    LogisticRegression_create(...)
+        LogisticRegression_create() -> retval
+    
+    NormalBayesClassifier_create(...)
+        NormalBayesClassifier_create() -> retval
+    
+    RTrees_create(...)
+        RTrees_create() -> retval
+    
+    SVM_create(...)
+        SVM_create() -> retval
+    
+    TrainData_create(...)
+        TrainData_create(samples, layout, responses[, varIdx[, sampleIdx[, sampleWeights[, varType]]]]) -> retval
+    
+    TrainData_getSubVector(...)
+        TrainData_getSubVector(vec, idx) -> retval
+
+DATA
+    ANN_MLP_BACKPROP = 0
+    ANN_MLP_GAUSSIAN = 2
+    ANN_MLP_IDENTITY = 0
+    ANN_MLP_NO_INPUT_SCALE = 2
+    ANN_MLP_NO_OUTPUT_SCALE = 4
+    ANN_MLP_RPROP = 1
+    ANN_MLP_SIGMOID_SYM = 1
+    ANN_MLP_UPDATE_WEIGHTS = 1
+    BOOST_DISCRETE = 0
+    BOOST_GENTLE = 3
+    BOOST_LOGIT = 2
+    BOOST_REAL = 1
+    Boost_DISCRETE = 0
+    Boost_GENTLE = 3
+    Boost_LOGIT = 2
+    Boost_REAL = 1
+    COL_SAMPLE = 1
+    DTREES_PREDICT_AUTO = 0
+    DTREES_PREDICT_MASK = 768
+    DTREES_PREDICT_MAX_VOTE = 512
+    DTREES_PREDICT_SUM = 256
+    DTrees_PREDICT_AUTO = 0
+    DTrees_PREDICT_MASK = 768
+    DTrees_PREDICT_MAX_VOTE = 512
+    DTrees_PREDICT_SUM = 256
+    EM_COV_MAT_DEFAULT = 1
+    EM_COV_MAT_DIAGONAL = 1
+    EM_COV_MAT_GENERIC = 2
+    EM_COV_MAT_SPHERICAL = 0
+    EM_DEFAULT_MAX_ITERS = 100
+    EM_DEFAULT_NCLUSTERS = 5
+    EM_START_AUTO_STEP = 0
+    EM_START_E_STEP = 1
+    EM_START_M_STEP = 2
+    KNEAREST_BRUTE_FORCE = 1
+    KNEAREST_KDTREE = 2
+    KNearest_BRUTE_FORCE = 1
+    KNearest_KDTREE = 2
+    LOGISTIC_REGRESSION_BATCH = 0
+    LOGISTIC_REGRESSION_MINI_BATCH = 1
+    LOGISTIC_REGRESSION_REG_DISABLE = -1
+    LOGISTIC_REGRESSION_REG_L1 = 0
+    LOGISTIC_REGRESSION_REG_L2 = 1
+    LogisticRegression_BATCH = 0
+    LogisticRegression_MINI_BATCH = 1
+    LogisticRegression_REG_DISABLE = -1
+    LogisticRegression_REG_L1 = 0
+    LogisticRegression_REG_L2 = 1
+    ROW_SAMPLE = 0
+    STAT_MODEL_COMPRESSED_INPUT = 2
+    STAT_MODEL_PREPROCESSED_INPUT = 4
+    STAT_MODEL_RAW_OUTPUT = 1
+    STAT_MODEL_UPDATE_MODEL = 1
+    SVM_C = 0
+    SVM_CHI2 = 4
+    SVM_COEF = 4
+    SVM_CUSTOM = -1
+    SVM_C_SVC = 100
+    SVM_DEGREE = 5
+    SVM_EPS_SVR = 103
+    SVM_GAMMA = 1
+    SVM_INTER = 5
+    SVM_LINEAR = 0
+    SVM_NU = 3
+    SVM_NU_SVC = 101
+    SVM_NU_SVR = 104
+    SVM_ONE_CLASS = 102
+    SVM_P = 2
+    SVM_POLY = 1
+    SVM_RBF = 2
+    SVM_SIGMOID = 3
+    StatModel_COMPRESSED_INPUT = 2
+    StatModel_PREPROCESSED_INPUT = 4
+    StatModel_RAW_OUTPUT = 1
+    StatModel_UPDATE_MODEL = 1
+    TEST_ERROR = 0
+    TRAIN_ERROR = 1
+    VAR_CATEGORICAL = 1
+    VAR_NUMERICAL = 0
+    VAR_ORDERED = 0
 
 
