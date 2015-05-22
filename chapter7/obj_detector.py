@@ -9,26 +9,31 @@ imagePaths = ["bb.jpg",
 "basil.jpg",
 "bathory_album.jpg"]
 
+extract = cv2.xfeatures2d.SIFT_create()
+detect = cv2.xfeatures2d.SIFT_create()
+
 hog = cv2.HOGDescriptor()
 svm_params = dict( kernel_type = cv2.ml.SVM_LINEAR,
                     svm_type = cv2.ml.SVM_C_SVC,
                     C=2.67, gamma=5.383 )
-responses = np.float32(np.repeat(np.arange(10),250)[:,np.newaxis])
 
-images = []
-
-
+train_data = np.array([])
 features = []
 
 
+def extract_sift(path):
+  img = cv2.imread(path, 0)
+  return extract.compute(img, detect.detect(img))[1]
+
 for im in imagePaths:
-  img = cv2.imread(join(basepath, im), 0)
-  d = np.array(img, dtype = np.float32)
-  q = d.flatten()
-  images.append(img)
+  im_path = join(basepath, im)
+  train_data = np.append(train_data, extract_sift(im_path))
+  
 
 svm = cv2.ml.SVM_create()
-retval, results = svm.train(np.asarray(images), cv2.ml.ROW_SAMPLE, np.array([1, 1, -1, -1]))
+retval, results = svm.train(train_data.ravel(order="C"),
+  np.array([1.0, 1.0, -1.0, -1.0], dtype=np.float32)
+)
 hog.setSVMDetector(results)
 
 result = hog.detectMultiScale(cv2.imread("/home/d3athmast3r/dev/python/study/images/depth1.jpg"))
