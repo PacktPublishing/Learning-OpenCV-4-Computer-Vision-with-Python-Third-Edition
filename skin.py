@@ -23,16 +23,17 @@ while (True):
  
   # apply a series of erosions and dilations to the mask
   # using an elliptical kernel
-  kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11, 11))
+  kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+  
   skinMask = cv2.erode(skinMask, kernel, iterations = 2)
-  skinMask = cv2.dilate(skinMask, kernel, iterations = 2)
+  skinMask = cv2.dilate(skinMask, kernel, iterations = 2) 
  
   # blur the mask to help remove noise, then apply the
   # mask to the frame
   skinMask = cv2.GaussianBlur(skinMask, (3, 3), 0)
-  #skin = cv2.bitwise_and(frame, frame, mask = skinMask)
-  skin = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-  skin = cv2.adaptiveThreshold(skin, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+  skin = cv2.bitwise_and(frame, frame, mask = skinMask)
+  #skin = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+  #skin = cv2.adaptiveThreshold(skin, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
   skin = cv2.GaussianBlur(skin, (3, 3), 0)
   cv2.imshow("HSV", skin)
   
