@@ -4,7 +4,7 @@ from car_detector.detector import car_detector, bow_features
 from car_detector.pyramid import pyramid
 from car_detector.non_maximum import non_max_suppression_fast as nms
 
-test_image = "/home/d3athmast3r/dev/python/study/images/cars.jpg"
+test_image = "/home/d3athmast3r/dev/python/study/images/cars_small.jpg"
 svm, extractor = car_detector()
 detect = cv2.xfeatures2d.SIFT_create()
 
