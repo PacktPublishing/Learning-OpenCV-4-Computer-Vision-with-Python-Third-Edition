@@ -44,7 +44,7 @@ for resized in pyramid(img, scaleFactor):
       if result[0][0] == 1:
         if res[0][0] < -0.8:
           rx, ry, rx2, ry2 = int(x * scale), int(y * scale), int((x+w) * scale), int((y+h) * scale)
-          rectangles.append((rx, ry, rx2, ry2, (0, (40 * counter), int(255/counter)), 1, res[0][0]))
+          rectangles.append((rx, ry, rx2, ry2, (0, (40 * counter), int(255/counter)), counter, res[0][0]))
     except:
       pass
 
