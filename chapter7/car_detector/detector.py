@@ -32,7 +32,7 @@ def car_detector():
   matcher = get_flann_matcher()
   extract_bow = get_bow_extractor(extract, matcher)
   print "building BOWKMeansTrainer..."
-  bow_kmeans_trainer = cv2.BOWKMeansTrainer(8)
+  bow_kmeans_trainer = cv2.BOWKMeansTrainer(12)
   extract_bow = cv2.BOWImgDescriptorExtractor(extract, matcher)
 
   print "adding features to trainer"
@@ -55,7 +55,7 @@ def car_detector():
 
   svm = cv2.ml.SVM_create()
   svm.setType(cv2.ml.SVM_C_SVC)
-  svm.setGamma(1)
+  svm.setGamma(0.5)
   svm.setC(30)
   svm.setKernel(cv2.ml.SVM_RBF)
 

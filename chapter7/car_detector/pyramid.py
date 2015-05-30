@@ -1,7 +1,7 @@
 import cv2
 
 def resize(img, scaleFactor):
-  return cv2.resize(img, (int(img.shape[1] / scaleFactor), int(img.shape[0] / scaleFactor)), interpolation=cv2.INTER_AREA)
+  return cv2.resize(img, (int(img.shape[1] * (1 / scaleFactor)), int(img.shape[0] * (1 / scaleFactor))), interpolation=cv2.INTER_AREA)
 
 def pyramid(image, scale=1.5, minSize=(200, 80)):
   yield image
