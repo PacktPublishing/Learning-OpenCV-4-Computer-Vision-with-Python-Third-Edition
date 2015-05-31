@@ -25,12 +25,10 @@ def bow_features(img, extractor_bow, detector):
   return extractor_bow.compute(img, detector.detect(img))
 
 def car_detector():
-  
   pos, neg = "pos-", "neg-"
-
   detect, extract = get_extract_detect()
   matcher = get_flann_matcher()
-  extract_bow = get_bow_extractor(extract, matcher)
+  #extract_bow = get_bow_extractor(extract, matcher)
   print "building BOWKMeansTrainer..."
   bow_kmeans_trainer = cv2.BOWKMeansTrainer(12)
   extract_bow = cv2.BOWImgDescriptorExtractor(extract, matcher)
@@ -39,10 +37,10 @@ def car_detector():
   for i in range(SAMPLES):
     print i
     bow_kmeans_trainer.add(extract_sift(path(pos,i), extract, detect))
-    bow_kmeans_trainer.add(extract_sift(path(neg,i), extract, detect))
+    #bow_kmeans_trainer.add(extract_sift(path(neg,i), extract, detect))
     
-  voc = bow_kmeans_trainer.cluster()
-  extract_bow.setVocabulary( voc )
+  vocabulary = bow_kmeans_trainer.cluster()
+  extract_bow.setVocabulary(vocabulary)
 
   traindata, trainlabels = [],[]
   print "adding to train data"
@@ -55,8 +53,8 @@ def car_detector():
 
   svm = cv2.ml.SVM_create()
   svm.setType(cv2.ml.SVM_C_SVC)
-  svm.setGamma(0.5)
-  svm.setC(30)
+  svm.setGamma(1)
+  svm.setC(35)
   svm.setKernel(cv2.ml.SVM_RBF)
 
   svm.train(np.array(traindata), cv2.ml.ROW_SAMPLE, np.array(trainlabels))
