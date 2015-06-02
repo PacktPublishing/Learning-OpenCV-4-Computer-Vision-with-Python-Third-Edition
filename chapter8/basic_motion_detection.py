@@ -16,11 +16,9 @@ while (True):
   
   gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
   gray_frame = cv2.GaussianBlur(gray_frame, (21, 21), 0)
-  
   diff = cv2.absdiff(background, gray_frame)
   diff = cv2.threshold(diff, 25, 255, cv2.THRESH_BINARY)[1]
   diff = cv2.dilate(diff, es, iterations = 2)
-
   image, cnts, hierarchy = cv2.findContours(diff.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
   
   for c in cnts:

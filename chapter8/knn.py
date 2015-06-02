@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-knn = cv2.createBackgroundSubtractorKNN(detectShadows=False)
+knn = cv2.createBackgroundSubtractorKNN(detectShadows = True)
 es = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (20,12))
 camera = cv2.VideoCapture("/home/d3athmast3r/Downloads/traffic.flv")
 
