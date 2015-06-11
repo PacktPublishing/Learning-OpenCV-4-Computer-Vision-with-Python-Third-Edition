@@ -1,48 +1,38 @@
-import numpy as np
-import cv2
+import cv2, numpy as np
 
-cap = cv2.VideoCapture(0)
+measurements=[]
+predictions=[]
+frame = np.zeros((400,400,3), np.uint8) # the empty frame working as a canvas
+current_measurement = np.array((2,1), np.float32) # measurement array 
+current_prediction = np.zeros((2,1), np.float32) # tracked / prediction
 
-# take first frame of the video
-ret,frame = cap.read()
+def onmouse(event, x, y, s, p):
+    global current_measurement, measurements
+    current_measurement = np.array([[np.float32(x)],[np.float32(y)]])
+    measurements.append((x,y))
 
-# setup initial location of window
-r,h,c,w = 300,200,400,300  # simply hardcoded the values
-track_window = (c,r,w,h)
+def draw(frame, measurements, predictions):
+    for i in range(len(measurements)-1):
+        cv2.line(frame, measurements[i], measurements[i+1], (0,100,0))
 
+    for i in range(len(predictions)-1):
+        cv2.line(frame, predictions[i], predictions[i+1], (0,0,200))
 
-roi = frame[r:r+h, c:c+w]
-hsv_roi =  cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-mask = cv2.inRange(hsv_roi, np.array((100., 30.,32.)), np.array((180.,120.,255.)))
-roi_hist = cv2.calcHist([hsv_roi],[0],mask,[180],[0,180])
-cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)
-term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
+cv2.namedWindow("kalman")
+cv2.setMouseCallback("kalman",onmouse);
 
-kalman = cv2.KalmanFilter(2,1,0)
+kalman = cv2.KalmanFilter(4,2)
+kalman.measurementMatrix = np.array([[1,0,0,0],[0,1,0,0]],np.float32)
+kalman.transitionMatrix = np.array([[1,0,1,0],[0,1,0,1],[0,0,1,0],[0,0,0,1]],np.float32)
+kalman.processNoiseCov = np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],np.float32) * 0.03
 
-while(1):
-    ret ,frame = cap.read()
-
-    if ret == True:
-        
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        kalman.predict(hsv)
-        dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)
-
-        ret, track_window = cv2.CamShift(dst, track_window, term_crit)
-        x, y, w, h = track_window
-        kalman.correct(frame)
-        pts = cv2.boxPoints(ret)
-        pts = np.int0(pts)
-        img2 = cv2.polylines(frame,[pts],True, 255,2)
-        kalman.correct(hsv)
-        cv2.imshow('img2',img2)
-        k = cv2.waitKey(60) & 0xff
-        if k == 27:
-            break
-
-    else:
-        break
+while True:
+    kalman.correct(current_measurement)
+    current_prediction = kalman.predict()
+    predictions.append((int(current_prediction[0]),int(current_prediction[1])))
+    draw(frame, measurements, predictions)
+    cv2.imshow("kalman",frame)
+    k = cv2.waitKey(30) &0xFF
+    if k == 27: break
 
 cv2.destroyAllWindows()
-cap.release()
