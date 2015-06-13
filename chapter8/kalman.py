@@ -24,7 +24,7 @@ def mousemove(event, x, y, s, p):
 cv2.namedWindow("kalman_tracker")
 cv2.setMouseCallback("kalman_tracker", mousemove);
 
-kalman = cv2.KalmanFilter(4,2)
+kalman = cv2.KalmanFilter(4,2,1)
 kalman.measurementMatrix = np.array([[1,0,0,0],[0,1,0,0]],np.float32)
 kalman.transitionMatrix = np.array([[1,0,1,0],[0,1,0,1],[0,0,1,0],[0,0,0,1]],np.float32)
 kalman.processNoiseCov = np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],np.float32) * 0.03
@@ -32,6 +32,9 @@ kalman.processNoiseCov = np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],np.f
 while True:
     cv2.imshow("kalman_tracker", frame)
     if (cv2.waitKey(30) & 0xFF) == 27:
+        break
+    if (cv2.waitKey(30) & 0xFF) == ord('q'):
+        cv2.imwrite('kalman.jpg', frame)
         break
 
 cv2.destroyAllWindows()
