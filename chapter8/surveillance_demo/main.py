@@ -29,7 +29,6 @@ def center(points):
     y = (points[0][1] + points[1][1] + points[2][1] + points[3][1]) / 4
     return np.array([np.float32(x), np.float32(y)], np.float32)
 
-colors = [[0,0,0],[0,0,255],[0,255,0],[255,0,0],[255,255,0],[255,0,255]]
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 class Pedestrian():
@@ -78,11 +77,11 @@ class Pedestrian():
       ret, self.track_window = cv2.meanShift(back_project, self.track_window, self.term_crit)
       x,y,w,h = self.track_window
       self.center = center([[x,y],[x+w, y],[x,y+h],[x+w, y+h]])  
-      cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 0, 255), 1)
+      cv2.rectangle(frame, (x,y), (x+w, y+h), (255, 255, 0), 3)
 
     self.kalman.correct(self.center)
     prediction = self.kalman.predict()
-    cv2.circle(frame, (int(prediction[0]), int(prediction[1])), 4, (0, 255, 0), -1)
+    cv2.circle(frame, (int(prediction[0]), int(prediction[1])), 4, (255, 0, 0), -1)
     # fake shadow
     cv2.putText(frame, "ID: %d -> %s" % (self.id, self.center), (11, (self.id + 1) * 25 + 1),
         font, 0.6,
@@ -97,11 +96,13 @@ class Pedestrian():
         cv2.LINE_AA)
 
 def main():
-  # camera = cv2.VideoCapture(path.join(path.dirname(__file__), "traffic.flv"))
-  camera = cv2.VideoCapture(path.join(path.dirname(__file__), "768x576.avi"))
+  camera = cv2.VideoCapture(path.join(path.dirname(__file__), "traffic.flv"))
+  # camera = cv2.VideoCapture(path.join(path.dirname(__file__), "768x576.avi"))
   # camera = cv2.VideoCapture(path.join(path.dirname(__file__), "..", "movie.mpg"))
-  
+  # camera = cv2.VideoCapture(0)
+  history = 20
   bs = cv2.createBackgroundSubtractorKNN(detectShadows = True)
+  bs.setHistory(history)
   cv2.namedWindow("surveillance")
   pedestrians = {}
   firstFrame = True
@@ -119,7 +120,7 @@ def main():
     fgmask = bs.apply(frame)
 
     # this is just to let the background subtractor build a bit of history
-    if frames < 30:
+    if frames < history:
       frames += 1
       continue
 
@@ -133,7 +134,7 @@ def main():
     for c in contours:
       if cv2.contourArea(c) > 500:
         (x,y,w,h) = cv2.boundingRect(c)
-        cv2.rectangle(frame, (x,y), (x+w, y+h), colors[counter % 6], 1)
+        cv2.rectangle(frame, (x,y), (x+w, y+h), (0, 255, 0), 1)
         # only create pedestrians in the first frame, then just follow the ones you have
         if firstFrame is True:
           pedestrians[counter] = Pedestrian(counter, frame, (x,y,w,h))
@@ -147,8 +148,7 @@ def main():
     frames += 1
 
     cv2.imshow("surveillance", frame)
-    cv2.imshow("diff", image)
-    if cv2.waitKey(90) & 0xff == 27:
+    if cv2.waitKey(110) & 0xff == 27:
         break
 
 if __name__ == "__main__":
