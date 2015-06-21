@@ -77,7 +77,7 @@ class Pedestrian():
       ret, self.track_window = cv2.meanShift(back_project, self.track_window, self.term_crit)
       x,y,w,h = self.track_window
       self.center = center([[x,y],[x+w, y],[x,y+h],[x+w, y+h]])  
-      cv2.rectangle(frame, (x,y), (x+w, y+h), (255, 255, 0), 3)
+      cv2.rectangle(frame, (x,y), (x+w, y+h), (255, 255, 0), 2)
 
     self.kalman.correct(self.center)
     prediction = self.kalman.predict()
@@ -101,8 +101,16 @@ def main():
   # camera = cv2.VideoCapture(path.join(path.dirname(__file__), "..", "movie.mpg"))
   # camera = cv2.VideoCapture(0)
   history = 20
-  bs = cv2.createBackgroundSubtractorKNN(detectShadows = True)
-  bs.setHistory(history)
+  # KNN background subtractor
+  bs = cv2.createBackgroundSubtractorKNN()
+
+  # MOG subtractor
+  # bs = cv2.bgsegm.createBackgroundSubtractorMOG(history = history)
+  # bs.setHistory(history)
+
+  # GMG
+  # bs = cv2.bgsegm.createBackgroundSubtractorGMG(initializationFrames = history)
+  
   cv2.namedWindow("surveillance")
   pedestrians = {}
   firstFrame = True
