@@ -1,108 +1,104 @@
 import cv2
 import numpy as np
+from random import randint
 
 animals_net = cv2.ml.ANN_MLP_create()
-animals_net.setTrainMethod(cv2.ml.ANN_MLP_RPROP)
+animals_net.setTrainMethod(cv2.ml.ANN_MLP_RPROP | cv2.ml.ANN_MLP_UPDATE_WEIGHTS)
 animals_net.setActivationFunction(cv2.ml.ANN_MLP_SIGMOID_SYM)
-animals_net.setLayerSizes(np.array([7, 5, 8]))
+animals_net.setLayerSizes(np.array([3, 6, 4]))
+animals_net.setTermCriteria(( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 ))
 
 """Input arrays
-weight, legs, wings, tail, teeth, fins, breathe fire
+weight, length, teeth
 """
 
 """Output arrays
-dog, cat, kangaroo, whale, eagle, rabbit, dolphin and dragon
+dog, eagle, dolphin and dragon
 """
 
-def dog():
-  return [1, 0, 0, 0, 0, 0, 0, 0]
+def dog_sample():
+  return [randint(10, 20), 1, randint(38, 42)]
 
-def cat():
-  return [0, 1, 0, 0, 0, 0, 0, 0]
+def dog_class():
+  return [1, 0, 0, 0]
 
-def kangaroo():
-  return [0, 0, 1, 0, 0, 0, 0, 0]
+def condor_sample():
+  return [randint(3,10), randint(3,5), 0]
 
-def baleen():
-  return [0, 0, 0, 1, 0, 0, 0, 0]
+def condor_class():
+  return [0, 1, 0, 0]
 
-def eagle():
-  return [0, 0, 0, 0, 1, 0, 0, 0]
+def dolphin_sample():
+  return [randint(30, 190), randint(5, 15), randint(80, 100)]
 
-def rabbit():
-  return [0, 0, 0, 0, 0, 1, 0, 0]
+def dolphin_class():
+  return [0, 0, 1, 0]
 
-def dolphin():
-  return [0, 0, 0, 0, 0, 0, 1, 0]
+def dragon_sample():
+  return [randint(1200, 1800), randint(30, 40), randint(160, 180)]
 
-def dragon():
-  return [0, 0, 0, 0, 0, 0, 0, 1]
+def dragon_class():
+  return [0, 0, 0, 1]
 
-train_data = [
-  # dogs
-  ([10, 4, 0, 1, 42, 0, 0], dog()),
-  ([6, 4, 0, 1, 41, 0, 0], dog()),
-  ([12, 4, 0, 1, 39, 0, 0], dog()),
-  ([7, 4, 0, 1, 40, 0, 0], dog()),
-  # cats
-  ([2, 4, 0, 1, 30, 0, 0], cat()),
-  ([1.5, 4, 0, 1, 27, 0, 0], cat()),
-  ([3, 4, 0, 1, 28, 0, 0], cat()),
-  ([4, 4, 0, 1, 29, 0, 0], cat()),
-  # kangaroo
-  ([70, 2, 0, 1, 30, 0, 0], kangaroo()),
-  ([65, 2, 0, 1, 22, 0, 0], kangaroo()),
-  ([80, 2, 0, 1, 28, 0, 0], kangaroo()),
-  ([65, 2, 0, 1, 29, 0, 0], kangaroo()),
-  # baleen whale
-  ([70000, 0, 0, 1, 0, 2, 0], baleen()),
-  ([120000, 0, 0, 1, 0, 2, 0], baleen()),
-  ([100000, 0, 0, 1, 0, 2, 0], baleen()),
-  ([95000, 0, 0, 1, 0, 2, 0], baleen()),
-  # eagle
-  ([6, 2, 2, 1, 0, 0, 0], eagle()),
-  ([8, 2, 2, 1, 0, 0, 0], eagle()),
-  ([7, 2, 2, 1, 0, 0, 0], eagle()),
-  ([8, 2, 2, 1, 0, 0, 0], eagle()),
-  ([7, 2, 2, 1, 0, 0, 0], eagle()),
-  ([6, 2, 2, 1, 0, 0, 0], eagle()),
-  # rabbit
-  ([1, 4, 0, 1, 28, 0, 0], rabbit()),
-  ([3, 4, 0, 1, 26, 0, 0], rabbit()),
-  ([2, 4, 0, 1, 28, 0, 0], rabbit()),
-  ([3, 4, 0, 1, 26, 0, 0], rabbit()),
-  ([1, 4, 0, 1, 28, 0, 0], rabbit()),
-  ([2, 4, 0, 1, 26, 0, 0], rabbit()),
-  ([1, 4, 0, 1, 28, 0, 0], rabbit()),
-  # dolphin
-  ([130, 0, 0, 1, 80, 2, 0], dolphin()),
-  ([180, 0, 0, 1, 82, 2, 0], dolphin()),
-  ([200, 0, 0, 1, 88, 2, 0], dolphin()),
-  ([170, 0, 0, 1, 90, 2, 0], dolphin()),
-  ([180, 0, 0, 1, 98, 2, 0], dolphin()),
-  ([190, 0, 0, 1, 100, 2, 0], dolphin()),
-  # dragon
-  ([1000, 4, 2, 1, 250, 0, 1], dragon()),
-  ([1200, 4, 2, 1, 290, 0, 1], dragon()),
-  ([1100, 4, 2, 1, 230, 0, 1], dragon()),
-  ([1200, 4, 2, 1, 250, 0, 1], dragon()),
-  ([900, 4, 2, 1, 280, 0, 1], dragon()),
-  ([1000, 4, 2, 1, 240, 0, 1], dragon())
-]
-for x in range(0, 1000):
-  print "Epoch %d" % x
-  for t, r in train_data:
-    animals_net.train(np.array([t], dtype=np.float32), 
-      cv2.ml.ROW_SAMPLE,
-      np.array([r], dtype=np.float32)
-    )
+def record(sample, classification):
+  return (np.array([sample], dtype=np.float32), np.array([classification], dtype=np.float32))
 
-animals = ["dog", "cat", "kangaroo", "whale", "eagle", "rabbit", "dolphin", "dragon"]
+records = []
 
-pred1 = animals_net.predict(np.array([[1000, 4, 2, 1, 250, 0, 1]], dtype=np.float32))
-pred2 = animals_net.predict(np.array([[2, 4, 0, 1, 42, 0, 0]], dtype=np.float32))
-pred3 = animals_net.predict(np.array([[120000, 0, 0, 1, 0, 2, 0]], dtype=np.float32))
+"""
+SAMPLES = 5000
+for x in range(0, SAMPLES):
+  print "Samples %d/%d" % (x, SAMPLES)
+  animals_net.train(np.array([dog_sample()], dtype=np.float32), cv2.ml.ROW_SAMPLE, np.array([dog_class()], dtype=np.float32))
+  animals_net.train(np.array([condor_sample()], dtype=np.float32), cv2.ml.ROW_SAMPLE, np.array([condor_class()], dtype=np.float32))
+  animals_net.train(np.array([dolphin_sample()], dtype=np.float32), cv2.ml.ROW_SAMPLE, np.array([dolphin_class()], dtype=np.float32))
+  animals_net.train(np.array([dragon_sample()], dtype=np.float32), cv2.ml.ROW_SAMPLE, np.array([dragon_class()], dtype=np.float32))
+"""
 
-print animals[int(pred1[0])]
-print animals[int(pred2[0])]
-print animals[int(pred3[0])]
+RECORDS = 5000
+for x in range(0, RECORDS):
+  records.append(record(dog_sample(), dog_class()))
+  records.append(record(condor_sample(), condor_class()))
+  records.append(record(dolphin_sample(), dolphin_class()))
+  records.append(record(dragon_sample(), dragon_class()))
+
+EPOCHS = 2
+for e in range(0, EPOCHS):
+  print "Epoch %d:" % e
+  for t, c in records:
+    animals_net.train(t, cv2.ml.ROW_SAMPLE, c)
+
+
+TESTS = 100
+dog_results = 0
+for x in range(0, TESTS):
+  clas = int(animals_net.predict(np.array([dog_sample()], dtype=np.float32))[0])
+  print "class: %d" % clas
+  if (clas) == 0:
+    dog_results += 1
+
+condor_results = 0
+for x in range(0, TESTS):
+  clas = int(animals_net.predict(np.array([condor_sample()], dtype=np.float32))[0])
+  print "class: %d" % clas
+  if (clas) == 1:
+    condor_results += 1
+
+dolphin_results = 0
+for x in range(0, TESTS):
+  clas = int(animals_net.predict(np.array([dolphin_sample()], dtype=np.float32))[0])
+  print "class: %d" % clas
+  if (clas) == 2:
+    dolphin_results += 1
+
+dragon_results = 0
+for x in range(0, TESTS):
+  clas = int(animals_net.predict(np.array([dragon_sample()], dtype=np.float32))[0])
+  print "class: %d" % clas
+  if (clas) == 3:
+    dragon_results += 1
+
+print "Dog accuracy: %f%%" % (dog_results)
+print "condor accuracy: %f%%" % (condor_results)
+print "dolphin accuracy: %f%%" % (dolphin_results)
+print "dragon accuracy: %f%%" % (dragon_results)
