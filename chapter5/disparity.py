@@ -26,8 +26,8 @@ if __name__ == "__main__":
     disp12MaxDiff = 200
     P1 = 600
     P2 = 2400
-    imgL = cv2.imread('images/dis1.jpg')
-    imgR = cv2.imread('images/dis2.jpg')
+    imgL = cv2.imread('../images/dis1.jpg')
+    imgR = cv2.imread('../images/dis2.jpg')
     cv2.namedWindow('disparity')
     cv2.createTrackbar('speckleRange', 'disparity', speckleRange, 50, update)    
     cv2.createTrackbar('window_size', 'disparity', window_size, 21, update)

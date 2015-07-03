@@ -11,7 +11,7 @@ def in_range(number, test, thresh=0.2):
 
 test_image = "/home/d3athmast3r/dev/python/study/images/cars.jpg"
 img_path = "/home/d3athmast3r/dev/python/study/images/test.jpg"
-remote = "http://previews.123rf.com/images/aremac/aremac0903/aremac090300044/4545419-Lonely-car-on-an-empty-parking-lot-Stock-Photo.jpg"
+# remote = "http://previews.123rf.com/images/aremac/aremac0903/aremac090300044/4545419-Lonely-car-on-an-empty-parking-lot-Stock-Photo.jpg"
 urllib.urlretrieve(test_image, img_path)
 
 svm, extractor = car_detector()

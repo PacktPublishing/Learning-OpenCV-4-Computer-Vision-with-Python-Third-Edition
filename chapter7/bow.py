@@ -12,7 +12,7 @@ from os.path import join
 # since this is using SIFT, you will need the https://github.com/Itseez/opencv_contrib repo
 #
 # please modify !
-datapath="e:/code/opencv/samples/data"
+
 def path(cls,i): # "./left03.jpg"
   return "%s/%s%02d.jpg"  % (datapath,cls,i+1)
 
@@ -28,9 +28,6 @@ matcher = cv2.FlannBasedMatcher(flann_params, {})  # need to pass empty dict (#1
 bow_train   = cv2.BOWKMeansTrainer(8) # toy world, you want more.
 bow_extract = cv2.BOWImgDescriptorExtractor( extract, matcher )
 
-## try those, please!
-#help(bow_train) 
-#help(bow_extract)
 
 ## 1.b add positives and negatives to the bowtrainer, use SIFT DescriptorExtractor 
 def feature_sift(fn):
@@ -66,11 +63,6 @@ def feature_bow(fn):
   return bow_extract.compute(im, detect.detect(im))
 
 traindata, trainlabels = [],[]
-"""
-for i in range(6): # save first 2 for testing
-  traindata.extend(feature_bow(path("left", i+2))); trainlabels.append(-1)
-  traindata.extend(feature_bow(path("right",i+2))); trainlabels.append(1)
-"""
 
 traindata.extend(feature_bow(join(basepath, images[0])))
 traindata.extend(feature_bow(join(basepath, images[1])))
