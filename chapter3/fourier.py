@@ -2,12 +2,10 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plot
 
-img = cv2.imread('/home/d3athmast3r/Pictures/livia.jpg', 0)
+img = cv2.imread('../images/bb.jpg', 0)
 f = np.fft.fft2(img)
 fshift = np.fft.fftshift(f)
 magnitude_spectrum = 20 * np.log(np.abs(fshift))
-
-
 
 row, cols = img.shape
 crow, ccol = row / 2, cols / 2
