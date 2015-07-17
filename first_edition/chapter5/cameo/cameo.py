@@ -107,8 +107,10 @@ class CameoDepth(Cameo):
     def __init__(self):
         self._windowManager = WindowManager('Cameo',
                                              self.onKeypress)
-        device = depth.CV_CAP_OPENNI # uncomment for Microsoft Kinect
-        #device = depth.CV_CAP_OPENNI_ASUS # uncomment for Asus Xtion
+        device = cv2.CAP_OPENNI # uncomment for Microsoft Kinect via OpenNI
+        #device = cv2.CAP_OPENNI_ASUS # uncomment for Asus Xtion via OpenNI
+        #device = cv2.CAP_OPENNI2 # uncomment for Microsoft Kinect via OpenNI2
+        #device = cv2.CAP_OPENNI2_ASUS # uncomment for Asus Xtion via OpenNI2
         self._captureManager = CaptureManager(
             cv2.VideoCapture(device), self._windowManager, True)
         self._faceTracker = FaceTracker()
@@ -120,11 +122,11 @@ class CameoDepth(Cameo):
         self._windowManager.createWindow()
         while self._windowManager.isWindowCreated:
             self._captureManager.enterFrame()
-            self._captureManager.channel = depth.CV_CAP_OPENNI_DISPARITY_MAP
+            self._captureManager.channel = cv2.CAP_OPENNI_DISPARITY_MAP
             disparityMap = self._captureManager.frame
-            self._captureManager.channel = depth.CV_CAP_OPENNI_VALID_DEPTH_MASK
+            self._captureManager.channel = cv2.CAP_OPENNI_VALID_DEPTH_MASK
             validDepthMask = self._captureManager.frame
-            self._captureManager.channel = depth.CV_CAP_OPENNI_BGR_IMAGE
+            self._captureManager.channel = cv2.CAP_OPENNI_BGR_IMAGE
             frame = self._captureManager.frame
             
             if frame is not None:
@@ -149,5 +151,5 @@ class CameoDepth(Cameo):
 
 if __name__=="__main__":
     #Cameo().run() # uncomment for single camera
-    #CameoDouble().run() # uncomment for double camera
-    CameoDepth().run() # uncomment for depth camera
+    CameoDouble().run() # uncomment for double camera
+    #CameoDepth().run() # uncomment for depth camera

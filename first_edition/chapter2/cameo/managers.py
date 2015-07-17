@@ -37,6 +37,8 @@ class CaptureManager(object):
     @property
     def frame(self):
         if self._enteredFrame and self._frame is None:
+            # As of OpenCV 3.0, VideoCapture.retrieve() no longer supports
+            # the channel argument.
             # _, self._frame = self._capture.retrieve(channel = self.channel)
             _, self._frame = self._capture.retrieve()
         return self._frame

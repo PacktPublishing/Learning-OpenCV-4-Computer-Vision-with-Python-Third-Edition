@@ -47,7 +47,7 @@ class FaceTracker(object):
         if utils.isGray(image):
             image = cv2.equalizeHist(image)
         else:
-            image = cv2.Color(image, cv2.CV_BGR2GRAY)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
             cv2.equalizeHist(image, image)
         
         minSize = utils.widthHeightDividedBy(image, 8)
