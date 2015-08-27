@@ -96,8 +96,8 @@ class Pedestrian():
         cv2.LINE_AA)
 
 def main():
-  camera = cv2.VideoCapture(path.join(path.dirname(__file__), "traffic.flv"))
-  # camera = cv2.VideoCapture(path.join(path.dirname(__file__), "768x576.avi"))
+  # camera = cv2.VideoCapture(path.join(path.dirname(__file__), "traffic.flv"))
+  camera = cv2.VideoCapture(path.join(path.dirname(__file__), "768x576.avi"))
   # camera = cv2.VideoCapture(path.join(path.dirname(__file__), "..", "movie.mpg"))
   # camera = cv2.VideoCapture(0)
   history = 20
@@ -115,8 +115,8 @@ def main():
   pedestrians = {}
   firstFrame = True
   frames = 0
-  
-
+  fourcc = cv2.VideoWriter_fourcc(*'XVID')
+  out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
   while True:
     print " -------------------- FRAME %d --------------------" % frames
     grabbed, frane = camera.read()
@@ -156,8 +156,11 @@ def main():
     frames += 1
 
     cv2.imshow("surveillance", frame)
+    out.write(frame)
     if cv2.waitKey(110) & 0xff == 27:
         break
+  out.release()
+  camera.release()
 
 if __name__ == "__main__":
   main()
