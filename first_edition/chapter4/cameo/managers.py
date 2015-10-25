@@ -104,7 +104,7 @@ class CaptureManager(object):
     
     def startWritingVideo(
             self, filename,
-            encoding = cv2.VideoWriter_fourcc('I','4','2','0')):
+            encoding = cv2.VideoWriter_fourcc('M','J','P','G')):
         """Start writing exited frames to a video file."""
         self._videoFilename = filename
         self._videoEncoding = encoding
@@ -131,9 +131,9 @@ class CaptureManager(object):
                 else:
                     fps = self._fpsEstimate
             size = (int(self._capture.get(
-                        cv2.CV_CAP_PROP_FRAME_WIDTH)),
+                        cv2.CAP_PROP_FRAME_WIDTH)),
                     int(self._capture.get(
-                        cv2.CV_CAP_PROP_FRAME_HEIGHT)))
+                        cv2.CAP_PROP_FRAME_HEIGHT)))
             self._videoWriter = cv2.VideoWriter(
                 self._videoFilename, self._videoEncoding,
                 fps, size)

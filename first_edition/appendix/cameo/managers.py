@@ -39,6 +39,8 @@ class CaptureManager(object):
     @property
     def frame(self):
         if self._enteredFrame and self._frame is None:
+            # As of OpenCV 3.0, VideoCapture.retrieve() no longer supports
+            # the channel argument.
             # _, self._frame = self._capture.retrieve(channel = self.channel)
             _, self._frame = self._capture.retrieve()
         return self._frame
@@ -104,7 +106,7 @@ class CaptureManager(object):
     
     def startWritingVideo(
             self, filename,
-            encoding = cv2.VideoWriter_fourcc('I','4','2','0')):
+            encoding = cv2.VideoWriter_fourcc('M','J','P','G')):
         """Start writing exited frames to a video file."""
         self._videoFilename = filename
         self._videoEncoding = encoding
@@ -121,7 +123,7 @@ class CaptureManager(object):
             return
         
         if self._videoWriter is None:
-            fps = self._capture.get(cv2.CV_CAP_PROP_FPS)
+            fps = self._capture.get(cv2.CAP_PROP_FPS)
             if fps <= 0.0:
                 # The capture's FPS is unknown so use an estimate.
                 if self._framesElapsed < 20:
@@ -131,9 +133,9 @@ class CaptureManager(object):
                 else:
                     fps = self._fpsEstimate
             size = (int(self._capture.get(
-                        cv2.CV_CAP_PROP_FRAME_WIDTH)),
+                        cv2.CAP_PROP_FRAME_WIDTH)),
                     int(self._capture.get(
-                        cv2.CV_CAP_PROP_FRAME_HEIGHT)))
+                        cv2.CAP_PROP_FRAME_HEIGHT)))
             self._videoWriter = cv2.VideoWriter(
                 self._videoFilename, self._videoEncoding,
                 fps, size)
