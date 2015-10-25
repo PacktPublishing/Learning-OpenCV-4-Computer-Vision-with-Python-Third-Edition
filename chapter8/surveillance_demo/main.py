@@ -119,12 +119,11 @@ def main():
   out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
   while True:
     print " -------------------- FRAME %d --------------------" % frames
-    grabbed, frane = camera.read()
+    grabbed, frame = camera.read()
     if (grabbed is False):
       print "failed to grab frame."
       break
 
-    ret, frame = camera.read()
     fgmask = bs.apply(frame)
 
     # this is just to let the background subtractor build a bit of history
