@@ -3,7 +3,7 @@
 
 This is the repository and reference website for [Learning OpenCV 3 with Python](https://www.packtpub.com/application-development/learning-opencv-3-computer-vision-python-second-edition), a book authored by [Joe Minichino](https://github.com/techfort) and [Joe Howse](https://github.com/JoeHowse), and published by Packt Publishing.
 
-The book also has a Simplified Chinese edition, [OpenCV 3计算机视觉:Python语言实现](https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01H6ZJBV0), translated by Liu Bo, Miao Beibei, and Shi Bin, and published by Machinery Industry Press. This repository might also help readers of OpenCV 3计算机视觉:Python语言实现, but for Chinese-language support please contact Machinery Industry Press.
+The book also has a Simplified Chinese edition, [OpenCV 3计算机视觉:Python语言实现](http://hzbook.com/Books/9290.html), translated by Liu Bo, Miao Beibei, and Shi Bin, and published by HZ Books / China Machine Press. This repository might also help readers of OpenCV 3计算机视觉:Python语言实现, but for Chinese-language support please contact HZ Books.
 
 ### Code
 Code is divided in chapters reflecting the samples contained in the book. Feel free to report errors either by:
