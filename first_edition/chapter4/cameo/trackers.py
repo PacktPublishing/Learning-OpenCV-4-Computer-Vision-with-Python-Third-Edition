@@ -65,22 +65,22 @@ class FaceTracker(object):
                 x, y, w, h = faceRect
                 
                 # Seek an eye in the upper-left part of the face.
-                searchRect = (x+w/7, y, w*2/7, h/2)
+                searchRect = (x+w//7, y, w*2//7, h//2)
                 face.leftEyeRect = self._detectOneObject(
                     self._eyeClassifier, image, searchRect, 64)
                 
                 # Seek an eye in the upper-right part of the face.
-                searchRect = (x+w*4/7, y, w*2/7, h/2)
+                searchRect = (x+w*4//7, y, w*2//7, h//2)
                 face.rightEyeRect = self._detectOneObject(
                     self._eyeClassifier, image, searchRect, 64)
                 
                 # Seek a nose in the middle part of the face.
-                searchRect = (x+w/4, y+h/4, w/2, h/2)
+                searchRect = (x+w//4, y+h//4, w//2, h//2)
                 face.noseRect = self._detectOneObject(
                     self._noseClassifier, image, searchRect, 32)
                 
                 # Seek a mouth in the lower-middle part of the face.
-                searchRect = (x+w/6, y+h*2/3, w*2/3, h/3)
+                searchRect = (x+w//6, y+h*2//3, w*2//3, h//3)
                 face.mouthRect = self._detectOneObject(
                     self._mouthClassifier, image, searchRect, 16)
                 

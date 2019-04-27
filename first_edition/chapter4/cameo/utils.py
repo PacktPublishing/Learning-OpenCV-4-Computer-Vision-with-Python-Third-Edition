@@ -61,4 +61,4 @@ def isGray(image):
 def widthHeightDividedBy(image, divisor):
     """Return an image's dimensions, divided by a value."""
     h, w = image.shape[:2]
-    return (w/divisor, h/divisor)
+    return (w//divisor, h//divisor)

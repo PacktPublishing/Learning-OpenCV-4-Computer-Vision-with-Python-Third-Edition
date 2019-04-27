@@ -21,7 +21,7 @@ class CaptureManager(object):
         self._videoWriter = None
         
         self._startTime = None
-        self._framesElapsed = long(0)
+        self._framesElapsed = 0
         self._fpsEstimate = None
     
     @property
