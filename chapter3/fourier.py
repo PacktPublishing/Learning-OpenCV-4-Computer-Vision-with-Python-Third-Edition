@@ -8,7 +8,7 @@ fshift = np.fft.fftshift(f)
 magnitude_spectrum = 20 * np.log(np.abs(fshift))
 
 row, cols = img.shape
-crow, ccol = row / 2, cols / 2
+crow, ccol = row // 2, cols // 2
 fshift[crow - 30: crow+30, ccol - 30: ccol + 30] = 0
 
 f_ishift = np.fft.ifftshift(fshift)

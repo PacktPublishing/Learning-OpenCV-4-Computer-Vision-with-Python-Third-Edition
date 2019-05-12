@@ -27,7 +27,7 @@ while (True):
   skin = cv2.bitwise_and(frame, frame, mask = skinMask)
   cv2.imshow("HSV", skin)
   # quit or save frame
-  key = cv2.waitKey(1000 / 12) & 0xff
+  key = cv2.waitKey(1000 // 12) & 0xff
   if key == ord("q"):
     break
   if key == ord("p"):
