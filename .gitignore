@@ -1,3 +1,10 @@
-data/
+# Windows metafiles
+Thumbs.db
+
+# Mac metafiles
+._*
+.DS_Store
+
+# Python bytecode
 *.pyc
 *.pyo
