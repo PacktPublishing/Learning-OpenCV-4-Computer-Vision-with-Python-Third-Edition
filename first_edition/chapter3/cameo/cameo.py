@@ -6,7 +6,7 @@ class Cameo(object):
     
     def __init__(self):
         self._windowManager = WindowManager('Cameo',
-                                             self.onKeypress)
+                                            self.onKeypress)
         self._captureManager = CaptureManager(
             cv2.VideoCapture(0), self._windowManager, True)
         self._curveFilter = filters.BGRPortraCurveFilter()
