@@ -10,9 +10,9 @@ def createFlatView(array):
 
 def createLookupArray(func, length = 256):
     """Return a lookup for whole-number inputs to a function.
-    
+
     The lookup values are clamped to [0, length - 1].
-    
+
     """
     if func is None:
         return None
@@ -61,4 +61,4 @@ def isGray(image):
 def widthHeightDividedBy(image, divisor):
     """Return an image's dimensions, divided by a value."""
     h, w = image.shape[:2]
-    return (w/divisor, h/divisor)
+    return (w//divisor, h//divisor)

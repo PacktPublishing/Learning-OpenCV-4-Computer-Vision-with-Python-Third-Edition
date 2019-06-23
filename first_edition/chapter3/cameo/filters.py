@@ -6,17 +6,17 @@ import utils
 
 def recolorRC(src, dst):
     """Simulate conversion from BGR to RC (red, cyan).
-    
+
     The source and destination images must both be in BGR format.
-    
+
     Blues and greens are replaced with cyans. The effect is similar
     to Technicolor Process 2 (used in early color movies) and CGA
     Palette 3 (used in early color PCs).
-    
+
     Pseudocode:
     dst.b = dst.g = 0.5 * (src.b + src.g)
     dst.r = src.r
-    
+
     """
     b, g, r = cv2.split(src)
     cv2.addWeighted(b, 0.5, g, 0.5, 0, b)
@@ -25,17 +25,17 @@ def recolorRC(src, dst):
 
 def recolorRGV(src, dst):
     """Simulate conversion from BGR to RGV (red, green, value).
-    
+
     The source and destination images must both be in BGR format.
-    
+
     Blues are desaturated. The effect is similar to Technicolor
     Process 1 (used in early color movies).
-    
+
     Pseudocode:
     dst.b = min(src.b, src.g, src.r)
     dst.g = src.g
     dst.r = src.r
-    
+
     """
     b, g, r = cv2.split(src)
     cv2.min(b, g, b)
@@ -45,17 +45,17 @@ def recolorRGV(src, dst):
 
 def recolorCMV(src, dst):
     """Simulate conversion from BGR to CMV (cyan, magenta, value).
-    
+
     The source and destination images must both be in BGR format.
-    
+
     Yellows are desaturated. The effect is similar to CGA Palette 1
     (used in early color PCs).
-    
+
     Pseudocode:
     dst.b = max(src.b, src.g, src.r)
     dst.g = src.g
     dst.r = src.r
-    
+
     """
     b, g, r = cv2.split(src)
     cv2.max(b, g, b)
@@ -64,21 +64,21 @@ def recolorCMV(src, dst):
 
 
 def blend(foregroundSrc, backgroundSrc, dst, alphaMask):
-    
+
     # Calculate the normalized alpha mask.
     maxAlpha = numpy.iinfo(alphaMask.dtype).max
     normalizedAlphaMask = (1.0 / maxAlpha) * alphaMask
-    
+
     # Calculate the normalized inverse alpha mask.
     normalizedInverseAlphaMask = \
         numpy.ones_like(normalizedAlphaMask)
     normalizedInverseAlphaMask[:] = \
         normalizedInverseAlphaMask - normalizedAlphaMask
-    
+
     # Split the channels from the sources.
     foregroundChannels = cv2.split(foregroundSrc)
     backgroundChannels = cv2.split(backgroundSrc)
-    
+
     # Blend each channel.
     numChannels = len(foregroundChannels)
     i = 0
@@ -87,7 +87,7 @@ def blend(foregroundSrc, backgroundSrc, dst, alphaMask):
             normalizedAlphaMask * foregroundChannels[i] + \
             normalizedInverseAlphaMask * backgroundChannels[i]
         i += 1
-    
+
     # Merge the blended channels into the destination.
     cv2.merge(backgroundChannels, dst)
 
@@ -108,11 +108,11 @@ def strokeEdges(src, dst, blurKsize = 7, edgeKsize = 5):
 
 class VFuncFilter(object):
     """A filter that applies a function to V (or all of BGR)."""
-    
+
     def __init__(self, vFunc = None, dtype = numpy.uint8):
         length = numpy.iinfo(dtype).max + 1
         self._vLookupArray = utils.createLookupArray(vFunc, length)
-    
+
     def apply(self, src, dst):
         """Apply the filter with a BGR or gray source/destination."""
         srcFlatView = utils.flatView(src)
@@ -122,7 +122,7 @@ class VFuncFilter(object):
 
 class VCurveFilter(VFuncFilter):
     """A filter that applies a curve to V (or all of BGR)."""
-    
+
     def __init__(self, vPoints, dtype = numpy.uint8):
         VFuncFilter.__init__(self, utils.createCurveFunc(vPoints),
                              dtype)
@@ -130,7 +130,7 @@ class VCurveFilter(VFuncFilter):
 
 class BGRFuncFilter(object):
     """A filter that applies different functions to each of BGR."""
-    
+
     def __init__(self, vFunc = None, bFunc = None, gFunc = None,
                  rFunc = None, dtype = numpy.uint8):
         length = numpy.iinfo(dtype).max + 1
@@ -140,7 +140,7 @@ class BGRFuncFilter(object):
             utils.createCompositeFunc(gFunc, vFunc), length)
         self._rLookupArray = utils.createLookupArray(
             utils.createCompositeFunc(rFunc, vFunc), length)
-    
+
     def apply(self, src, dst):
         """Apply the filter with a BGR source/destination."""
         b, g, r = cv2.split(src)
@@ -151,7 +151,7 @@ class BGRFuncFilter(object):
 
 class BGRCurveFilter(BGRFuncFilter):
     """A filter that applies different curves to each of BGR."""
-    
+
     def __init__(self, vPoints = None, bPoints = None,
                  gPoints = None, rPoints = None, dtype = numpy.uint8):
         BGRFuncFilter.__init__(self,
@@ -162,7 +162,7 @@ class BGRCurveFilter(BGRFuncFilter):
 
 class BGRCrossProcessCurveFilter(BGRCurveFilter):
     """A filter that applies cross-process-like curves to BGR."""
-    
+
     def __init__(self, dtype = numpy.uint8):
         BGRCurveFilter.__init__(
             self,
@@ -173,7 +173,7 @@ class BGRCrossProcessCurveFilter(BGRCurveFilter):
 
 class BGRPortraCurveFilter(BGRCurveFilter):
     """A filter that applies Portra-like curves to BGR."""
-    
+
     def __init__(self, dtype = numpy.uint8):
         BGRCurveFilter.__init__(
             self,
@@ -185,7 +185,7 @@ class BGRPortraCurveFilter(BGRCurveFilter):
 
 class BGRProviaCurveFilter(BGRCurveFilter):
     """A filter that applies Provia-like curves to BGR."""
-    
+
     def __init__(self, dtype = numpy.uint8):
         BGRCurveFilter.__init__(
             self,
@@ -196,7 +196,7 @@ class BGRProviaCurveFilter(BGRCurveFilter):
 
 class BGRVelviaCurveFilter(BGRCurveFilter):
     """A filter that applies Velvia-like curves to BGR."""
-    
+
     def __init__(self, dtype = numpy.uint8):
         BGRCurveFilter.__init__(
             self,
@@ -209,17 +209,17 @@ class BGRVelviaCurveFilter(BGRCurveFilter):
 
 class VConvolutionFilter(object):
     """A filter that applies a convolution to V (or all of BGR)."""
-    
+
     def __init__(self, kernel):
         self._kernel = kernel
-    
+
     def apply(self, src, dst):
         """Apply the filter with a BGR or gray source/destination."""
         cv2.filter2D(src, -1, self._kernel, dst)
 
 class BlurFilter(VConvolutionFilter):
     """A blur filter with a 2-pixel radius."""
-    
+
     def __init__(self):
         kernel = numpy.array([[0.04, 0.04, 0.04, 0.04, 0.04],
                               [0.04, 0.04, 0.04, 0.04, 0.04],
@@ -230,7 +230,7 @@ class BlurFilter(VConvolutionFilter):
 
 class SharpenFilter(VConvolutionFilter):
     """A sharpen filter with a 1-pixel radius."""
-    
+
     def __init__(self):
         kernel = numpy.array([[-1, -1, -1],
                               [-1,  9, -1],
@@ -239,7 +239,7 @@ class SharpenFilter(VConvolutionFilter):
 
 class FindEdgesFilter(VConvolutionFilter):
     """An edge-finding filter with a 1-pixel radius."""
-    
+
     def __init__(self):
         kernel = numpy.array([[-1, -1, -1],
                               [-1,  8, -1],
@@ -248,7 +248,7 @@ class FindEdgesFilter(VConvolutionFilter):
 
 class EmbossFilter(VConvolutionFilter):
     """An emboss filter with a 1-pixel radius."""
-    
+
     def __init__(self):
         kernel = numpy.array([[-2, -1, 0],
                               [-1,  1, 1],

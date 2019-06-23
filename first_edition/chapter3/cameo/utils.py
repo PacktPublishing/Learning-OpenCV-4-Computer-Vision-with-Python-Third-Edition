@@ -11,9 +11,9 @@ def createFlatView(array):
 
 def createLookupArray(func, length = 256):
     """Return a lookup for whole-number inputs to a function.
-    
+
     The lookup values are clamped to [0, length - 1].
-    
+
     """
     if func is None:
         return None
