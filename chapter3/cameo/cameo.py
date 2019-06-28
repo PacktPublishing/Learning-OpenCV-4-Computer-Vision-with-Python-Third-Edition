@@ -19,9 +19,6 @@ class Cameo(object):
             frame = self._captureManager.frame
 
             if frame is not None:
-
-                # TODO: Track faces (Chapter 3).
-
                 filters.strokeEdges(frame, frame)
                 self._curveFilter.apply(frame, frame)
 
