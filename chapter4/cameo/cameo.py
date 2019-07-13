@@ -7,7 +7,7 @@ class Cameo(object):
 
     def __init__(self):
         self._windowManager = WindowManager('Cameo',
-                                             self.onKeypress)
+                                            self.onKeypress)
         self._captureManager = CaptureManager(
             cv2.VideoCapture(0), self._windowManager, True)
         self._curveFilter = filters.BGRPortraCurveFilter()
@@ -49,9 +49,9 @@ class CameoDepth(Cameo):
 
     def __init__(self):
         self._windowManager = WindowManager('Cameo',
-                                             self.onKeypress)
+                                            self.onKeypress)
         #device = cv2.CAP_OPENNI2 # uncomment for Microsoft Kinect via OpenNI2
-        device = cv2.CAP_OPENNI2_ASUS # uncomment for Asus Xtion via OpenNI2
+        device = cv2.CAP_OPENNI2_ASUS # uncomment for Asus Xtion via OpenNI2 or Occipital Structure
         self._captureManager = CaptureManager(
             cv2.VideoCapture(device), self._windowManager, True)
         self._curveFilter = filters.BGRPortraCurveFilter()
@@ -77,7 +77,7 @@ class CameoDepth(Cameo):
 
                 # Make everything except the median layer black.
                 mask = depth.createMedianMask(disparityMap, validDepthMask)
-                frame[mask == 0.0] = 0
+                frame[mask == 0] = 0
 
                 if self._captureManager.channel == cv2.CAP_OPENNI_BGR_IMAGE:
                     # A BGR frame was captured.
@@ -89,6 +89,5 @@ class CameoDepth(Cameo):
             self._windowManager.processEvents()
 
 if __name__=="__main__":
-    #Cameo().run() # uncomment for single camera
-    #CameoDouble().run() # uncomment for double camera
+    #Cameo().run() # uncomment for ordinary camera
     CameoDepth().run() # uncomment for depth camera

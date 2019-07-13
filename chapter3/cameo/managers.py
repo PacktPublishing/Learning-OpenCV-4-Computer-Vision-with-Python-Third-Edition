@@ -165,6 +165,4 @@ class WindowManager(object):
     def processEvents(self):
         keycode = cv2.waitKey(1)
         if self.keypressCallback is not None and keycode != -1:
-            # Discard any non-ASCII info encoded by GTK.
-            keycode &= 0xFF
             self.keypressCallback(keycode)

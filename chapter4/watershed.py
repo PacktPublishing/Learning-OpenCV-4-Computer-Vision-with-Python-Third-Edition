@@ -32,6 +32,7 @@ markers += 1
 
 # Label the unknown region as 0.
 markers[unknown==255] = 0
+
 markers = cv2.watershed(img, markers)
 img[markers==-1] = [255,0,0]
 

@@ -10,4 +10,4 @@ def createMedianMask(disparityMap, validDepthMask, rect = None):
     median = numpy.median(disparityMap)
     return numpy.where((validDepthMask == 0) | \
                        (abs(disparityMap - median) < 12),
-                       1.0, 0.0)
+                       255, 0).astype(numpy.uint8)
