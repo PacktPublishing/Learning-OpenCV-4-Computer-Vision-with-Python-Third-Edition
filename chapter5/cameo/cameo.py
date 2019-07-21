@@ -10,7 +10,7 @@ class Cameo(object):
 
     def __init__(self):
         self._windowManager = WindowManager('Cameo',
-                                             self.onKeypress)
+                                            self.onKeypress)
         self._captureManager = CaptureManager(
             cv2.VideoCapture(0), self._windowManager, True)
         self._faceTracker = FaceTracker()
@@ -107,9 +107,9 @@ class CameoDepth(Cameo):
 
     def __init__(self):
         self._windowManager = WindowManager('Cameo',
-                                             self.onKeypress)
+                                            self.onKeypress)
         #device = cv2.CAP_OPENNI2 # uncomment for Microsoft Kinect via OpenNI2
-        device = cv2.CAP_OPENNI2_ASUS # uncomment for Asus Xtion via OpenNI2
+        device = cv2.CAP_OPENNI2_ASUS # uncomment for Asus Xtion or Occipital Structure via OpenNI2
         self._captureManager = CaptureManager(
             cv2.VideoCapture(device), self._windowManager, True)
         self._faceTracker = FaceTracker()

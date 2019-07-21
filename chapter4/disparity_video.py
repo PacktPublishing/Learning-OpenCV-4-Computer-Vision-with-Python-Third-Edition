@@ -35,6 +35,3 @@ while(cv2.waitKey(1) == -1):
             disparity, disparity, alpha=0, beta=255,
             norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
     cv2.imshow('Disparity', disparity)
-
-# Destroy windows.
-cv2.destroyAllWindows()

@@ -51,7 +51,7 @@ class CameoDepth(Cameo):
         self._windowManager = WindowManager('Cameo',
                                             self.onKeypress)
         #device = cv2.CAP_OPENNI2 # uncomment for Microsoft Kinect via OpenNI2
-        device = cv2.CAP_OPENNI2_ASUS # uncomment for Asus Xtion via OpenNI2 or Occipital Structure
+        device = cv2.CAP_OPENNI2_ASUS # uncomment for Asus Xtion or Occipital Structure via OpenNI2
         self._captureManager = CaptureManager(
             cv2.VideoCapture(device), self._windowManager, True)
         self._curveFilter = filters.BGRPortraCurveFilter()
