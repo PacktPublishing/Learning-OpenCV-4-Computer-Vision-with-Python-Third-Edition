@@ -1,5 +1,4 @@
 import cv2
-import numpy
 import depth
 import filters
 from managers import WindowManager, CaptureManager

@@ -4,7 +4,7 @@ import cv2
 import numpy
 
 
-def read_images(path, size):
+def read_images(path, image_size):
     names = []
     training_images, training_labels = [], []
     label = 0
@@ -19,7 +19,7 @@ def read_images(path, size):
                     # The file cannot be loaded as an image.
                     # Skip it.
                     continue
-                img = cv2.resize(img, size)
+                img = cv2.resize(img, image_size)
                 training_images.append(img)
                 training_labels.append(label)
             label += 1
