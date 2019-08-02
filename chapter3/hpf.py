@@ -22,6 +22,7 @@ g_hpf = img - blurred
 
 cv2.imshow("3x3", k3)
 cv2.imshow("5x5", k5)
+cv2.imshow("blurred", blurred)
 cv2.imshow("g_hpf", g_hpf)
 cv2.waitKey()
 cv2.destroyAllWindows()
