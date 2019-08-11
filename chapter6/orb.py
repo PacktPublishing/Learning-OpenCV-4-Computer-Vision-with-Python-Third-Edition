@@ -1,22 +1,29 @@
-import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-# query and test images
-img1 = cv2.imread('../images/manowar_logo.png',0)
-img2 = cv2.imread('../images/manowar_single.jpg',0)
+# Load the images.
+img0 = cv2.imread('../images/nasa_logo.png',
+                  cv2.IMREAD_GRAYSCALE)
+img1 = cv2.imread('../images/kennedy_space_center.jpg',
+                  cv2.IMREAD_GRAYSCALE)
 
-# create the ORB detector
+# Perform ORB feature detection and description.
 orb = cv2.ORB_create()
-kp1, des1 = orb.detectAndCompute(img1,None)
-kp2, des2 = orb.detectAndCompute(img2,None)
+kp0, des0 = orb.detectAndCompute(img0, None)
+kp1, des1 = orb.detectAndCompute(img1, None)
 
-# brute force matching
+# Perform brute-force matching.
 bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-matches = bf.match(des1,des2)
+matches = bf.match(des0, des1)
 
-# Sort by distance.
-matches = sorted(matches, key = lambda x:x.distance)
-img3 = cv2.drawMatches(img1,kp1,img2,kp2, matches[:25], img2,flags=2)
+# Sort the matches by distance.
+matches = sorted(matches, key=lambda x:x.distance)
 
-plt.imshow(img3),plt.show()
+# Draw the best 25 matches.
+img_matches = cv2.drawMatches(
+    img0, kp0, img1, kp1, matches[:25], img1,
+    flags=cv2.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS)
+
+# Show the matches.
+plt.imshow(img_matches)
+plt.show()
