@@ -7,7 +7,7 @@ MIN_MATCH_COUNT = 10
 img0 = cv2.imread('anchors/tattoo_seed.jpg',
                   cv2.IMREAD_GRAYSCALE)
 img1 = cv2.imread('anchors/hush.jpg',
-                  cv2.IMREAD_GRAYSALE)
+                  cv2.IMREAD_GRAYSCALE)
 
 # Perform SIFT feature detection and description.
 sift = cv2.xfeatures2d.SIFT_create()

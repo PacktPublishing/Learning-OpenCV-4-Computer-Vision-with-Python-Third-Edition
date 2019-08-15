@@ -2,9 +2,9 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-img0 = cv2.imread('../images/gauguin_entre_les_lis.jpg',
+img0 = cv2.imread('../images/gauguin_entre_les_lys.jpg',
                   cv2.IMREAD_GRAYSCALE)
-img1 = cv2.imread('../images/gauguin_paintings.jpg',
+img1 = cv2.imread('../images/gauguin_paintings.png',
                   cv2.IMREAD_GRAYSCALE)
 
 # Perform SIFT feature detection and description.

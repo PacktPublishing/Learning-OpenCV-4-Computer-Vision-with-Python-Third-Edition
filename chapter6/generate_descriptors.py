@@ -1,26 +1,27 @@
 import os
-import cv2
+
 import numpy as np
-from os import walk
-from os.path import join
-import sys
+import cv2
 
 def create_descriptors(folder):
-  files = []
-  for (dirpath, dirnames, filenames) in walk(folder):
-    files.extend(filenames)
-  for f in files:
-    save_descriptor(folder, f, cv2.xfeatures2d.SIFT_create())
+    feature_detector = cv2.xfeatures2d.SIFT_create()
+    files = []
+    for (dirpath, dirnames, filenames) in os.walk(folder):
+        files.extend(filenames)
+    for f in files:
+        create_descriptor(folder, f, feature_detector)
 
-def save_descriptor(folder, image_path, feature_detector):
-  print "reading %s" % image_path
-  if image_path.endswith("npy"):
-    return
-  img = cv2.imread(join(folder, image_path), 0)
-  keypoints, descriptors = feature_detector.detectAndCompute(img, None)
-  descriptor_file = image_path.replace("jpg", "npy")
-  np.save(join(folder, descriptor_file), descriptors)
+def create_descriptor(folder, image_path, feature_detector):
+    if not image_path.endswith('jpg'):
+        print('skipping %s' % image_path)
+        return
+    print('reading %s' % image_path)
+    img = cv2.imread(os.path.join(folder, image_path),
+                     cv2.IMREAD_GRAYSCALE)
+    keypoints, descriptors = feature_detector.detectAndCompute(
+        img, None)
+    descriptor_file = image_path.replace('jpg', 'npy')
+    np.save(os.path.join(folder, descriptor_file), descriptors)
 
-dir = sys.argv[1]
-
-create_descriptors(dir)
+folder = 'anchors'
+create_descriptors(folder)
