@@ -12,7 +12,7 @@ def create_descriptors(folder):
         create_descriptor(folder, f, feature_detector)
 
 def create_descriptor(folder, image_path, feature_detector):
-    if not image_path.endswith('jpg'):
+    if not image_path.endswith('png'):
         print('skipping %s' % image_path)
         return
     print('reading %s' % image_path)
@@ -20,8 +20,8 @@ def create_descriptor(folder, image_path, feature_detector):
                      cv2.IMREAD_GRAYSCALE)
     keypoints, descriptors = feature_detector.detectAndCompute(
         img, None)
-    descriptor_file = image_path.replace('jpg', 'npy')
+    descriptor_file = image_path.replace('png', 'npy')
     np.save(os.path.join(folder, descriptor_file), descriptors)
 
-folder = 'anchors'
+folder = 'tattoos'
 create_descriptors(folder)

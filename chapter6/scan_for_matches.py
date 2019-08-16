@@ -4,8 +4,8 @@ import numpy as np
 import cv2
 
 # Read the query image.
-folder = 'anchors'
-query = cv2.imread(os.path.join(folder, 'tattoo_seed.jpg'),
+folder = 'tattoos'
+query = cv2.imread(os.path.join(folder, 'query.png'),
                    cv2.IMREAD_GRAYSCALE)
 
 # create files, images, descriptors globals
@@ -15,7 +15,7 @@ descriptors = []
 for (dirpath, dirnames, filenames) in os.walk(folder):
     files.extend(filenames)
     for f in files:
-        if f.endswith('npy') and f != 'tattoo_seed.npy':
+        if f.endswith('npy') and f != 'query.npy':
             descriptors.append(f)
 print(descriptors)
 
