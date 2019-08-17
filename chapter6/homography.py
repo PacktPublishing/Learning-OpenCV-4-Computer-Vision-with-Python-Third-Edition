@@ -4,9 +4,9 @@ from matplotlib import pyplot as plt
 
 MIN_MATCH_COUNT = 10
 
-img0 = cv2.imread('anchors/tattoo_seed.jpg',
+img0 = cv2.imread('tattoos/query.png',
                   cv2.IMREAD_GRAYSCALE)
-img1 = cv2.imread('anchors/hush.jpg',
+img1 = cv2.imread('tattoos/anchor_man.png',
                   cv2.IMREAD_GRAYSCALE)
 
 # Perform SIFT feature detection and description.
@@ -40,7 +40,7 @@ if len(good_matches) >= MIN_MATCH_COUNT:
 
     h,w = img0.shape
     pts = np.float32(
-        [[0, 0], [0, h-1], [w-1, h-1], [w-1, 0]]).reshape(-1,1,2)
+        [[0, 0], [0, h-1], [w-1, h-1], [w-1, 0]]).reshape(-1, 1, 2)
     dst = cv2.perspectiveTransform(pts, M)
 else:
     print("Not enough matches are found - %d/%d" % \
