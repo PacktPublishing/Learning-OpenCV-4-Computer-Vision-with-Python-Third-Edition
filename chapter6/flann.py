@@ -29,9 +29,6 @@ for i, (m, n) in enumerate(matches):
     if m.distance < 0.7 * n.distance:
         mask_matches[i]=[1, 0]
 
-# Define drawing parameters.
-draw_params = dict()
-
 # Draw the matches that passed the ratio test.
 img_matches = cv2.drawMatchesKnn(
     img0, kp0, img1, kp1, matches, None,
