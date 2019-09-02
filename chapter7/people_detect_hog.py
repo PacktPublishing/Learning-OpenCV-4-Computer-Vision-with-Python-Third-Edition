@@ -1,32 +1,37 @@
 import cv2
 import numpy as np
 
-def is_inside(o, i):
-    ox, oy, ow, oh = o
+def is_inside(i, o):
     ix, iy, iw, ih = i
-    return ox > ix and oy > iy and ox + ow < ix + iw and oy + oh < iy + ih
+    ox, oy, ow, oh = o
+    return ix > ox and ix + iw < ox + ow and \
+        iy > oy and iy + ih < oy + oh
 
-def draw_person(image, person):
-  x, y, w, h = person
-  cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 255), 2)
-
-img = cv2.imread("../images/people.jpg")
 hog = cv2.HOGDescriptor()
 hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
-found, w = hog.detectMultiScale(img, winStride=(8,8),scale=1.05)
+img = cv2.imread('../images/haying.jpg')
 
-found_filtered = []
-for ri, r in enumerate(found):
-    for qi, q in enumerate(found):
+found_rects, found_weights = hog.detectMultiScale(
+    img, winStride=(4, 4), scale=1.02, finalThreshold=1.9)
+
+found_rects_filtered = []
+found_weights_filtered = []
+for ri, r in enumerate(found_rects):
+    for qi, q in enumerate(found_rects):
         if ri != qi and is_inside(r, q):
             break
     else:
-        found_filtered.append(r)
+        found_rects_filtered.append(r)
+        found_weights_filtered.append(found_weights[ri])
 
-for person in found_filtered:
-  draw_person(img, person)
+for ri, r in enumerate(found_rects_filtered):
+    x, y, w, h = r
+    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 255), 2)
+    text = '%.2f' % found_weights_filtered[ri]
+    cv2.putText(img, text, (x, y - 20),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
 
-cv2.imshow("people detection", img)  
+cv2.imshow('Women in Hayfield Detected', img)
+cv2.imwrite('./women_in_hayfield_detected.jpg', img)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
