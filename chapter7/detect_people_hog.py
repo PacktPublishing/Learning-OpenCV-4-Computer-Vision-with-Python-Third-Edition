@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 def is_inside(i, o):
     ix, iy, iw, ih = i
