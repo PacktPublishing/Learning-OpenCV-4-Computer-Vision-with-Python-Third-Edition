@@ -8,8 +8,8 @@ if not os.path.isdir('CarData'):
           'into the same folder as this script.')
     exit(1)
 
-BOW_VOCABULARY_NUM_TRAINING_SAMPLES_PER_CLASS = 8
-BOW_DESCRIPTORS_NUM_TRAINING_SAMPLES_PER_CLASS = 20
+BOW_VOCABULARY_NUM_TRAINING_SAMPLES_PER_CLASS = 10
+BOW_DESCRIPTORS_NUM_TRAINING_SAMPLES_PER_CLASS = 100
 
 sift = cv2.xfeatures2d.SIFT_create()
 
@@ -22,20 +22,20 @@ bow_kmeans_trainer = cv2.BOWKMeansTrainer(40)
 bow_extractor = cv2.BOWImgDescriptorExtractor(sift, flann)
 
 def get_pos_and_neg_paths(i):
-    pos_path = 'CarData/TrainImages/pos-%d.pgm' % i+1
-    neg_path = 'CarData/TrainImages/neg-%d.pgm' % i+1
+    pos_path = 'CarData/TrainImages/pos-%d.pgm' % (i+1)
+    neg_path = 'CarData/TrainImages/neg-%d.pgm' % (i+1)
     return pos_path, neg_path
 
 def add_sample(path):
     img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
-    keypoints, descriptors = sift.detectAndCompute(gray, None)
+    keypoints, descriptors = sift.detectAndCompute(img, None)
     bow_kmeans_trainer.add(descriptors)
 
 for i in range(BOW_VOCABULARY_NUM_TRAINING_SAMPLES_PER_CLASS):
     pos_path, neg_path = get_pos_and_neg_paths(i)
     add_sample(pos_path)
     add_sample(neg_path)
-  
+
 voc = bow_kmeans_trainer.cluster()
 bow_extractor.setVocabulary(voc)
 
@@ -59,11 +59,16 @@ svm = cv2.ml.SVM_create()
 svm.train(np.array(training_data), cv2.ml.ROW_SAMPLE,
           np.array(training_labels))
 
-for test_img_path in ['../images/car.jpg', '../images/bb.jpg']:
+for test_img_path in ['CarData/TestImages/test-0.pgm',
+                      'CarData/TestImages/test-1.pgm',
+                      '../images/car.jpg',
+                      '../images/haying.jpg',
+                      '../images/statue.jpg',
+                      '../images/woodcutters.jpg']:
     img = cv2.imread(test_img_path)
-    descriptors = extract_bow_descriptors(path)
+    descriptors = extract_bow_descriptors(test_img_path)
     prediction = svm.predict(descriptors)
-    if predictiction[1][0][0] == 1.0:
+    if prediction[1][0][0] == 1.0:
         text = 'car'
         color = (0, 255, 0)
     else:

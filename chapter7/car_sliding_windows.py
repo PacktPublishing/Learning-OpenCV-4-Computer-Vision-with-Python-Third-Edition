@@ -4,22 +4,17 @@ from car_detector.detector import car_detector, bow_features
 from car_detector.pyramid import pyramid
 from car_detector.non_maximum import non_max_suppression_fast as nms
 from car_detector.sliding_window import sliding_window
-import urllib
 
 def in_range(number, test, thresh=0.2):
   return abs(number - test) < thresh
 
-test_image = "/home/d3athmast3r/dev/python/pycv/images/cars.jpg"
-img_path = "/home/d3athmast3r/dev/python/pycv/images/test.jpg"
-
-urllib.urlretrieve(test_image, img_path)
+img_path = "../images/car.jpg"
 
 svm, extractor = car_detector()
 detect = cv2.xfeatures2d.SIFT_create()
 
 w, h = 100, 40
 img = cv2.imread(img_path)
-#img = cv2.imread(test_image)
 
 rectangles = []
 counter = 1
@@ -27,10 +22,10 @@ scaleFactor = 1.25
 scale = 1
 font = cv2.FONT_HERSHEY_PLAIN
 
-for resized in pyramid(img, scaleFactor):  
+for resized in pyramid(img, scaleFactor):
   scale = float(img.shape[1]) / float(resized.shape[1])
   for (x, y, roi) in sliding_window(resized, 20, (100, 40)):
-    
+
     if roi.shape[1] != w or roi.shape[0] != h:
       continue
 
@@ -47,7 +42,7 @@ for resized in pyramid(img, scaleFactor):
     except:
       pass
 
-    counter += 1 
+    counter += 1
 
 windows = np.array(rectangles)
 boxes = nms(windows, 0.25)
