@@ -29,7 +29,8 @@ def get_pos_and_neg_paths(i):
 def add_sample(path):
     img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
     keypoints, descriptors = sift.detectAndCompute(img, None)
-    bow_kmeans_trainer.add(descriptors)
+    if descriptors is not None:
+        bow_kmeans_trainer.add(descriptors)
 
 for i in range(BOW_NUM_TRAINING_SAMPLES_PER_CLASS):
     pos_path, neg_path = get_pos_and_neg_paths(i)
@@ -49,12 +50,14 @@ for i in range(SVM_NUM_TRAINING_SAMPLES_PER_CLASS):
     pos_path, neg_path = get_pos_and_neg_paths(i)
     pos_img = cv2.imread(pos_path, cv2.IMREAD_GRAYSCALE)
     pos_descriptors = extract_bow_descriptors(pos_img)
-    training_data.extend(pos_descriptors)
-    training_labels.append(1)
+    if pos_descriptors is not None:
+        training_data.extend(pos_descriptors)
+        training_labels.append(1)
     neg_img = cv2.imread(neg_path, cv2.IMREAD_GRAYSCALE)
     neg_descriptors = extract_bow_descriptors(neg_img)
-    training_data.extend(neg_descriptors)
-    training_labels.append(-1)
+    if neg_descriptors is not None:
+        training_data.extend(neg_descriptors)
+        training_labels.append(-1)
 
 svm = cv2.ml.SVM_create()
 svm.train(np.array(training_data), cv2.ml.ROW_SAMPLE,
