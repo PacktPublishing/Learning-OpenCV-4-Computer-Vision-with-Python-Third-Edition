@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 
-from car_detector.non_maximum import non_max_suppression_fast as nms
+from non_max_suppression import non_max_suppression_fast as nms
 
 if not os.path.isdir('CarData'):
     print('CarData folder not found. Please download and unzip '
@@ -13,7 +13,7 @@ if not os.path.isdir('CarData'):
 BOW_NUM_TRAINING_SAMPLES_PER_CLASS = 10
 SVM_NUM_TRAINING_SAMPLES_PER_CLASS = 100
 
-SVM_SCORE_THRESHOLD = 1.75
+SVM_SCORE_THRESHOLD = 1.8
 NMS_OVERLAP_THRESHOLD = 0.15
 
 sift = cv2.xfeatures2d.SIFT_create()
@@ -66,17 +66,18 @@ for i in range(SVM_NUM_TRAINING_SAMPLES_PER_CLASS):
 
 svm = cv2.ml.SVM_create()
 svm.setType(cv2.ml.SVM_C_SVC)
-svm.setGamma(1)
-svm.setC(35)
-svm.setKernel(cv2.ml.SVM_RBF)
+svm.setC(50)
 svm.train(np.array(training_data), cv2.ml.ROW_SAMPLE,
           np.array(training_labels))
 
-def pyramid(img, scale_factor=1.25, min_size=(200, 80)):
+def pyramid(img, scale_factor=1.25, min_size=(200, 80),
+            max_size=(600, 600)):
     h, w = img.shape
     min_w, min_h = min_size
+    max_w, max_h = max_size
     while w >= min_w and h >= min_h:
-        yield img
+        if w <= max_w and h <= max_h:
+            yield img
         w /= scale_factor
         h /= scale_factor
         img = cv2.resize(img, (int(w), int(h)),
@@ -85,9 +86,12 @@ def pyramid(img, scale_factor=1.25, min_size=(200, 80)):
 def sliding_window(img, step=20, window_size=(100, 40)):
     img_h, img_w = img.shape
     window_w, window_h = window_size
-    for y in range(0, img_w - window_w - (img_w % window_w) + 1, step):
-        for x in range(0, img_h - window_h - (img_h % window_h) + 1, step):
-            yield (x, y, img[y:y+window_h, x:x+window_w])
+    for y in range(0, img_w, step):
+        for x in range(0, img_h, step):
+            roi = img[y:y+window_h, x:x+window_w]
+            roi_h, roi_w = roi.shape
+            if roi_w == window_w and roi_h == window_h:
+                yield (x, y, roi)
 
 for test_img_path in ['CarData/TestImages/test-0.pgm',
                       'CarData/TestImages/test-1.pgm',
@@ -116,12 +120,12 @@ for test_img_path in ['CarData/TestImages/test-0.pgm',
                                       int((x+w) * scale),
                                       int((y+h) * scale),
                                       score])
-    nms(np.array(pos_rects), NMS_OVERLAP_THRESHOLD)
+    pos_rects = nms(np.array(pos_rects), NMS_OVERLAP_THRESHOLD)
     for x0, y0, x1, y1, score in pos_rects:
         cv2.rectangle(img, (int(x0), int(y0)), (int(x1), int(y1)),
                       (0, 255, 255), 2)
         text = '%.2f' % score
-        cv2.putText(img, text, (x0, y0 - 20),
+        cv2.putText(img, text, (int(x0), int(y0) - 20),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
     cv2.imshow(test_img_path, img)
 cv2.waitKey(0)

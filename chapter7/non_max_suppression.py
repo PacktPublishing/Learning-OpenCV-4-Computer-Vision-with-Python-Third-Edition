@@ -3,15 +3,11 @@ import numpy as np
 
 # Malisiewicz et al.
 # Python port by Adrian Rosebrock
+# https://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/
 def non_max_suppression_fast(boxes, overlapThresh):
   # if there are no boxes, return an empty list
   if len(boxes) == 0:
     return []
-
-  # if the bounding boxes integers, convert them to floats --
-  # this is important since we'll be doing a bunch of divisions
-  if boxes.dtype.kind == "i":
-    boxes = boxes.astype("float")
 
   # initialize the list of picked indexes 
   pick = []
@@ -55,6 +51,5 @@ def non_max_suppression_fast(boxes, overlapThresh):
     idxs = np.delete(idxs, np.concatenate(([last],
       np.where(overlap > overlapThresh)[0])))
 
-  # return only the bounding boxes that were picked using the
-  # integer data type
-  return boxes[pick].astype("int")
+  # return only the bounding boxes that were picked
+  return boxes[pick]
