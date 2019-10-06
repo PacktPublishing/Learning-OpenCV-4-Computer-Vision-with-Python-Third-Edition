@@ -1,17 +1,18 @@
 import cv2
 
 bg_subtractor = cv2.createBackgroundSubtractorKNN(detectShadows=True)
-cap = cv2.VideoCapture('movie.mpg')
 
+erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+
+cap = cv2.VideoCapture('movie.mpg')
 success, frame = cap.read()
 while success:
 
     fg_mask = bg_subtractor.apply(frame)
 
     _, thresh = cv2.threshold(fg_mask, 244, 255, cv2.THRESH_BINARY)
-    erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
     cv2.erode(thresh, erode_kernel, thresh, iterations=2)
-    dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
     cv2.dilate(thresh, dilate_kernel, thresh, iterations=2)
 
     contours, hier = cv2.findContours(thresh, cv2.RETR_EXTERNAL,
@@ -26,7 +27,7 @@ while success:
     cv2.imshow('detection', frame)
 
     k = cv2.waitKey(30)
-    if k == 27:
+    if k == 27:  # Escape
         break
 
     success, frame = cap.read()
