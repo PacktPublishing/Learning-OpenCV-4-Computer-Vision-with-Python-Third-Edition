@@ -81,7 +81,7 @@ def pyramid(img, scale_factor=1.25, min_size=(200, 80),
         w /= scale_factor
         h /= scale_factor
         img = cv2.resize(img, (int(w), int(h)),
-                         interpolation = cv2.INTER_AREA)
+                         interpolation=cv2.INTER_AREA)
 
 def sliding_window(img, step=20, window_size=(100, 40)):
     img_h, img_w = img.shape
