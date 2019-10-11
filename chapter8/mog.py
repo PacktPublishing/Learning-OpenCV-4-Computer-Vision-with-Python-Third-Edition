@@ -17,9 +17,9 @@ while success:
 
     contours, hier = cv2.findContours(thresh, cv2.RETR_EXTERNAL,
                                       cv2.CHAIN_APPROX_SIMPLE)
-    for contour in contours:
-        if cv2.contourArea(contour) > 1000:
-            x, y, w, h = cv2.boundingRect(contour)
+    for c in contours:
+        if cv2.contourArea(c) > 1000:
+            x, y, w, h = cv2.boundingRect(c)
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 255, 0), 2)
 
     cv2.imshow('mog', fg_mask)

@@ -1,48 +1,51 @@
-import numpy as np
 import cv2
+import numpy as np
 
 cap = cv2.VideoCapture(0)
-# capture the first frame
-ret,frame = cap.read()
-# mark the ROI
-r,h,c,w = 10, 200, 10, 200
-# wrap in a tuple
-track_window = (c,r,w,h)
 
-# extract the ROI for tracking
-roi = frame[r:r+h, c:c+w]
-# switch to HSV
-hsv_roi =  cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-# create a mask with upper and lower boundaries of colors you want to track
-mask = cv2.inRange(hsv_roi, np.array((100., 30.,32.)), np.array((180.,120.,255.)))
-# calculate histograms of roi
-roi_hist = cv2.calcHist([hsv_roi],[0],mask,[180],[0,180])
-cv2.normalize(roi_hist,roi_hist,0,255,cv2.NORM_MINMAX)
+# Capture several frames to allow the camera's autoexposure to adjust.
+for i in range(10):
+    success, frame = cap.read()
+if not success:
+    exit(1)
 
-# Setup the termination criteria, either 10 iteration or move by atleast 1 pt
-term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
+# Define an initial tracking window in the center of the frame.
+frame_h, frame_w = frame.shape[:2]
+w = frame_w//8
+h = frame_h//8
+x = frame_w//2 - w//2
+y = frame_h//2 - h//2
+track_window = (x, y, w, h)
 
-while(1):
-    ret ,frame = cap.read()
+# Calculate the normalized HSV histogram of the initial window.
+roi = frame[y:y+h, x:x+w]
+hsv_roi =  cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+mask = None
+roi_hist = cv2.calcHist([hsv_roi], [0], mask, [180], [0, 180])
+cv2.normalize(roi_hist, roi_hist, 0, 255, cv2.NORM_MINMAX)
 
-    if ret == True:
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)
-        print dst
-        # apply meanshift to get the new location
-        ret, track_window = cv2.meanShift(dst, track_window, term_crit)
+# Define the termination criteria:
+# 10 iterations or convergence within 1-pixel radius.
+term_crit = (cv2.TERM_CRITERIA_COUNT | cv2.TERM_CRITERIA_EPS, 10, 1)
 
-        # Draw it on image
-        x,y,w,h = track_window
-        img2 = cv2.rectangle(frame, (x,y), (x+w,y+h), 255,2)
-        cv2.imshow('img2',img2)
+success, frame = cap.read()
+while success:
 
-        k = cv2.waitKey(60) & 0xff
-        if k == 27:
-            break
+    # Perform back-projection of the HSV histogram onto the frame.
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    back_proj = cv2.calcBackProject([hsv], [0], roi_hist, [0, 180], 1)
 
-    else:
+    # Perform tracking with MeanShift.
+    ret, track_window = cv2.meanShift(back_proj, track_window, term_crit)
+
+    # Draw the tracking window.
+    x, y, w, h = track_window
+    cv2.rectangle(frame, (x,y), (x+w, y+h), (255, 0, 0), 2)
+
+    cv2.imshow('meanshift', frame)
+
+    k = cv2.waitKey(1)
+    if k == 27:
         break
 
-cv2.destroyAllWindows()
-cap.release()
+    success, frame = cap.read()
