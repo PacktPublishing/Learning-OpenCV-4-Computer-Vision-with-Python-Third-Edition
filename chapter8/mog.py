@@ -1,5 +1,7 @@
 import cv2
 
+OPENCV_MAJOR_VERSION = int(cv2.__version__.split('.')[0])
+
 bg_subtractor = cv2.createBackgroundSubtractorKNN(detectShadows=True)
 
 erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
@@ -15,8 +17,18 @@ while success:
     cv2.erode(thresh, erode_kernel, thresh, iterations=2)
     cv2.dilate(thresh, dilate_kernel, thresh, iterations=2)
 
-    contours, hier = cv2.findContours(thresh, cv2.RETR_EXTERNAL,
-                                      cv2.CHAIN_APPROX_SIMPLE)
+    if OPENCV_MAJOR_VERSION >= 4:
+        # OpenCV 4 or a later version is being used.
+        contours, hier = cv2.findContours(thresh, cv2.RETR_EXTERNAL,
+                                          cv2.CHAIN_APPROX_SIMPLE)
+    else:
+        # OpenCV 3 or an earlier version is being used.
+        # cv2.findContours has an extra return value.
+        # The extra return value is the thresholded image, which is
+        # unchanged, so we can ignore it.
+        _, contours, hier = cv2.findContours(thresh, cv2.RETR_EXTERNAL,
+                                             cv2.CHAIN_APPROX_SIMPLE)
+
     for c in contours:
         if cv2.contourArea(c) > 1000:
             x, y, w, h = cv2.boundingRect(c)

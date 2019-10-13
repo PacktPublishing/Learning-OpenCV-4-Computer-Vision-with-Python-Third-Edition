@@ -18,6 +18,8 @@ import numpy as np
 import os.path as path
 import argparse
 
+OPENCV_MAJOR_VERSION = int(cv2.__version__.split('.')[0])
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-a", "--algorithm",
     help = "m (or nothing) for meanShift and c for camshift")
@@ -135,7 +137,18 @@ def main():
     th = cv2.threshold(fgmask.copy(), 127, 255, cv2.THRESH_BINARY)[1]
     th = cv2.erode(th, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3,3)), iterations = 2)
     dilated = cv2.dilate(th, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (8,3)), iterations = 2)
-    image, contours, hier = cv2.findContours(dilated, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    if OPENCV_MAJOR_VERSION >= 4:
+        # OpenCV 4 or a later version is being used.
+        contours, hier = cv2.findContours(dilated, cv2.RETR_EXTERNAL,
+                                          cv2.CHAIN_APPROX_SIMPLE)
+    else:
+        # OpenCV 3 or an earlier version is being used.
+        # cv2.findContours has an extra return value.
+        # The extra return value is the thresholded image, which is
+        # unchanged, so we can ignore it.
+        _, contours, hier = cv2.findContours(dilated, cv2.RETR_EXTERNAL,
+                                             cv2.CHAIN_APPROX_SIMPLE)
 
     counter = 0
     for c in contours:
