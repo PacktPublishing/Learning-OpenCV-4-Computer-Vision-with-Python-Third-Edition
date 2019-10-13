@@ -22,7 +22,7 @@ while success:
             x, y, w, h = cv2.boundingRect(c)
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 255, 0), 2)
 
-    cv2.imshow("knn", fg_mask)
+    cv2.imshow('knn', fg_mask)
     cv2.imshow('thresh', thresh)
     cv2.imshow('detection', frame)
 

@@ -52,7 +52,7 @@ while(success):
     cv2.imshow('lk', frame)
 
     k = cv2.waitKey(1)
-    if k == 27:
+    if k == 27:  # Escape
         break
 
     # Update the previous frame and points.

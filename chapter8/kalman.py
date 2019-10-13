@@ -1,40 +1,61 @@
-import cv2, numpy as np
+import cv2
+import numpy as np
 
-measurements = []
-predictions = []
-frame = np.zeros((800, 800, 3), np.uint8)
-last_measurement = current_measurement = np.array((2,1), np.float32) 
-last_prediction = current_prediction = np.zeros((2,1), np.float32)
+# Create a black image.
+img = np.zeros((800, 800, 3), np.uint8)
 
-def mousemove(event, x, y, s, p):
-    global frame, current_measurement, measurements, last_measurement, current_prediction, last_prediction
-    last_prediction = current_prediction
-    last_measurement = current_measurement
-    current_measurement = np.array([[np.float32(x)],[np.float32(y)]])
-    kalman.correct(current_measurement)
-    current_prediction = kalman.predict()
-    lmx, lmy = last_measurement[0], last_measurement[1]
-    cmx, cmy = current_measurement[0], current_measurement[1]
-    lpx, lpy = last_prediction[0], last_prediction[1]
-    cpx, cpy = current_prediction[0], current_prediction[1]
-    cv2.line(frame, (lmx, lmy), (cmx, cmy), (0,100,0))
-    cv2.line(frame, (lpx, lpy), (cpx, cpy), (0,0,200))
+# Initialize the Kalman filter.
+kalman = cv2.KalmanFilter(4, 2, 1)
+kalman.measurementMatrix = np.array(
+    [[1, 0, 0, 0],
+     [0, 1, 0, 0]], np.float32)
+kalman.transitionMatrix = np.array(
+    [[1, 0, 1, 0],
+     [0, 1, 0, 1],
+     [0, 0, 1, 0],
+     [0, 0, 0, 1]], np.float32)
+kalman.processNoiseCov = np.array(
+    [[1, 0, 0, 0],
+     [0, 1, 0, 0],
+     [0, 0, 1, 0],
+     [0, 0, 0, 1]], np.float32) * 0.03
 
+last_measurement = None
+last_prediction = None
 
-cv2.namedWindow("kalman_tracker")
-cv2.setMouseCallback("kalman_tracker", mousemove);
+def on_mouse_moved(event, x, y, flags, param):
+    global img, kalman, last_measurement, last_prediction
 
-kalman = cv2.KalmanFilter(4,2,1)
-kalman.measurementMatrix = np.array([[1,0,0,0],[0,1,0,0]],np.float32)
-kalman.transitionMatrix = np.array([[1,0,1,0],[0,1,0,1],[0,0,1,0],[0,0,0,1]],np.float32)
-kalman.processNoiseCov = np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]],np.float32) * 0.03
+    measurement = np.array([[x], [y]], np.float32)
+    if last_measurement is None:
+        # This is the first measurement.img
+        # Update the Kalman filter's state to match the measurement.
+        kalman.statePre = np.array(
+            [[x], [y], [0], [0]], np.float32)
+        kalman.statePost = np.array(
+            [[x], [y], [0], [0]], np.float32)
+        prediction = measurement
+    else:
+        kalman.correct(measurement)
+        prediction = kalman.predict()  # Gets a reference, not a copy
+
+        # Trace the path of the measurement in green.
+        cv2.line(img, (last_measurement[0], last_measurement[1]),
+                 (measurement[0], measurement[1]), (0, 255, 0))
+
+        # Trace the path of the prediction in red.
+        cv2.line(img, (last_prediction[0], last_prediction[1]),
+                 (prediction[0], prediction[1]), (0, 0, 255))
+
+    last_prediction = prediction.copy()
+    last_measurement = measurement
+
+cv2.namedWindow('kalman_tracker')
+cv2.setMouseCallback('kalman_tracker', on_mouse_moved)
 
 while True:
-    cv2.imshow("kalman_tracker", frame)
-    if (cv2.waitKey(30) & 0xFF) == 27:
+    cv2.imshow('kalman_tracker', img)
+    k = cv2.waitKey(1)
+    if k == 27:  # Escape
+        cv2.imwrite('kalman.png', img)
         break
-    if (cv2.waitKey(30) & 0xFF) == ord('q'):
-        cv2.imwrite('kalman.jpg', frame)
-        break
-
-cv2.destroyAllWindows()

@@ -45,7 +45,7 @@ while success:
     cv2.imshow('meanshift', frame)
 
     k = cv2.waitKey(1)
-    if k == 27:
+    if k == 27:  # Escape
         break
 
     success, frame = cap.read()
