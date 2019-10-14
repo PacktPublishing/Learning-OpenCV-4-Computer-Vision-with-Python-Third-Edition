@@ -7,7 +7,7 @@ bg_subtractor = cv2.createBackgroundSubtractorKNN(detectShadows=True)
 erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
 dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
 
-cap = cv2.VideoCapture('movie.mpg')
+cap = cv2.VideoCapture('hallway.mpg')
 success, frame = cap.read()
 while success:
 
