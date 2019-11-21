@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 cap = cv2.VideoCapture(0)
 
@@ -36,12 +35,14 @@ while success:
     back_proj = cv2.calcBackProject([hsv], [0], roi_hist, [0, 180], 1)
 
     # Perform tracking with MeanShift.
-    ret, track_window = cv2.meanShift(back_proj, track_window, term_crit)
+    num_iters, track_window = cv2.meanShift(
+        back_proj, track_window, term_crit)
 
     # Draw the tracking window.
     x, y, w, h = track_window
-    cv2.rectangle(frame, (x,y), (x+w, y+h), (255, 0, 0), 2)
+    cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
+    cv2.imshow('back-projection', back_proj)
     cv2.imshow('meanshift', frame)
 
     k = cv2.waitKey(1)

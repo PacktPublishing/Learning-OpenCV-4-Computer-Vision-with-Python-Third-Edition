@@ -2,12 +2,12 @@ import cv2
 
 OPENCV_MAJOR_VERSION = int(cv2.__version__.split('.')[0])
 
-bg_subtractor = cv2.createBackgroundSubtractorMOG2(detectShadows=True)
+bg_subtractor = cv2.bgsegm.createBackgroundSubtractorGMG()
 
-erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (13, 9))
+dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (17, 11))
 
-cap = cv2.VideoCapture('hallway.mpg')
+cap = cv2.VideoCapture('traffic.flv')
 success, frame = cap.read()
 while success:
 
@@ -34,7 +34,7 @@ while success:
             x, y, w, h = cv2.boundingRect(c)
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 255, 0), 2)
 
-    cv2.imshow('mog', fg_mask)
+    cv2.imshow('gmg', fg_mask)
     cv2.imshow('thresh', thresh)
     cv2.imshow('detection', frame)
 

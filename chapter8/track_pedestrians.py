@@ -8,7 +8,7 @@ class Pedestrian():
     window, histogram, and Kalman filter.
     """
 
-    def __init__(self, id, frame, hsv_frame, track_window):
+    def __init__(self, id, hsv_frame, track_window):
 
         self.id = id
 
@@ -24,7 +24,7 @@ class Pedestrian():
                                       cv2.NORM_MINMAX)
 
         # Initialize the Kalman filter.
-        self.kalman = cv2.KalmanFilter(4,2)
+        self.kalman = cv2.KalmanFilter(4, 2)
         self.kalman.measurementMatrix = np.array(
             [[1, 0, 0, 0],
              [0, 1, 0, 0]], np.float32)
@@ -62,14 +62,14 @@ class Pedestrian():
                              y + int(center_offset[1]), w, h)
         x, y, w, h = self.track_window
 
-        # Draw the predicted center position as a circle.
+        # Draw the predicted center position as a blue circle.
         cv2.circle(frame, (int(prediction[0]), int(prediction[1])),
                    4, (255, 0, 0), -1)
 
-        # Draw the corrected tracking window as a rectangle.
+        # Draw the corrected tracking window as a cyan rectangle.
         cv2.rectangle(frame, (x,y), (x+w, y+h), (255, 255, 0), 2)
 
-        # Draw the ID above the rectangle.
+        # Draw the ID above the rectangle in blue text.
         cv2.putText(frame, 'ID: %d' % self.id, (x, y-5),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0),
                     1, cv2.LINE_AA)
@@ -93,7 +93,7 @@ def main():
     while True:
         grabbed, frame = cap.read()
         if (grabbed is False):
-          break
+            break
 
         # Apply the KNN background subtractor.
         fg_mask = bg_subtractor.apply(frame)
@@ -124,18 +124,18 @@ def main():
 
         hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-        # Draw rectangles around large contours.
+        # Draw green rectangles around large contours.
         # Also, if no pedestrians are being tracked yet, create some.
         should_initialize_pedestrians = len(pedestrians) == 0
         id = 0
         for c in contours:
             if cv2.contourArea(c) > 500:
-                (x,y,w,h) = cv2.boundingRect(c)
-                cv2.rectangle(frame, (x,y), (x+w, y+h),
+                (x, y, w, h) = cv2.boundingRect(c)
+                cv2.rectangle(frame, (x, y), (x+w, y+h),
                               (0, 255, 0), 1)
                 if should_initialize_pedestrians:
                     pedestrians.append(
-                        Pedestrian(id, frame, hsv_frame,
+                        Pedestrian(id, hsv_frame,
                                    (x, y, w, h)))
             id += 1
 

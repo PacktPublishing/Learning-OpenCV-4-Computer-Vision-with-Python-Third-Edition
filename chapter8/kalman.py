@@ -5,7 +5,7 @@ import numpy as np
 img = np.zeros((800, 800, 3), np.uint8)
 
 # Initialize the Kalman filter.
-kalman = cv2.KalmanFilter(4, 2, 1)
+kalman = cv2.KalmanFilter(4, 2)
 kalman.measurementMatrix = np.array(
     [[1, 0, 0, 0],
      [0, 1, 0, 0]], np.float32)
@@ -28,7 +28,7 @@ def on_mouse_moved(event, x, y, flags, param):
 
     measurement = np.array([[x], [y]], np.float32)
     if last_measurement is None:
-        # This is the first measurement.img
+        # This is the first measurement.
         # Update the Kalman filter's state to match the measurement.
         kalman.statePre = np.array(
             [[x], [y], [0], [0]], np.float32)

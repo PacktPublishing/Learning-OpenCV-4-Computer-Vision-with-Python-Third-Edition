@@ -13,7 +13,7 @@ while success:
 
     fg_mask = bg_subtractor.apply(frame)
 
-    _, thresh = cv2.threshold(fg_mask, 10, 255, cv2.THRESH_BINARY)
+    _, thresh = cv2.threshold(fg_mask, 244, 255, cv2.THRESH_BINARY)
     cv2.erode(thresh, erode_kernel, thresh, iterations=2)
     cv2.dilate(thresh, dilate_kernel, thresh, iterations=2)
 

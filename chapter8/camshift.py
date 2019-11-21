@@ -44,6 +44,7 @@ while success:
     box_points = np.int0(box_points)
     cv2.polylines(frame, [box_points], True, (255, 0, 0), 2)
 
+    cv2.imshow('back-projection', back_proj)
     cv2.imshow('camshift', frame)
 
     k = cv2.waitKey(1)
