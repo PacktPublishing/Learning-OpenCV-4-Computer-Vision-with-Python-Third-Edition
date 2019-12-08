@@ -24,12 +24,10 @@ def wrap_digit(rect):
     y = vcenter - (h/2)
   return (x-padding, y-padding, w+padding, h+padding)
 
-# ann, test_data = ANN.train(ANN.create_ANN(56), 50000, 5)
 ann, test_data = ANN.train(ANN.create_ANN(58), 50000, 5)
 font = cv2.FONT_HERSHEY_SIMPLEX
 
-# path = "./images/MNISTsamples.png"
-path = "./images/numbers.jpg"
+path = "./digit_images/digits_0.jpg"
 img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
 bw = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 bw = cv2.GaussianBlur(bw, (7,7), 0)
@@ -66,5 +64,4 @@ for r in rectangles:
 
 cv2.imshow("thbw", thbw)
 cv2.imshow("contours", img)
-cv2.imwrite("sample.jpg", img)
 cv2.waitKey()
