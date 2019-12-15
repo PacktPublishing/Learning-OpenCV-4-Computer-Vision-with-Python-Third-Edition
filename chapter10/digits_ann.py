@@ -39,10 +39,10 @@ def vectorized_result(j):
 def create_ANN(hidden_nodes=20):
     ann = cv2.ml.ANN_MLP_create()
     ann.setLayerSizes(np.array([784, hidden_nodes, 10]))
-    ann.setTrainMethod(cv2.ml.ANN_MLP_RPROP)
-    ann.setActivationFunction(cv2.ml.ANN_MLP_SIGMOID_SYM)
+    ann.setTrainMethod(cv2.ml.ANN_MLP_BACKPROP, 0.1, 0.1)
+    ann.setActivationFunction(cv2.ml.ANN_MLP_SIGMOID_SYM, 0.6, 1.0)
     ann.setTermCriteria(
-        (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 100, 1))
+        (cv2.TERM_CRITERIA_MAX_ITER | cv2.TERM_CRITERIA_EPS, 100, 1.0))
     return ann
 
 def train(ann, samples=10000, epochs=1):
@@ -63,10 +63,15 @@ def train(ann, samples=10000, epochs=1):
                 print("Epoch %d: Trained on %d/%d samples" % \
                       (epoch, counter, samples))
             counter += 1
-            data, digit = img
-            ann.train(np.array([data.ravel()], dtype=np.float32),
-                      cv2.ml.ROW_SAMPLE,
-                      np.array([digit.ravel()], dtype=np.float32))
+            sample, response = img
+            data = cv2.ml.TrainData_create(
+                np.array([sample.ravel()], dtype=np.float32),
+                cv2.ml.ROW_SAMPLE,
+                np.array([response.ravel()], dtype=np.float32))
+            if ann.isTrained():
+                ann.train(data, cv2.ml.ANN_MLP_UPDATE_WEIGHTS | cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
+            else:
+                ann.train(data, cv2.ml.ANN_MLP_NO_INPUT_SCALE | cv2.ml.ANN_MLP_NO_OUTPUT_SCALE)
     print("Completed all epochs!")
 
     return ann, test

@@ -32,7 +32,7 @@ def wrap_digit(rect):
     h += 2 * padding
     return x, y, w, h
 
-ann, test_data = ANN.train(ANN.create_ANN(58), 50000, 5)
+ann, test_data = ANN.train(ANN.create_ANN(60), 50000, 10)
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 img_path = "./digit_images/digits_0.jpg"
