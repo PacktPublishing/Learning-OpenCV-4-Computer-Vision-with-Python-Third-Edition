@@ -3,9 +3,9 @@ import numpy as np
 from random import randint, uniform
 
 animals_net = cv2.ml.ANN_MLP_create()
+animals_net.setLayerSizes(np.array([3, 50, 4]))
 animals_net.setTrainMethod(cv2.ml.ANN_MLP_BACKPROP, 0.1, 0.1)
 animals_net.setActivationFunction(cv2.ml.ANN_MLP_SIGMOID_SYM, 0.6, 1.0)
-animals_net.setLayerSizes(np.array([3, 50, 4]))
 animals_net.setTermCriteria(
     (cv2.TERM_CRITERIA_MAX_ITER | cv2.TERM_CRITERIA_EPS, 100, 1.0))
 
@@ -49,10 +49,10 @@ def record(sample, classification):
 RECORDS = 20000
 records = []
 for x in range(0, RECORDS):
-  records.append(record(dog_sample(), dog_class()))
-  records.append(record(condor_sample(), condor_class()))
-  records.append(record(dolphin_sample(), dolphin_class()))
-  records.append(record(dragon_sample(), dragon_class()))
+    records.append(record(dog_sample(), dog_class()))
+    records.append(record(condor_sample(), condor_class()))
+    records.append(record(dolphin_sample(), dolphin_class()))
+    records.append(record(dragon_sample(), dragon_class()))
 
 EPOCHS = 10
 for e in range(0, EPOCHS):

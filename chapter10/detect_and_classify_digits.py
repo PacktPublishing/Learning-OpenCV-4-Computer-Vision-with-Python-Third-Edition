@@ -6,13 +6,10 @@ import digits_ann as ANN
 OPENCV_MAJOR_VERSION = int(cv2.__version__.split('.')[0])
 
 def inside(r1, r2):
-    x1,y1,w1,h1 = r1
-    x2,y2,w2,h2 = r2
-    if (x1 > x2) and (y1 > y2) and (x1+w1 < x2+w2) and \
-            (y1+h1 < y2 + h2):
-        return True
-    else:
-        return False
+    x1, y1, w1, h1 = r1
+    x2, y2, w2, h2 = r2
+    return (x1 > x2) and (y1 > y2) and (x1+w1 < x2+w2) and \
+            (y1+h1 < y2+h2)
 
 def wrap_digit(rect):
     x, y, w, h = rect
@@ -33,6 +30,7 @@ def wrap_digit(rect):
     return x, y, w, h
 
 ann, test_data = ANN.train(ANN.create_ANN(60), 50000, 10)
+
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 img_path = "./digit_images/digits_0.jpg"
@@ -59,19 +57,21 @@ else:
 
 rectangles = []
 
+img_area = img.shape[0] * img.shape[1]
 for c in contours:
-    r = cv2.boundingRect(c)
-    a = cv2.contourArea(c)
-    b = (img.shape[0] - 3) * (img.shape[1] - 3)
 
+    a = cv2.contourArea(c)
+    if a >= 0.98 * img_area or a <= 0.0001 * img_area:
+        continue
+
+    r = cv2.boundingRect(c)
     is_inside = False
     for q in rectangles:
         if inside(r, q):
             is_inside = True
             break
     if not is_inside:
-        if not a == b:
-            rectangles.append(r)
+        rectangles.append(r)
 
 for r in rectangles:
     x, y, w, h = wrap_digit(r) 
