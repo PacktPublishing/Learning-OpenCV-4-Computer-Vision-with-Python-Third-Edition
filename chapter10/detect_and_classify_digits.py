@@ -3,7 +3,9 @@ import numpy as np
 
 import digits_ann as ANN
 
+
 OPENCV_MAJOR_VERSION = int(cv2.__version__.split('.')[0])
+
 
 def inside(r1, r2):
     x1, y1, w1, h1 = r1
@@ -11,27 +13,46 @@ def inside(r1, r2):
     return (x1 > x2) and (y1 > y2) and (x1+w1 < x2+w2) and \
             (y1+h1 < y2+h2)
 
-def wrap_digit(rect):
+
+def wrap_digit(rect, img_w, img_h):
+
     x, y, w, h = rect
-    hcenter = x + w//2
-    vcenter = y + h//2
-    roi = None
+
+    x_center = x + w//2
+    y_center = y + h//2
     if (h > w):
         w = h
-        x = hcenter - (w//2)
+        x = x_center - (w//2)
     else:
         h = w
-        y = vcenter - (h//2)
+        y = y_center - (h//2)
+
     padding = 5
     x -= padding
     y -= padding
     w += 2 * padding
     h += 2 * padding
+
+    if x < 0:
+        x = 0
+    elif x > img_w:
+        x = img_w
+
+    if y < 0:
+        y = 0
+    elif y > img_h:
+        y = img_h
+
+    if x+w > img_w:
+        w = img_w - x
+
+    if y+h > img_h:
+        h = img_h - y
+
     return x, y, w, h
 
-ann, test_data = ANN.train(ANN.create_ANN(60), 50000, 10)
 
-font = cv2.FONT_HERSHEY_SIMPLEX
+ann, test_data = ANN.train(ANN.create_ANN(60), 50000, 10)
 
 img_path = "./digit_images/digits_0.jpg"
 img = cv2.imread(img_path, cv2.IMREAD_COLOR)
@@ -57,7 +78,8 @@ else:
 
 rectangles = []
 
-img_area = img.shape[0] * img.shape[1]
+img_h, img_w = img.shape[:2]
+img_area = img_w * img_h
 for c in contours:
 
     a = cv2.contourArea(c)
@@ -74,16 +96,12 @@ for c in contours:
         rectangles.append(r)
 
 for r in rectangles:
-    x, y, w, h = wrap_digit(r) 
-    cv2.rectangle(img, (x,y), (x+w, y+h), (0, 255, 0), 2)
+    x, y, w, h = wrap_digit(r, img_w, img_h)
+    cv2.rectangle(img, (x,y), (x+w, y+h), (255, 0, 0), 2)
     roi = thresh[y:y+h, x:x+w]
-
-    try:
-        digit_class = int(ANN.predict(ann, roi)[0])
-    except:
-        continue
-    cv2.putText(img, "%d" % digit_class, (x, y-1), font, 1,
-                (0, 255, 0))
+    digit_class = int(ANN.predict(ann, roi)[0])
+    cv2.putText(img, "%d" % digit_class, (x, y-5),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
 cv2.imshow("thresh", thresh)
 cv2.imshow("detected and classified digits", img)
