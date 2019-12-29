@@ -65,7 +65,7 @@ while success:
             age_gender_roi = frame[y0:y1, x0_roi:x1_roi]
             scaled_age_gender_roi = cv2.resize(
                 age_gender_roi, age_gender_blob_size,
-                interpolation=cv2.INTER_AREA).astype(np.float32)
+                interpolation=cv2.INTER_LINEAR).astype(np.float32)
             scaled_age_gender_roi[:] -= age_gender_average_image
             age_gender_blob = cv2.dnn.blobFromImage(
                 scaled_age_gender_roi, size=age_gender_blob_size)

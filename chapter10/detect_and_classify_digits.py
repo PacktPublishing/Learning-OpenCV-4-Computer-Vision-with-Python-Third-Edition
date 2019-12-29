@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-import digits_ann as ANN
+import digits_ann
 
 
 OPENCV_MAJOR_VERSION = int(cv2.__version__.split('.')[0])
@@ -52,7 +52,8 @@ def wrap_digit(rect, img_w, img_h):
     return x, y, w, h
 
 
-ann, test_data = ANN.train(ANN.create_ANN(60), 50000, 10)
+ann, test_data = digits_ann.train(
+    digits_ann.create_ann(60), 50000, 10)
 
 img_path = "./digit_images/digits_0.jpg"
 img = cv2.imread(img_path, cv2.IMREAD_COLOR)
@@ -99,7 +100,7 @@ for r in rectangles:
     x, y, w, h = wrap_digit(r, img_w, img_h)
     cv2.rectangle(img, (x,y), (x+w, y+h), (255, 0, 0), 2)
     roi = thresh[y:y+h, x:x+w]
-    digit_class = int(ANN.predict(ann, roi)[0])
+    digit_class = int(digits_ann.predict(ann, roi)[0])
     cv2.putText(img, "%d" % digit_class, (x, y-5),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
