@@ -15,21 +15,18 @@ by Michael Nielsen
 
 def load_data():
     mnist = gzip.open('./digits_data/mnist.pkl.gz', 'rb')
-    training_data, classification_data, test_data = pickle.load(
-        mnist, encoding="latin1")
+    training_data, test_data = pickle.load(mnist)
     mnist.close()
-    return (training_data, classification_data, test_data)
+    return (training_data, test_data)
 
 def wrap_data():
-    tr_d, va_d, te_d = load_data()
+    tr_d, te_d = load_data()
     training_inputs = [np.reshape(x, (784, 1)) for x in tr_d[0]]
     training_results = [vectorized_result(y) for y in tr_d[1]]
     training_data = zip(training_inputs, training_results)
-    validation_inputs = [np.reshape(x, (784, 1)) for x in va_d[0]]
-    validation_data = zip(validation_inputs, va_d[1])
     test_inputs = [np.reshape(x, (784, 1)) for x in te_d[0]]
     test_data = zip(test_inputs, te_d[1])
-    return (training_data, validation_data, test_data)
+    return (training_data, test_data)
 
 def vectorized_result(j):
     e = np.zeros((10, 1))
@@ -47,7 +44,7 @@ def create_ANN(hidden_nodes=20):
 
 def train(ann, samples=10000, epochs=1):
 
-    tr, val, test = wrap_data()
+    tr, test = wrap_data()
 
     # Convert iterator to list so that we can iterate multiple times
     # in multiple epochs.
