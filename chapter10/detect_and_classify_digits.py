@@ -98,13 +98,14 @@ for c in contours:
 
 for r in rectangles:
     x, y, w, h = wrap_digit(r, img_w, img_h)
-    cv2.rectangle(img, (x,y), (x+w, y+h), (255, 0, 0), 2)
     roi = thresh[y:y+h, x:x+w]
     digit_class = int(digits_ann.predict(ann, roi)[0])
+    cv2.rectangle(img, (x,y), (x+w, y+h), (255, 0, 0), 2)
     cv2.putText(img, "%d" % digit_class, (x, y-5),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
+cv2.imwrite("detected_and_classified_digits_thresh.png", thresh)
+cv2.imwrite("detected_and_classified_digits.png", img)
 cv2.imshow("thresh", thresh)
 cv2.imshow("detected and classified digits", img)
-cv2.imwrite("detected_and_classified_digits.png", img)
 cv2.waitKey()

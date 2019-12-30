@@ -21,11 +21,10 @@ def load_data():
 
 def wrap_data():
     tr_d, te_d = load_data()
-    training_inputs = [np.reshape(x, (784,)) for x in tr_d[0]]
+    training_inputs = tr_d[0]
     training_results = [vectorized_result(y) for y in tr_d[1]]
     training_data = zip(training_inputs, training_results)
-    test_inputs = [np.reshape(x, (784,)) for x in te_d[0]]
-    test_data = zip(test_inputs, te_d[1])
+    test_data = zip(te_d[0], te_d[1])
     return (training_data, test_data)
 
 def vectorized_result(j):
@@ -82,7 +81,7 @@ def test(ann, test_data):
         digit_class = predict(ann, sample)[0]
         if digit_class == correct_digit_class:
             num_correct += 1
-    print('accuracy: %.2f%%' % (100.0 * num_correct / num_tests))
+    print('Accuracy: %.2f%%' % (100.0 * num_correct / num_tests))
 
 def predict(ann, sample):
     if sample.shape != (784,):
