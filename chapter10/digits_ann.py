@@ -35,8 +35,8 @@ def vectorized_result(j):
 def create_ann(hidden_nodes=60):
     ann = cv2.ml.ANN_MLP_create()
     ann.setLayerSizes(np.array([784, hidden_nodes, 10]))
-    ann.setTrainMethod(cv2.ml.ANN_MLP_BACKPROP, 0.1, 0.1)
     ann.setActivationFunction(cv2.ml.ANN_MLP_SIGMOID_SYM, 0.6, 1.0)
+    ann.setTrainMethod(cv2.ml.ANN_MLP_BACKPROP, 0.1, 0.1)
     ann.setTermCriteria(
         (cv2.TERM_CRITERIA_MAX_ITER | cv2.TERM_CRITERIA_EPS, 100, 1.0))
     return ann

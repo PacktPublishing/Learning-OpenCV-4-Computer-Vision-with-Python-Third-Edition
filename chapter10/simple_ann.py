@@ -3,8 +3,8 @@ import numpy as np
 
 ann = cv2.ml.ANN_MLP_create()
 ann.setLayerSizes(np.array([9, 15, 9], np.uint8))
-ann.setTrainMethod(cv2.ml.ANN_MLP_BACKPROP, 0.1, 0.1)
 ann.setActivationFunction(cv2.ml.ANN_MLP_SIGMOID_SYM, 0.6, 1.0)
+ann.setTrainMethod(cv2.ml.ANN_MLP_BACKPROP, 0.1, 0.1)
 ann.setTermCriteria(
     (cv2.TERM_CRITERIA_MAX_ITER | cv2.TERM_CRITERIA_EPS, 100, 1.0))
 
