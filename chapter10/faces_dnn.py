@@ -52,9 +52,10 @@ while success:
             x0, y0, x1, y1 = (face[3:7] * [w, h, w, h]).astype(int)
 
             # Classify the age and gender of the face based on a
-            # square region of interest.
+            # square region of interest that includes the neck.
 
-            x_margin = ((y1-y0) - (x1-x0)) // 2
+            y1_roi = y0 + int(1.2*(y1-y0))
+            x_margin = ((y1_roi-y0) - (x1-x0)) // 2
             x0_roi = x0 - x_margin
             x1_roi = x1 + x_margin
             if x0_roi < 0 or x1_roi > w or y0 < 0 or y1 > h:
@@ -62,7 +63,7 @@ while success:
                 # frame. Skip this face.
                 continue
 
-            age_gender_roi = frame[y0:y1, x0_roi:x1_roi]
+            age_gender_roi = frame[y0:y1_roi, x0_roi:x1_roi]
             scaled_age_gender_roi = cv2.resize(
                 age_gender_roi, age_gender_blob_size,
                 interpolation=cv2.INTER_LINEAR).astype(np.float32)
@@ -88,7 +89,7 @@ while success:
 
             # Draw a yellow square around the region of interest
             # for age and gender classification.
-            cv2.rectangle(frame, (x0_roi, y0), (x1_roi, y1),
+            cv2.rectangle(frame, (x0_roi, y0), (x1_roi, y1_roi),
                           (0, 255, 255), 2)
 
             # Draw the age and gender classification results.
