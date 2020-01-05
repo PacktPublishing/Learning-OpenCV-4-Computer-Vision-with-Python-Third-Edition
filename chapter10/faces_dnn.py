@@ -58,7 +58,7 @@ while success:
             x_margin = ((y1_roi-y0) - (x1-x0)) // 2
             x0_roi = x0 - x_margin
             x1_roi = x1 + x_margin
-            if x0_roi < 0 or x1_roi > w or y0 < 0 or y1 > h:
+            if x0_roi < 0 or x1_roi > w or y0 < 0 or y1_roi > h:
                 # The region of interest is partly outside the
                 # frame. Skip this face.
                 continue
