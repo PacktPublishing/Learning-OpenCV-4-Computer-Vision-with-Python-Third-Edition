@@ -27,7 +27,7 @@ sift = cv2.xfeatures2d.SIFT_create()
 query_kp, query_ds = sift.detectAndCompute(query, None)
 
 # Define FLANN-based matching parameters.
-FLANN_INDEX_KDTREE = 0
+FLANN_INDEX_KDTREE = 1
 index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
 search_params = dict(checks=50)
 
