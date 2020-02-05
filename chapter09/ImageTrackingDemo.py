@@ -240,7 +240,7 @@ class ImageTrackingDemo():
         index_params = dict(algorithm=FLANN_INDEX_LSH,
                             table_number=6, key_size=12,
                             multi_probe_level=1)
-        search_params = dict(checks=50)
+        search_params = dict()
         self._descriptor_matcher = cv2.FlannBasedMatcher(
             index_params, search_params)
         self._descriptor_matcher.add([self._reference_descriptors])
@@ -494,7 +494,7 @@ class ImageTrackingDemo():
 
         # Draw the mask in semi-transparent yellow.
         cv2.subtract(
-            self._bgr_image, 16, self._bgr_image, self._mask)
+            self._bgr_image, 48, self._bgr_image, self._mask)
 
 
 def main():

@@ -1,5 +1,6 @@
 import cv2
 import numpy
+
 import utils
 
 
@@ -91,7 +92,7 @@ def blend(foregroundSrc, backgroundSrc, dst, alphaMask):
     cv2.merge(backgroundChannels, dst)
 
 
-def strokeEdges(src, dst, blurKsize = 7, edgeKsize = 5):
+def strokeEdges(src, dst, blurKsize=7, edgeKsize=5):
     if blurKsize >= 3:
         blurredSrc = cv2.medianBlur(src, blurKsize)
         graySrc = cv2.cvtColor(blurredSrc, cv2.COLOR_BGR2GRAY)
@@ -108,21 +109,21 @@ def strokeEdges(src, dst, blurKsize = 7, edgeKsize = 5):
 class VFuncFilter(object):
     """A filter that applies a function to V (or all of BGR)."""
 
-    def __init__(self, vFunc = None, dtype = numpy.uint8):
+    def __init__(self, vFunc=None, dtype=numpy.uint8):
         length = numpy.iinfo(dtype).max + 1
         self._vLookupArray = utils.createLookupArray(vFunc, length)
 
     def apply(self, src, dst):
         """Apply the filter with a BGR or gray source/destination."""
-        srcFlatView = utils.flatView(src)
-        dstFlatView = utils.flatView(dst)
+        srcFlatView = utils.createFlatView(src)
+        dstFlatView = utils.createFlatView(dst)
         utils.applyLookupArray(self._vLookupArray, srcFlatView,
                                dstFlatView)
 
 class VCurveFilter(VFuncFilter):
     """A filter that applies a curve to V (or all of BGR)."""
 
-    def __init__(self, vPoints, dtype = numpy.uint8):
+    def __init__(self, vPoints, dtype=numpy.uint8):
         VFuncFilter.__init__(self, utils.createCurveFunc(vPoints),
                              dtype)
 
@@ -130,8 +131,8 @@ class VCurveFilter(VFuncFilter):
 class BGRFuncFilter(object):
     """A filter that applies different functions to each of BGR."""
 
-    def __init__(self, vFunc = None, bFunc = None, gFunc = None,
-                 rFunc = None, dtype = numpy.uint8):
+    def __init__(self, vFunc=None, bFunc=None, gFunc=None,
+                 rFunc=None, dtype=numpy.uint8):
         length = numpy.iinfo(dtype).max + 1
         self._bLookupArray = utils.createLookupArray(
             utils.createCompositeFunc(bFunc, vFunc), length)
@@ -151,8 +152,8 @@ class BGRFuncFilter(object):
 class BGRCurveFilter(BGRFuncFilter):
     """A filter that applies different curves to each of BGR."""
 
-    def __init__(self, vPoints = None, bPoints = None,
-                 gPoints = None, rPoints = None, dtype = numpy.uint8):
+    def __init__(self, vPoints=None, bPoints=None,
+                 gPoints=None, rPoints=None, dtype=numpy.uint8):
         BGRFuncFilter.__init__(self,
                                utils.createCurveFunc(vPoints),
                                utils.createCurveFunc(bPoints),
@@ -162,7 +163,7 @@ class BGRCurveFilter(BGRFuncFilter):
 class BGRCrossProcessCurveFilter(BGRCurveFilter):
     """A filter that applies cross-process-like curves to BGR."""
 
-    def __init__(self, dtype = numpy.uint8):
+    def __init__(self, dtype=numpy.uint8):
         BGRCurveFilter.__init__(
             self,
             bPoints = [(0,20),(255,235)],
@@ -173,7 +174,7 @@ class BGRCrossProcessCurveFilter(BGRCurveFilter):
 class BGRPortraCurveFilter(BGRCurveFilter):
     """A filter that applies Portra-like curves to BGR."""
 
-    def __init__(self, dtype = numpy.uint8):
+    def __init__(self, dtype=numpy.uint8):
         BGRCurveFilter.__init__(
             self,
             vPoints = [(0,0),(23,20),(157,173),(255,255)],
@@ -185,7 +186,7 @@ class BGRPortraCurveFilter(BGRCurveFilter):
 class BGRProviaCurveFilter(BGRCurveFilter):
     """A filter that applies Provia-like curves to BGR."""
 
-    def __init__(self, dtype = numpy.uint8):
+    def __init__(self, dtype=numpy.uint8):
         BGRCurveFilter.__init__(
             self,
             bPoints = [(0,0),(35,25),(205,227),(255,255)],
@@ -196,7 +197,7 @@ class BGRProviaCurveFilter(BGRCurveFilter):
 class BGRVelviaCurveFilter(BGRCurveFilter):
     """A filter that applies Velvia-like curves to BGR."""
 
-    def __init__(self, dtype = numpy.uint8):
+    def __init__(self, dtype=numpy.uint8):
         BGRCurveFilter.__init__(
             self,
             vPoints = [(0,0),(128,118),(221,215),(255,255)],

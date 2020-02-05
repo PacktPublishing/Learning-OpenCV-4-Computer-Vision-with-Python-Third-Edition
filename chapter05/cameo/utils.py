@@ -2,13 +2,14 @@ import cv2
 import numpy
 import scipy.interpolate
 
+
 def createFlatView(array):
     """Return a 1D view of an array of any dimensionality."""
     flatView = array.view()
     flatView.shape = array.size
     return flatView
 
-def createLookupArray(func, length = 256):
+def createLookupArray(func, length=256):
     """Return a lookup for whole-number inputs to a function.
 
     The lookup values are clamped to [0, length - 1].
@@ -38,9 +39,10 @@ def createCurveFunc(points):
     if numPoints < 2:
         return None
     xs, ys = zip(*points)
-    if numPoints < 4:
+    if numPoints < 3:
         kind = 'linear'
-        # 'quadratic' is not implemented.
+    elif numPoints < 4:
+        kind = 'quadratic'
     else:
         kind = 'cubic'
     return scipy.interpolate.interp1d(xs, ys, kind,
