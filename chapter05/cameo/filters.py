@@ -115,8 +115,8 @@ class VFuncFilter(object):
 
     def apply(self, src, dst):
         """Apply the filter with a BGR or gray source/destination."""
-        srcFlatView = utils.createFlatView(src)
-        dstFlatView = utils.createFlatView(dst)
+        srcFlatView = numpy.ravel(src)
+        dstFlatView = numpy.ravel(dst)
         utils.applyLookupArray(self._vLookupArray, srcFlatView,
                                dstFlatView)
 

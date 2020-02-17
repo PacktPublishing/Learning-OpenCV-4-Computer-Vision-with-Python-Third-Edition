@@ -3,12 +3,6 @@ import numpy
 import scipy.interpolate
 
 
-def createFlatView(array):
-    """Return a 1D view of an array of any dimensionality."""
-    flatView = array.view()
-    flatView.shape = array.size
-    return flatView
-
 def createLookupArray(func, length=256):
     """Return a lookup for whole-number inputs to a function.
 
