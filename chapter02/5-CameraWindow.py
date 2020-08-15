@@ -10,7 +10,7 @@ cameraCapture = cv2.VideoCapture(0)
 cv2.namedWindow('MyWindow')
 cv2.setMouseCallback('MyWindow', onMouse)
 
-print 'Showing camera feed. Click window or press any key to stop.'
+print('Showing camera feed. Click window or press any key to stop.')
 success, frame = cameraCapture.read()
 while cv2.waitKey(1) == -1 and not clicked:
     if frame is not None:
