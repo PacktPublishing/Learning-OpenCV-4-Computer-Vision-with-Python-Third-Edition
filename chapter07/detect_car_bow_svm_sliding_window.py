@@ -7,6 +7,7 @@ from non_max_suppression import non_max_suppression_fast as nms
 if not os.path.isdir('CarData'):
     print('CarData folder not found. Please download and unzip '
           'http://l2r.cs.uiuc.edu/~cogcomp/Data/Car/CarData.tar.gz '
+          'or https://github.com/gcr/arc-evaluator/raw/master/CarData.tar.gz '
           'into the same folder as this script.')
     exit(1)
 
