@@ -1,4 +1,5 @@
-# Learning OpenCV 4 Computer Vision with Python 3 - Third Edition 
+# Learning OpenCV 4 Computer Vision with Python 3 - Third Edition :)
+# A updated tool to use
 
 <a href="https://www.packtpub.com/data/learning-opencv-4-computer-vision-with-python-3-third-edition?utm_source=github&utm_medium=repository&utm_campaign=9781789531619"><img src="https://www.packtpub.com/media/catalog/product/cache/ecd051e9670bd57df35c8f0b122d8aea/9/7/9781789531619-original.jpeg" alt="Learning OpenCV 4 Computer Vision with Python 3 - Third Edition " height="256px" align="right"></a>
 
@@ -6,7 +7,7 @@ This is the code repository for [Learning OpenCV 4 Computer Vision with Python 3
 
 **Get to grips with tools, techniques, and algorithms for computer vision and machine learning**
 
-## What is this book about?
+## What's this book about?
 Computer vision is a rapidly evolving science, encompassing diverse applications and techniques. This book will not only help those who are getting started with computer vision but also experts in the domain. You’ll be able to put theory into practice by building apps with OpenCV 4 and Python 3.
 
 
