@@ -1,3 +1,8 @@
+## $5 Tech Unlocked 2021!
+[Buy and download this Book for only $5 on PacktPub.com](https://www.packtpub.com/product/learning-opencv-4-computer-vision-with-python-3-third-edition/9781789531619)
+-----
+*If you have read this book, please leave a review on [Amazon.com](https://www.amazon.com/gp/product/1789531616).     Potential readers can then use your unbiased opinion to help them make purchase decisions. Thank you. The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
+
 # Learning OpenCV 4 Computer Vision with Python 3 - Third Edition 
 
 <a href="https://www.packtpub.com/data/learning-opencv-4-computer-vision-with-python-3-third-edition?utm_source=github&utm_medium=repository&utm_campaign=9781789531619"><img src="https://static.packt-cdn.com/products/9781789531619/cover/smaller" alt="Learning OpenCV 4 Computer Vision with Python 3 - Third Edition " height="256px" align="right"></a>
