@@ -39,6 +39,8 @@ cv2.imwrite('MyPicGray.png', grayImage)
 **Following is what you need for this book:**
 If you are interested in learning computer vision, machine learning, and OpenCV in the context of practical real-world applications, then this book is for you. This OpenCV book will also be useful for anyone getting started with computer vision as well as experts who want to stay up-to-date with OpenCV 4 and Python 3. Although no prior knowledge of image processing, computer vision or machine learning is required, familiarity with basic Python programming is a must.
 
+We provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781789531619_ColorImages.pdf).
+
 With the following software and hardware list you can run all code files present in the book (Chapter 1-10).
 ### Software and Hardware List
 | Chapter | Software required | OS required |
@@ -50,12 +52,14 @@ With the following software and hardware list you can run all code files present
 | 4, 5 | OpenNI 2 | Windows, Mac OS X, and Linux (Any) |
 | 4, 6 | Matplotlib (any recent version) | Windows, Mac OS X, and Linux (Any) |
 
-We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781789531619_ColorImages.pdf).
+#### Update about Optional Software Requirements
+At the time the book was written, some of the code samples (in Chapters 6 and 7) depended on OpenCV's "non-free" modules in order to use the SIFT and SURF patented algorithms. Since then, the SIFT patent has expired and, starting in OpenCV 4.4.0, SIFT can be used without the "non-free" modules. There is now just one code sample (in Chapter 6) which depends on the "non-free" modules for SURF. If you wish to try the SURF sample, you will need to build OpenCV with the "non-free" modules from source (as per instructions in Chapter 1 for building from source). The pre-built `opencv-contrib-python-nonfree` pip package (also mentioned in Chapter 1) is no longer available. 
 
-### Related products
+### Related Products
 * Hands-On Computer Vision with TensorFlow 2  [[Packt]](https://www.packtpub.com/application-development/hands-computer-vision-tensorflow-2?utm_source=github&utm_medium=repository&utm_campaign=9781788830645) [[Amazon]](https://www.amazon.com/dp/1788830644)
+* OpenCV 4 for Secret Agents  [[Packt]](https://www.packtpub.com/product/opencv-4-for-secret-agents-second-edition/9781789345360) [[Amazon]](https://www.amazon.com/dp/1789345367)
 
-## Get to Know the Author
+## Get to Know the Authors
 **Joseph Howse**
  lives in a Canadian fishing village with four cats; the cats like fish, but they prefer chicken.
 
@@ -64,5 +68,5 @@ Joseph provides computer vision expertise through his company, Nummist Media. Hi
 **Joe Minichino**
  is an R&D labs engineer at Teamwork. He is a passionate programmer who is immensely curious about programming languages and technologies and constantly experimenting with them. Born and raised in Varese, Lombardy, Italy, and coming from a humanistic background in philosophy (at Milan's Università Statale), Joe has lived in Cork, Ireland, since 2004. There, he became a computer science graduate at the Cork Institute of Technology.
 
-### Suggestions and Feedback
+## Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
