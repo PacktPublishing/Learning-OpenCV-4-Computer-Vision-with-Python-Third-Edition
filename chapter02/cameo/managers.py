@@ -138,6 +138,10 @@ class CaptureManager(object):
 
         self._videoWriter.write(self._frame)
 
+    def release(self):
+        self._capture.release()
+        self._capture = None
+
 
 class WindowManager(object):
 
