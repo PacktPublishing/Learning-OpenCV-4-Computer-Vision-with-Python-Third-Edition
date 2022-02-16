@@ -40,12 +40,12 @@ def on_mouse_moved(event, x, y, flags, param):
         prediction = kalman.predict()  # Gets a reference, not a copy
 
         # Trace the path of the measurement in green.
-        cv2.line(img, (last_measurement[0], last_measurement[1]),
-                 (measurement[0], measurement[1]), (0, 255, 0))
+        cv2.line(img, (int(last_measurement[0]), int(last_measurement[1])),
+                 (int(measurement[0]), int(measurement[1])), (0, 255, 0))
 
         # Trace the path of the prediction in red.
-        cv2.line(img, (last_prediction[0], last_prediction[1]),
-                 (prediction[0], prediction[1]), (0, 0, 255))
+        cv2.line(img, (int(last_prediction[0]), int(last_prediction[1])),
+                 (int(prediction[0]), int(prediction[1])), (0, 0, 255))
 
     last_prediction = prediction.copy()
     last_measurement = measurement

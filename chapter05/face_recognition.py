@@ -82,16 +82,16 @@ def read_images(path, sz=None):
                     filepath = os.path.join(subject_path, filename)
                     im = cv2.imread(os.path.join(subject_path, filename), cv2.IMREAD_GRAYSCALE)
                     if (im is None):
-                        print "image " + filepath + " is none" 
+                        print("image " + filepath + " is none")
                     # resize to given size (if given)
                     if (sz is not None):
                         im = cv2.resize(im, sz)
                     X.append(np.asarray(im, dtype=np.uint8))
                     y.append(c)
                 except IOError, (errno, strerror):
-                    print "I/O error({0}): {1}".format(errno, strerror)
+                    print("I/O error({0}): {1}".format(errno, strerror))
                 except:
-                    print "Unexpected error:", sys.exc_info()[0]
+                    print("Unexpected error:", sys.exc_info()[0])
                     raise
             c = c+1
     return [X,y]
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     # the tutorial coming with this source code on how to prepare
     # your image data:
     if len(sys.argv) < 2:
-        print "USAGE: facerec_demo.py </path/to/images> [</path/to/store/images/at>]"
+        print("USAGE: facerec_demo.py </path/to/images> [</path/to/store/images/at>]")
         sys.exit()
     # Now read in the image data. This must be a valid path!
     [X,y] = read_images(sys.argv[1])
@@ -135,7 +135,7 @@ if __name__ == "__main__":
     # the associated confidence:
     [p_label, p_confidence] = model.predict(np.asarray(X[0]))
     # Print it:
-    print "Predicted label = %d (confidence=%.2f)" % (p_label, p_confidence)
+    print("Predicted label = %d (confidence=%.2f)" % (p_label, p_confidence))
     # Cool! Finally we'll plot the Eigenfaces, because that's
     # what most people read in the papers are keen to see.
     #
@@ -143,7 +143,7 @@ if __name__ == "__main__":
     # data, because the cv::FaceRecognizer is a cv::Algorithm.
     #
     # You can see the available parameters with getParams():
-    print model.getParams()
+    print(model.getParams())
     # Now let's get some data:
     mean = model.getMat("mean")
     eigenvectors = model.getMat("eigenvectors")

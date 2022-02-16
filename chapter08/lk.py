@@ -45,6 +45,7 @@ while(success):
             zip(good_points, good_old_points)):
         a, b = point.ravel()
         c, d = old_point.ravel()
+        a, b, c, d = int(a), int(b), int(c), int(d)
         color = colors[i].tolist()
         cv2.line(overlay, (a, b), (c, d), color, 2)
         cv2.circle(frame, (a, b), 5, color, cv2.FILLED)
