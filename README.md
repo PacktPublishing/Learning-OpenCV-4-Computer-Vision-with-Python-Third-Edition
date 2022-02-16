@@ -53,7 +53,7 @@ With the following software and hardware list you can run all code files present
 | 4, 6 | Matplotlib (any recent version) | Windows, Mac OS X, and Linux (Any) |
 
 #### Update about Optional Software Requirements
-At the time the book was written, some of the code samples (in Chapters 6 and 7) depended on OpenCV's "non-free" modules in order to use the SIFT and SURF patented algorithms. Since then, the SIFT patent has expired and, starting in OpenCV 4.4.0, SIFT can be used without the "non-free" modules. There is now just one code sample (in Chapter 6) which depends on the "non-free" modules for SURF. If you wish to try the SURF sample, you will need to build OpenCV with the "non-free" modules from source (as per instructions in Chapter 1 for building from source). The pre-built `opencv-contrib-python-nonfree` pip package (also mentioned in Chapter 1) is no longer available. 
+At the time the book was written, some of the code samples (in Chapters 6 and 7) depended on OpenCV's "non-free" modules in order to use the SIFT and SURF patented algorithms. Since then, the SIFT patent has expired and, starting in OpenCV 4.4.0, SIFT can be used without the "non-free" modules. There is now just one code sample (in Chapter 6) which depends on the "non-free" modules for SURF. If you wish to try the SURF sample, you will need to build OpenCV with the "non-free" modules from source (as per instructions in Chapter 1 for building from source). The pre-built `opencv-contrib-python-nonfree` pip package (also mentioned in Chapter 1) is no longer available.
 
 ### Related Products
 * Hands-On Computer Vision with TensorFlow 2  [[Packt]](https://www.packtpub.com/application-development/hands-computer-vision-tensorflow-2?utm_source=github&utm_medium=repository&utm_campaign=9781788830645) [[Amazon]](https://www.amazon.com/dp/1788830644)
@@ -67,6 +67,22 @@ Joseph provides computer vision expertise through his company, Nummist Media. Hi
 
 **Joe Minichino**
  is an R&D labs engineer at Teamwork. He is a passionate programmer who is immensely curious about programming languages and technologies and constantly experimenting with them. Born and raised in Varese, Lombardy, Italy, and coming from a humanistic background in philosophy (at Milan's Università Statale), Joe has lived in Cork, Ireland, since 2004. There, he became a computer science graduate at the Cork Institute of Technology.
+
+## Troubleshooting and FAQ
+
+### Issue: Camera input does not work on Windows
+
+For some cameras and some versions of OpenCV, `cv2.VideoCapture` fails to capture camera input when it uses the Microsoft Media Foundation (MSMF) back-end. This issue may manifest itself with errors such as ``[ WARN:0@25.936] global C:\opencv\modules\videoio\src\cap_msmf.cpp (539) `anonymous-namespace'::SourceReaderCB::~SourceReaderCB terminating async callback`` when you run camera input scripts such as `chapter02/5-CameraWindow.py`.
+
+To work around the problem, define an environment variable with the name `OPENCV_VIDEOIO_PRIORITY_MSMF` and the value `0`. (You may need to reboot in order for global changes to your environment variables to take effect.) This change de-prioritizes OpenCV's MSMF back-end so that OpenCV will try to choose any other back-end, usually the Microsoft DirectShow back-end, which is more compatible.
+
+Alternatively, to specify the preferred back-end in any given script, replace code such as `cv2.VideoCapture(0)` with code such as `cv2.VideoCapture(0, cv2.CAP_DSHOW)`, which specifies Microsoft DirectShow as the preferred back-end. However, be aware that such changes may reduce the portability of your code.
+
+### Question: Will the sample code work with the upcoming OpenCV 5?
+
+The sample code in this repository has been tested successfully with OpenCV's `5.x` development branch as of February 16, 2022. Thus, as far as we can tell at this point, it should work with the upcoming OpenCV 5 release.
+
+A future edition of the book will provide more extensive coverage of new features in OpenCV 5.
 
 ## Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
