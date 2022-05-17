@@ -66,4 +66,4 @@ if len(good_matches) >= MIN_NUM_GOOD_MATCHES:
     plt.show()
 else:
     print("Not enough matches good were found - %d/%d" % \
-          (len(good_matches), MIN_MATCH_COUNT))
+          (len(good_matches), MIN_NUM_GOOD_MATCHES))
