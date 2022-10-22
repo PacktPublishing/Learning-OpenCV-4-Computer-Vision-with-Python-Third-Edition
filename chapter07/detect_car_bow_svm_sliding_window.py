@@ -17,7 +17,7 @@ SVM_NUM_TRAINING_SAMPLES_PER_CLASS = 100
 SVM_SCORE_THRESHOLD = 1.8
 NMS_OVERLAP_THRESHOLD = 0.15
 
-sift = cv2.xfeatures2d.SIFT_create()
+sift = cv2.SIFT_create()
 
 FLANN_INDEX_KDTREE = 1
 index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)

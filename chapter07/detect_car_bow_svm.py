@@ -12,7 +12,7 @@ if not os.path.isdir('CarData'):
 BOW_NUM_TRAINING_SAMPLES_PER_CLASS = 10
 SVM_NUM_TRAINING_SAMPLES_PER_CLASS = 100
 
-sift = cv2.xfeatures2d.SIFT_create()
+sift = cv2.SIFT_create()
 
 FLANN_INDEX_KDTREE = 1
 index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
