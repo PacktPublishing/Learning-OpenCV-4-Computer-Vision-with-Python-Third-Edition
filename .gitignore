@@ -13,4 +13,6 @@ Thumbs.db
 # The dataset can be download from:
 # http://l2r.cs.uiuc.edu/~cogcomp/Data/Car/CarData.tar.gz
 chapter07/CarData
+
 .vscode/
+data/at/output

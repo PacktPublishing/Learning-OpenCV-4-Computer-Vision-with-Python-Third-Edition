@@ -74,6 +74,9 @@ def read_images(path, sz=None):
     X,y = [], []
     for dirname, dirnames, filenames in os.walk(path):
         for subdirname in dirnames:
+            if subdirname == 'output':
+                continue
+
             subject_path = os.path.join(dirname, subdirname)
             for filename in os.listdir(subject_path):
                 try:
@@ -88,8 +91,8 @@ def read_images(path, sz=None):
                         im = cv2.resize(im, sz)
                     X.append(np.asarray(im, dtype=np.uint8))
                     y.append(c)
-                except IOError, (errno, strerror):
-                    print("I/O error({0}): {1}".format(errno, strerror))
+                except IOError as err:
+                    print("I/O error({0}): {1}".format(err.errno, err.strerror))
                 except:
                     print("Unexpected error:", sys.exc_info()[0])
                     raise
@@ -105,26 +108,56 @@ if __name__ == "__main__":
     # your image data:
     if len(sys.argv) < 2:
         print("USAGE: facerec_demo.py </path/to/images> [</path/to/store/images/at>]")
+        # python .\face_recognition.py ../data/at ../data/at/output
         sys.exit()
+
     # Now read in the image data. This must be a valid path!
     [X,y] = read_images(sys.argv[1])
+
     # Convert labels to 32bit integers. This is a workaround for 64bit machines,
     # because the labels will truncated else. This will be fixed in code as
     # soon as possible, so Python users don't need to know about this.
     # Thanks to Leo Dirac for reporting:
     y = np.asarray(y, dtype=np.int32)
+
     # If a out_dir is given, set it:
     if len(sys.argv) == 3:
         out_dir = sys.argv[2]
+
     # Create the Eigenfaces model. We are going to use the default
     # parameters for this simple example, please read the documentation
     # for thresholding:
-    model = cv2.face.createEigenFaceRecognizer()
+    model = cv2.face.EigenFaceRecognizer_create()
+    # model = cv2.face.FisherFaceRecognizer_create()
+    # model = cv2.face.LBPHFaceRecognizer_create()
+    
     # Read
     # Learn the model. Remember our function returns Python lists,
     # so we use np.asarray to turn them into NumPy lists to make
     # the OpenCV wrapper happy:
     model.train(np.asarray(X), np.asarray(y))
+
+    #save
+    model.save(f'{sys.argv[1]}/output/suface.xml')
+
+    # read model
+    model2 = cv2.face.EigenFaceRecognizer_create()
+    model2.read(f'{sys.argv[1]}/output/suface.xml')
+    print(set(model2.getLabels().flatten().tolist()))
+    
+    # update model, or re-train
+    # imgs = list()
+    # lbls = list()
+    # for filename in os.listdir(os.path.join(sys.argv[1], 'su')):
+    #     imgs.append(cv2.imread(os.path.join(sys.argv[1], 'su', filename), cv2.IMREAD_GRAYSCALE))
+    #     lbls.append(2)
+    # EigenFaceRecognizer&FisherFaceRecognizer&LBPHFaceRecognizer does not support updating.
+    # model2.update(np.asarray(imgs), np.asarray(lbls)) 
+    # model2.train(np.asarray(imgs), np.asarray(lbls)) # re-train
+    # print(set(model2.getLabels().flatten().tolist()))
+
+
+    # predict, 预测
     # We now get a prediction from the model! In reality you
     # should always use unseen images for testing your model.
     # But so many people were confused, when I sliced an image
@@ -133,9 +166,16 @@ if __name__ == "__main__":
     #
     # model.predict is going to return the predicted label and
     # the associated confidence:
-    [p_label, p_confidence] = model.predict(np.asarray(X[0]))
-    # Print it:
-    print("Predicted label = %d (confidence=%.2f)" % (p_label, p_confidence))
+    for i in range(91,96):
+        img = cv2.imread(f'{sys.argv[1]}/{i}.pgm', cv2.IMREAD_GRAYSCALE)
+        p_label, p_confidence = model2.predict(img) # model.predict(img)
+        print(i, "Predicted: label = %d (confidence = %.2f)" % (p_label, p_confidence))
+    for i in range(96,100):
+        img = cv2.imread(f'{sys.argv[1]}/{i}.png', cv2.IMREAD_GRAYSCALE)
+        p_label, p_confidence = model2.predict(img) # model.predict(img)
+        print(i, "Predicted: label = %d (confidence = %.2f)" % (p_label, p_confidence))
+
+
     # Cool! Finally we'll plot the Eigenfaces, because that's
     # what most people read in the papers are keen to see.
     #
@@ -143,10 +183,14 @@ if __name__ == "__main__":
     # data, because the cv::FaceRecognizer is a cv::Algorithm.
     #
     # You can see the available parameters with getParams():
-    print(model.getParams())
+    # print(model.getParams()) # deprecated
+    # print(model.getEigenValues())
     # Now let's get some data:
-    mean = model.getMat("mean")
-    eigenvectors = model.getMat("eigenvectors")
+    # mean = model.getMat("mean")
+    # eigenvectors = model.getMat("eigenvectors")
+    mean = model.getMean()
+    eigenvectors = model.getEigenVectors()
+
     # We'll save the mean, by first normalizing it:
     mean_norm = normalize(mean, 0, 255, dtype=np.uint8)
     mean_resized = mean_norm.reshape(X[0].shape)
@@ -154,11 +198,12 @@ if __name__ == "__main__":
         cv2.imshow("mean", mean_resized)
     else:
         cv2.imwrite("%s/mean.png" % (out_dir), mean_resized)
+
     # Turn the first (at most) 16 eigenvectors into grayscale
     # images. You could also use cv::normalize here, but sticking
     # to NumPy is much easier for now.
     # Note: eigenvectors are stored by column:
-    for i in xrange(min(len(X), 16)):
+    for i in range(min(len(X), 16)):
         eigenvector_i = eigenvectors[:,i].reshape(X[0].shape)
         eigenvector_i_norm = normalize(eigenvector_i, 0, 255, dtype=np.uint8)
         # Show or save the images:
@@ -166,6 +211,9 @@ if __name__ == "__main__":
             cv2.imshow("%s/eigenface_%d" % (out_dir,i), eigenvector_i_norm)
         else:
             cv2.imwrite("%s/eigenface_%d.png" % (out_dir,i), eigenvector_i_norm)
+    
     # Show the images:
     if out_dir is None:
         cv2.waitKey(0)
+
+    cv2.destroyAllWindows()
