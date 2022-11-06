@@ -98,7 +98,7 @@ def strokeEdges(src, dst, blurKsize=7, edgeKsize=5):
         graySrc = cv2.cvtColor(blurredSrc, cv2.COLOR_BGR2GRAY)
     else:
         graySrc = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
-    cv2.Laplacian(graySrc, cv2.CV_8U, graySrc, ksize = edgeKsize)
+    cv2.Laplacian(graySrc, cv2.CV_8U, graySrc, ksize=edgeKsize)
     normalizedInverseAlpha = (1.0 / 255) * (255 - graySrc)
     channels = cv2.split(src)
     for channel in channels:
@@ -166,10 +166,10 @@ class BGRCrossProcessCurveFilter(BGRCurveFilter):
     def __init__(self, dtype=numpy.uint8):
         BGRCurveFilter.__init__(
             self,
-            bPoints = [(0,20),(255,235)],
-            gPoints = [(0,0),(56,39),(208,226),(255,255)],
-            rPoints = [(0,0),(56,22),(211,255),(255,255)],
-            dtype = dtype)
+            bPoints=[(0,20),(255,235)],
+            gPoints=[(0,0),(56,39),(208,226),(255,255)],
+            rPoints=[(0,0),(56,22),(211,255),(255,255)],
+            dtype=dtype)
 
 class BGRPortraCurveFilter(BGRCurveFilter):
     """A filter that applies Portra-like curves to BGR."""
@@ -177,11 +177,11 @@ class BGRPortraCurveFilter(BGRCurveFilter):
     def __init__(self, dtype=numpy.uint8):
         BGRCurveFilter.__init__(
             self,
-            vPoints = [(0,0),(23,20),(157,173),(255,255)],
-            bPoints = [(0,0),(41,46),(231,228),(255,255)],
-            gPoints = [(0,0),(52,47),(189,196),(255,255)],
-            rPoints = [(0,0),(69,69),(213,218),(255,255)],
-            dtype = dtype)
+            vPoints=[(0,0),(23,20),(157,173),(255,255)],
+            bPoints=[(0,0),(41,46),(231,228),(255,255)],
+            gPoints=[(0,0),(52,47),(189,196),(255,255)],
+            rPoints=[(0,0),(69,69),(213,218),(255,255)],
+            dtype=dtype)
 
 class BGRProviaCurveFilter(BGRCurveFilter):
     """A filter that applies Provia-like curves to BGR."""
@@ -189,10 +189,10 @@ class BGRProviaCurveFilter(BGRCurveFilter):
     def __init__(self, dtype=numpy.uint8):
         BGRCurveFilter.__init__(
             self,
-            bPoints = [(0,0),(35,25),(205,227),(255,255)],
-            gPoints = [(0,0),(27,21),(196,207),(255,255)],
-            rPoints = [(0,0),(59,54),(202,210),(255,255)],
-            dtype = dtype)
+            bPoints=[(0,0),(35,25),(205,227),(255,255)],
+            gPoints=[(0,0),(27,21),(196,207),(255,255)],
+            rPoints=[(0,0),(59,54),(202,210),(255,255)],
+            dtype=dtype)
 
 class BGRVelviaCurveFilter(BGRCurveFilter):
     """A filter that applies Velvia-like curves to BGR."""
@@ -200,11 +200,11 @@ class BGRVelviaCurveFilter(BGRCurveFilter):
     def __init__(self, dtype=numpy.uint8):
         BGRCurveFilter.__init__(
             self,
-            vPoints = [(0,0),(128,118),(221,215),(255,255)],
-            bPoints = [(0,0),(25,21),(122,153),(165,206),(255,255)],
-            gPoints = [(0,0),(25,21),(95,102),(181,208),(255,255)],
-            rPoints = [(0,0),(41,28),(183,209),(255,255)],
-            dtype = dtype)
+            vPoints=[(0,0),(128,118),(221,215),(255,255)],
+            bPoints=[(0,0),(25,21),(122,153),(165,206),(255,255)],
+            gPoints=[(0,0),(25,21),(95,102),(181,208),(255,255)],
+            rPoints=[(0,0),(41,28),(183,209),(255,255)],
+            dtype=dtype)
 
 
 class VConvolutionFilter(object):

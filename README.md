@@ -2,7 +2,7 @@
 
 <a href="https://www.packtpub.com/data/learning-opencv-4-computer-vision-with-python-3-third-edition?utm_source=github&utm_medium=repository&utm_campaign=9781789531619"><img src="https://static.packt-cdn.com/products/9781789531619/cover/smaller" alt="Learning OpenCV 4 Computer Vision with Python 3 - Third Edition " height="256px" align="right"></a>
 
-This is the code repository for [Learning OpenCV 4 Computer Vision with Python 3 - Third Edition ](https://www.packtpub.com/data/learning-opencv-4-computer-vision-with-python-3-third-edition?utm_source=github&utm_medium=repository&utm_campaign=9781789531619), published by Packt.
+This is the code repository for [Learning OpenCV 4 Computer Vision with Python 3 - Third Edition](https://www.packtpub.com/data/learning-opencv-4-computer-vision-with-python-3-third-edition?utm_source=github&utm_medium=repository&utm_campaign=9781789531619), published by Packt.
 
 **Get to grips with tools, techniques, and algorithms for computer vision and machine learning**
 
@@ -80,9 +80,9 @@ Alternatively, to specify the preferred back-end in any given script, replace co
 
 ### Question: Will the sample code work with the upcoming OpenCV 5?
 
-The sample code in this repository has been tested successfully with OpenCV's `5.x` development branch as of February 16, 2022. Thus, as far as we can tell at this point, it should work with the upcoming OpenCV 5 release.
+The sample code in this repository has been tested successfully with OpenCV's `5.x` development branch as of August 7, 2022. Thus, as far as we can tell at this point, it should work with the upcoming OpenCV 5 release.
 
-A future edition of the book will provide more extensive coverage of new features in OpenCV 5.
+A future edition of the book will provide more extensive coverage of new features in OpenCV 5. See [https://github.com/PacktPublishing/Learning-OpenCV-5-Computer-Vision-with-Python-Fourth-Edition](https://github.com/PacktPublishing/Learning-OpenCV-5-Computer-Vision-with-Python-Fourth-Edition).
 
 ## Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.

@@ -28,18 +28,27 @@ imgL = cv2.imread('../images/color1_small.jpg')
 imgR = cv2.imread('../images/color2_small.jpg')
 
 
-def update(sliderValue = 0):
+def update(sliderValue=0):
 
-    stereo.setBlockSize(
-        cv2.getTrackbarPos('blockSize', 'Disparity'))
-    stereo.setUniquenessRatio(
-        cv2.getTrackbarPos('uniquenessRatio', 'Disparity'))
-    stereo.setSpeckleWindowSize(
-        cv2.getTrackbarPos('speckleWindowSize', 'Disparity'))
-    stereo.setSpeckleRange(
-        cv2.getTrackbarPos('speckleRange', 'Disparity'))
-    stereo.setDisp12MaxDiff(
-        cv2.getTrackbarPos('disp12MaxDiff', 'Disparity'))
+    try:
+        blockSize = cv2.getTrackbarPos('blockSize', 'Disparity')
+        uniquenessRatio = cv2.getTrackbarPos(
+            'uniquenessRatio', 'Disparity')
+        speckleWindowSize = cv2.getTrackbarPos(
+            'speckleWindowSize', 'Disparity')
+        speckleRange = cv2.getTrackbarPos(
+            'speckleRange', 'Disparity')
+        disp12MaxDiff = cv2.getTrackbarPos(
+            'disp12MaxDiff', 'Disparity')
+    except cv2.error:
+        # One or more of the sliders has not been created yet.
+        return
+
+    stereo.setBlockSize(blockSize)
+    stereo.setUniquenessRatio(uniquenessRatio)
+    stereo.setSpeckleWindowSize(speckleWindowSize)
+    stereo.setSpeckleRange(speckleRange)
+    stereo.setDisp12MaxDiff(disp12MaxDiff)
 
     disparity = stereo.compute(
         imgL, imgR).astype(np.float32) / 16.0

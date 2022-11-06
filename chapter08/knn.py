@@ -7,7 +7,7 @@ bg_subtractor = cv2.createBackgroundSubtractorKNN(detectShadows=True)
 erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 5))
 dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (17, 11))
 
-cap = cv2.VideoCapture('traffic.flv')
+cap = cv2.VideoCapture('../videos/traffic.flv')
 success, frame = cap.read()
 while success:
 
@@ -36,6 +36,8 @@ while success:
 
     cv2.imshow('knn', fg_mask)
     cv2.imshow('thresh', thresh)
+    cv2.imshow('background',
+               bg_subtractor.getBackgroundImage())
     cv2.imshow('detection', frame)
 
     k = cv2.waitKey(30)

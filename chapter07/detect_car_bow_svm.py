@@ -4,22 +4,23 @@ import os
 
 if not os.path.isdir('CarData'):
     print('CarData folder not found. Please download and unzip '
-          'http://l2r.cs.uiuc.edu/~cogcomp/Data/Car/CarData.tar.gz '
-          'or https://github.com/gcr/arc-evaluator/raw/master/CarData.tar.gz '
+          'https://github.com/gcr/arc-evaluator/raw/master/CarData.tar.gz '
           'into the same folder as this script.')
     exit(1)
 
 BOW_NUM_TRAINING_SAMPLES_PER_CLASS = 10
-SVM_NUM_TRAINING_SAMPLES_PER_CLASS = 100
+SVM_NUM_TRAINING_SAMPLES_PER_CLASS = 110
 
-sift = cv2.xfeatures2d.SIFT_create()
+BOW_NUM_CLUSTERS = 40
+
+sift = cv2.SIFT_create()
 
 FLANN_INDEX_KDTREE = 1
 index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
-search_params = {}
+search_params = dict(checks=50)
 flann = cv2.FlannBasedMatcher(index_params, search_params)
 
-bow_kmeans_trainer = cv2.BOWKMeansTrainer(40)
+bow_kmeans_trainer = cv2.BOWKMeansTrainer(BOW_NUM_CLUSTERS)
 bow_extractor = cv2.BOWImgDescriptorExtractor(sift, flann)
 
 def get_pos_and_neg_paths(i):
@@ -61,6 +62,7 @@ for i in range(SVM_NUM_TRAINING_SAMPLES_PER_CLASS):
         training_labels.append(-1)
 
 svm = cv2.ml.SVM_create()
+
 svm.train(np.array(training_data), cv2.ml.ROW_SAMPLE,
           np.array(training_labels))
 

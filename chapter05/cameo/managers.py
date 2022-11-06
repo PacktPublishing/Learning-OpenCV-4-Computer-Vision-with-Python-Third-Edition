@@ -78,9 +78,9 @@ class CaptureManager(object):
 
         # Update the FPS estimate and related variables.
         if self._framesElapsed == 0:
-            self._startTime = time.time()
+            self._startTime = time.perf_counter()
         else:
-            timeElapsed = time.time() - self._startTime
+            timeElapsed = time.perf_counter() - self._startTime
             self._fpsEstimate =  self._framesElapsed / timeElapsed
         self._framesElapsed += 1
 
@@ -128,7 +128,7 @@ class CaptureManager(object):
 
         if self._videoWriter is None:
             fps = self._capture.get(cv2.CAP_PROP_FPS)
-            if fps <= 0.0:
+            if numpy.isnan(fps) or fps <= 0.0:
                 # The capture's FPS is unknown so use an estimate.
                 if self._framesElapsed < 20:
                     # Wait until more frames elapse so that the

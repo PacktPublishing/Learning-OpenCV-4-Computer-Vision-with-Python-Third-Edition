@@ -3,7 +3,7 @@ import numpy as np
 
 OPENCV_MAJOR_VERSION = int(cv2.__version__.split('.')[0])
 
-img = cv2.pyrDown(cv2.imread("hammer.jpg", cv2.IMREAD_UNCHANGED))
+img = cv2.pyrDown(cv2.imread("../images/hammer.jpg"))
 
 ret, thresh = cv2.threshold(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY),
                             127, 255, cv2.THRESH_BINARY)
@@ -15,8 +15,9 @@ if OPENCV_MAJOR_VERSION >= 4:
 else:
     # OpenCV 3 or an earlier version is being used.
     # cv2.findContours has an extra return value.
-    # The extra return value is the thresholded image, which is
-    # unchanged, so we can ignore it.
+    # The extra return value is the thresholded image, which (in
+    # OpenCV 3.1 or an earlier version) may have been modified, but
+    # we can ignore it.
     _, contours, hier = cv2.findContours(thresh, cv2.RETR_EXTERNAL,
                                          cv2.CHAIN_APPROX_SIMPLE)
 
