@@ -1,6 +1,3 @@
-
-
-
 # Learning OpenCV 4 Computer Vision with Python 3 - Third Edition 
 
 <a href="https://www.packtpub.com/data/learning-opencv-4-computer-vision-with-python-3-third-edition?utm_source=github&utm_medium=repository&utm_campaign=9781789531619"><img src="https://static.packt-cdn.com/products/9781789531619/cover/smaller" alt="Learning OpenCV 4 Computer Vision with Python 3 - Third Edition " height="256px" align="right"></a>
@@ -54,6 +51,22 @@ With the following software and hardware list you can run all code files present
 | 3 | SciPy (any recent version) | Windows, Mac OS X, and Linux (Any) |
 | 4, 5 | OpenNI 2 | Windows, Mac OS X, and Linux (Any) |
 | 4, 6 | Matplotlib (any recent version) | Windows, Mac OS X, and Linux (Any) |
+
+## Errata
+
+* Page 244: Code should be
+  ```
+  for c in contours:
+  if cv2.contourArea(c) > 500:
+  (x, y, w, h) = cv2.boundingRect(c)
+  cv2.rectangle(frame, (x, y), (x+w, y+h),
+  (0, 255, 0), 1)
+  if should_initialize_pedestrians:
+  pedestrians.append(
+  Pedestrian(id, hsv_frame,
+  (x, y, w, h)))
+  id += 1
+  ```
 
 #### Update about Optional Software Requirements
 At the time the book was written, some of the code samples (in Chapters 6 and 7) depended on OpenCV's "non-free" modules in order to use the SIFT and SURF patented algorithms. Since then, the SIFT patent has expired and, starting in OpenCV 4.4.0, SIFT can be used without the "non-free" modules. There is now just one code sample (in Chapter 6) which depends on the "non-free" modules for SURF. If you wish to try the SURF sample, you will need to build OpenCV with the "non-free" modules from source (as per instructions in Chapter 1 for building from source). The pre-built `opencv-contrib-python-nonfree` pip package (also mentioned in Chapter 1) is no longer available.
