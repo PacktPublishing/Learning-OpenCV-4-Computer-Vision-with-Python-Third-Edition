@@ -4,13 +4,13 @@ from matplotlib import pyplot as plt
 
 MIN_NUM_GOOD_MATCHES = 10
 
-img0 = cv2.imread('tattoos/query.png',
+img0 = cv2.imread('../images/tattoos/query.png',
                   cv2.IMREAD_GRAYSCALE)
-img1 = cv2.imread('tattoos/anchor-man.png',
+img1 = cv2.imread('../images/tattoos/anchor-man.png',
                   cv2.IMREAD_GRAYSCALE)
 
 # Perform SIFT feature detection and description.
-sift = cv2.xfeatures2d.SIFT_create()
+sift = cv2.SIFT_create()
 kp0, des0 = sift.detectAndCompute(img0, None)
 kp1, des1 = sift.detectAndCompute(img1, None)
 
@@ -66,4 +66,4 @@ if len(good_matches) >= MIN_NUM_GOOD_MATCHES:
     plt.show()
 else:
     print("Not enough matches good were found - %d/%d" % \
-          (len(good_matches), MIN_MATCH_COUNT))
+          (len(good_matches), MIN_NUM_GOOD_MATCHES))

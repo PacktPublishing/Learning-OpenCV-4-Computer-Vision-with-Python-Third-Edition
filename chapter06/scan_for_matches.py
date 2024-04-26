@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 
 # Read the query image.
-folder = 'tattoos'
+folder = '../images/tattoos'
 query = cv2.imread(os.path.join(folder, 'query.png'),
                    cv2.IMREAD_GRAYSCALE)
 
@@ -20,7 +20,7 @@ for (dirpath, dirnames, filenames) in os.walk(folder):
 print(descriptors)
 
 # Create the SIFT detector.
-sift = cv2.xfeatures2d.SIFT_create()
+sift = cv2.SIFT_create()
 
 # Perform SIFT feature detection and description on the
 # query image.

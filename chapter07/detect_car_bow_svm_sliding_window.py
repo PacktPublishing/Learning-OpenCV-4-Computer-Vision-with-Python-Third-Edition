@@ -2,29 +2,32 @@ import cv2
 import numpy as np
 import os
 
-from non_max_suppression import non_max_suppression_fast as nms
+# When running in Jupyter, the `non_max_suppression_fast` function should
+# already be in the global scope. Otherwise, import it now.
+if 'non_max_suppression_fast' not in globals():
+    from non_max_suppression import non_max_suppression_fast
 
 if not os.path.isdir('CarData'):
     print('CarData folder not found. Please download and unzip '
-          'http://l2r.cs.uiuc.edu/~cogcomp/Data/Car/CarData.tar.gz '
-          'or https://github.com/gcr/arc-evaluator/raw/master/CarData.tar.gz '
+          'https://github.com/gcr/arc-evaluator/raw/master/CarData.tar.gz '
           'into the same folder as this script.')
     exit(1)
 
 BOW_NUM_TRAINING_SAMPLES_PER_CLASS = 10
-SVM_NUM_TRAINING_SAMPLES_PER_CLASS = 100
+SVM_NUM_TRAINING_SAMPLES_PER_CLASS = 110
 
-SVM_SCORE_THRESHOLD = 1.8
-NMS_OVERLAP_THRESHOLD = 0.15
+BOW_NUM_CLUSTERS = 12
+SVM_SCORE_THRESHOLD = 2.2
+NMS_OVERLAP_THRESHOLD = 0.4
 
-sift = cv2.xfeatures2d.SIFT_create()
+sift = cv2.SIFT_create()
 
 FLANN_INDEX_KDTREE = 1
 index_params = dict(algorithm=FLANN_INDEX_KDTREE, trees=5)
-search_params = {}
+search_params = dict(checks=50)
 flann = cv2.FlannBasedMatcher(index_params, search_params)
 
-bow_kmeans_trainer = cv2.BOWKMeansTrainer(12)
+bow_kmeans_trainer = cv2.BOWKMeansTrainer(BOW_NUM_CLUSTERS)
 bow_extractor = cv2.BOWImgDescriptorExtractor(sift, flann)
 
 def get_pos_and_neg_paths(i):
@@ -68,11 +71,12 @@ for i in range(SVM_NUM_TRAINING_SAMPLES_PER_CLASS):
 svm = cv2.ml.SVM_create()
 svm.setType(cv2.ml.SVM_C_SVC)
 svm.setC(50)
+
 svm.train(np.array(training_data), cv2.ml.ROW_SAMPLE,
           np.array(training_labels))
 
-def pyramid(img, scale_factor=1.25, min_size=(200, 80),
-            max_size=(600, 600)):
+def pyramid(img, scale_factor=1.05, min_size=(100, 40),
+            max_size=(600, 240)):
     h, w = img.shape
     min_w, min_h = min_size
     max_w, max_h = max_size
@@ -121,7 +125,8 @@ for test_img_path in ['CarData/TestImages/test-0.pgm',
                                       int((x+w) * scale),
                                       int((y+h) * scale),
                                       score])
-    pos_rects = nms(np.array(pos_rects), NMS_OVERLAP_THRESHOLD)
+    pos_rects = non_max_suppression_fast(
+        np.array(pos_rects), NMS_OVERLAP_THRESHOLD)
     for x0, y0, x1, y1, score in pos_rects:
         cv2.rectangle(img, (int(x0), int(y0)), (int(x1), int(y1)),
                       (0, 255, 255), 2)

@@ -2,9 +2,9 @@ import cv2
 
 
 face_cascade = cv2.CascadeClassifier(
-    './cascades/haarcascade_frontalface_default.xml')
+    f'{cv2.data.haarcascades}haarcascade_frontalface_default.xml')
 eye_cascade = cv2.CascadeClassifier(
-    './cascades/haarcascade_eye.xml')
+    f'{cv2.data.haarcascades}haarcascade_eye.xml')
 
 camera = cv2.VideoCapture(0)
 while (cv2.waitKey(1) == -1):
