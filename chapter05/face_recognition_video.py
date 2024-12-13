@@ -47,11 +47,7 @@ while (cv2.waitKey(1) == -1):
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            roi_gray = gray[x:x+w, y:y+h]
-            if roi_gray.size == 0:
-                # The ROI is empty. Maybe the face is at the image edge.
-                # Skip it.
-                continue
+            roi_gray = gray[y:y+h, x:x+w]
             roi_gray = cv2.resize(roi_gray, training_image_size)
             label, confidence = model.predict(roi_gray)
             text = '%s, confidence=%.2f' % (names[label], confidence)
