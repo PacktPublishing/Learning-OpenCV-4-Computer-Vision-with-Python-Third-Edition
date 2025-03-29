@@ -31,7 +31,7 @@ for c in contours:
     # calculate coordinates of the minimum area rectangle
     box = cv2.boxPoints(rect)
     # normalize coordinates to integers
-    box = np.int0(box)
+    box = box.astype(int)
     # draw contours
     cv2.drawContours(img, [box], 0, (0, 0, 255), 3)
 
